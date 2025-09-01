@@ -12,7 +12,7 @@ const Work = () => {
         저는 한국에서 it를 공부중이고 웹개발을 배우고 있으면 앞으로 QA, 클라우드, 정보보안 분야로 나아가고 싶습니다.
         </p>
 
-        <div className='grid grid-cols-4 my-10 gap-5'>
+        <div className='grid grid-cols-auto my-10 gap-5'>
             {workData.map((project,index)=>(
                 <div key={index} 
                 className='aspect-square bg-no-repeat bg-cover bg-center rounded-lg relative cursor-pointer group'

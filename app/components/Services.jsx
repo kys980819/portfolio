@@ -11,7 +11,7 @@ const Services = () => {
         <p className='text-center max-w-2xl mx-auto mt-5 mb-12 Font-Ovo'>
         저는 한국에서 it를 공부중이고 웹개발을 배우고 있으면 앞으로 QA, 클라우드, 정보보안 분야로 나아가고 싶습니다.
         </p>
-            <div className='grid grid-cols-4 gap-6 my-10'>
+            <div className='grid grid-cols-auto gap-6 my-10'>
                 {serviceData.map(({icon, title, description, link}, index)=>(
                     <div key={index} 
                     className='border border-gray-400 rounded-lg px-8 py-12 hover:shadow-black 
