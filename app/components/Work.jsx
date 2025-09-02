@@ -1,6 +1,7 @@
 import { assets, workData } from '@/assets/assets'
 import Image from 'next/image'
 import React from 'react'
+import Chatbot from './Chatbot'
 
 const Work = (isDarkMode) => {
   return (
@@ -37,6 +38,10 @@ const Work = (isDarkMode) => {
         rounded-full py-3 px-10 mx-auto my-20 hover:bg-amber-50 duration-500 dark:text-white dark:border-white dark:hover:bg-darkHover'>
             Show more <Image src={isDarkMode ? assets.right_arrow_bold_dark : assets.right_arrow_bold} alt='Right arrow' className='w-4' />
         </a>
+
+        <div className='mt-8'>
+          <Chatbot mode="inline" />
+        </div>
 
     </div>
   )

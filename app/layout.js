@@ -1,5 +1,7 @@
 import { Outfit, Ovo } from "next/font/google";
 import "./globals.css";
+import Chatbot from "./components/Chatbot";
+import { ChatbotProvider } from "./components/ChatbotProvider";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -22,7 +24,10 @@ export default function RootLayout({ children }) {
     <html lang="ko" className="scroll-smooth">
       <body className={`${outfit.variable} ${ovo.variable} 
       antialiased leading-8 overflow-x-hidden dark:bg-darkTheme dark:text-white`}>
-        {children}
+        <ChatbotProvider>
+          {children}
+          <Chatbot />
+        </ChatbotProvider>
       </body>
     </html>
   );
