@@ -9,7 +9,7 @@ const Work = (isDarkMode) => {
         <h2 className='text-center text-5xl font-Ovo'> MY latese Work </h2>
 
         <p className='text-center max-w-2xl mx-auto mt-5 mb-12 Font-Ovo'>
-        저는 한국에서 it를 공부중이고 웹개발을 배우고 있으면 앞으로 QA, 클라우드, 정보보안 분야로 나아가고 싶습니다.
+        지금까지 학습하며 진행한 프로젝트들을 모았습니다. <br/>배운 기술을 직접 적용하며 경험을 쌓아가는 과정을 담았습니다.
         </p>
 
         <div className='grid grid-cols-auto my-10 gap-5 dark:text-black'>

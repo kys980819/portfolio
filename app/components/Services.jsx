@@ -9,7 +9,7 @@ const Services = () => {
         <h2 className='text-center text-5xl font-Ovo'> MY Services </h2>
 
         <p className='text-center max-w-2xl mx-auto mt-5 mb-12 Font-Ovo'>
-        저는 한국에서 it를 공부중이고 웹개발을 배우고 있으면 앞으로 QA, 클라우드, 정보보안 분야로 나아가고 싶습니다.
+        제가 학습하고있는 분야입니다. <br/> 앞으로는 QA, 클라우드, 정보보안 분야로 나아가고 싶습니다.
         </p>
             <div className='grid grid-cols-auto gap-6 my-10'>
                 {serviceData.map(({icon, title, description, link}, index)=>(

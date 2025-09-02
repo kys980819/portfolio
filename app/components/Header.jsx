@@ -10,14 +10,10 @@ const Header = () => {
       </div>
       <h3 className='flex items-end gap-2 text-x1 md:text-2x1 md-3 font-Ovo '> 
         안녕하세요 저는 김윤성 입니다 <Image src={assets.hand_icon} alt='' className='w-6'/> </h3>
-      <h1 className='text-3xl sm:text-6xl lg:text-[66px] font-Ovo'> 한국에서 it 공부중</h1>
-      <p className='max-w-2xl mx-auto font-Ovo'> 현재는 웹개발을 공부중입니다.앞으로 QA, 클라우드엔지니어, 정보보안 분야에 대해서 공부 할 예정입니다. 
-      </p>
+      <h1 className='text-3xl sm:text-6xl lg:text-[66px] font-Ovo'> 한국에서 it 공부중입니다</h1>
+      <p className='max-w-2xl mx-auto font-Ovo'> 
+        현재는 웹개발을 공부중입니다. <br/> 앞으로 QA, 클라우드엔지니어, 정보보안 분야에 대해서 공부 할 예정입니다. </p>
       <div className='flex flex-col sm:flex-row items-center gap-4 mt-4'>
-        <a href="#contact"
-        className='px-10 py-3 border border-white rounded-full bg-black text-white flex items-center gap-2 dark:bg-transparent '
-        > Contact Me <Image src={assets.right_arrow_white} alt='' className='w-4'/></a>
-
         <a href="#sample-resume.pdf" download className='px-10 py-3 border rounded-full
          border-gray-500 flex items-center gap-2 bg-white dark:text-black'> 
         My Resume <Image src={assets.download_icon} alt='' className='w-4'/></a>
