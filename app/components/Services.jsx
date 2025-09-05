@@ -5,10 +5,10 @@ import React from 'react'
 const Services = () => {
   return (
     <div id='services' className='w-full px-[12%] py-10 scroll-mt-20'>
-        <h4 className='text-center mb-2 text-lg font-Ovo'> What I offer </h4>
-        <h2 className='text-center text-5xl font-Ovo'> MY Services </h2>
+        <h4 className='text-center mb-2 text-lg'> What I offer </h4>
+        <h2 className='text-center text-5xl'> MY Services </h2>
 
-        <p className='text-center max-w-2xl mx-auto mt-5 mb-12 Font-Ovo'>
+        <p className='text-center max-w-2xl mx-auto mt-5 mb-12'>
         제가 학습하고있는 분야입니다. <br/> 앞으로는 QA, 클라우드, 정보보안 분야로 나아가고 싶습니다.
         </p>
             <div className='grid grid-cols-auto gap-6 my-10'>

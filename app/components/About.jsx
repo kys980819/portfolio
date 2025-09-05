@@ -5,15 +5,15 @@ import React from 'react'
 const About = ({isDarkMode}) => {
   return (
     <div id='about' className='w-full px-[12%] py-10 scroll-mt-20'>
-      <h4 className='text-center mb-2 text-lg font-Ovo'> Introduction </h4>
-      <h2 className='text-center text-5xl font-Ovo'> About me </h2>
+      <h4 className='text-center mb-2 text-lg'> Introduction </h4>
+      <h2 className='text-center text-5xl'> About me </h2>
 
       <div className='flex w-full flex-col lg:flex-row items-center gap-20 my-20'>
         <div className='w-64 sm:w-80 rounded-3xl max-w-none'>
             <Image src={assets.profile_kys_img} alt='user' className='w-full rounded-3xl'/>
         </div>
         <div className='flex-1'>
-            <p className='mb-10 max-w-2xl font-Ovo'>
+            <p className='mb-10 max-w-2xl'>
             안녕하세요, 경찰행정학을 전공했지만 오래전부터 IT에 관심을 가져온 김윤성입니다.
             컴퓨터에 문제가 생겼을 때 직접 해결하는 과정이 멋지고 의미 있다고 느껴 도전하게 되었습니다.
             새로운 기술과 프로그램을 빠르게 배우고 활용하는 것을 좋아하며, 문제가 생기면 직접 해결하려는 태도를 강점으로 삼고 있습니다.
@@ -28,12 +28,20 @@ const About = ({isDarkMode}) => {
                      key={index}>
                         <Image src={isDarkMode ? iconDark : icon} alt={title} className='w-7 mt-3'/>
                         <h3 className='my-4 font-semibold text-gray-700 dark:text-white'>{title}</h3>
-                        <p className='text-gray-600 text-sm dark:text-white/80'>{description}</p>
+                        {Array.isArray(description) ? (
+                          <ul className='list-disc pl-5 text-gray-600 text-sm dark:text-white/80 space-y-1 whitespace-pre-line'>
+                            {description.map((item, i) => (
+                              <li key={i}>{item}</li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <p className='text-gray-600 text-sm dark:text-white/80'>{description}</p>
+                        )}
                     </li>
                 ))}
             </ul>
 
-                <h4 className='my-6 text-gray-700 font-Ovo dark:text-white'>Tool I use</h4>
+                <h4 className='my-6 text-gray-700 dark:text-white'>Tool I use</h4>
 
                 <ul className='flex items-center gap-3 sm:gap-5'>
                     {toolsData.map((tool,index)=>(

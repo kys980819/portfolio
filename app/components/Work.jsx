@@ -6,10 +6,10 @@ import Chatbot from './Chatbot'
 const Work = (isDarkMode) => {
   return (
     <div id='work' className='w-full px-[12%] py-10 scroll-mt-20'>
-        <h4 className='text-center mb-2 text-lg font-Ovo'> My portfolio </h4>
-        <h2 className='text-center text-5xl font-Ovo'> MY latese Work </h2>
+        <h4 className='text-center mb-2 text-lg'> My portfolio </h4>
+        <h2 className='text-center text-5xl'> MY latese Work </h2>
 
-        <p className='text-center max-w-2xl mx-auto mt-5 mb-12 Font-Ovo'>
+        <p className='text-center max-w-2xl mx-auto mt-5 mb-12'>
         지금까지 학습하며 진행한 프로젝트들을 모았습니다. <br/>배운 기술을 직접 적용하며 경험을 쌓아가는 과정을 담았습니다.
         </p>
 
@@ -39,7 +39,7 @@ const Work = (isDarkMode) => {
             Show more <Image src={isDarkMode ? assets.right_arrow_bold_dark : assets.right_arrow_bold} alt='Right arrow' className='w-4' />
         </a>
 
-        <div className='mt-8'>
+        <div id='chat' className='mt-8 scroll-mt-40'>
           <Chatbot mode="inline" />
         </div>
 
