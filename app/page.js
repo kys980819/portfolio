@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import Projects from "./components/Projects";
+import ChatSection from "./components/ChatSection";
 
 export default function Home() {
 
@@ -36,6 +37,7 @@ export default function Home() {
    <Header isDarkMode={isDarkMode} />
    <About isDarkMode={isDarkMode} />
    <Projects isDarkMode={isDarkMode} />
+   <ChatSection isDarkMode={isDarkMode} />
    <Footer isDarkMode={isDarkMode} />
    </>
   );

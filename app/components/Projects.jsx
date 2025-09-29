@@ -2,9 +2,9 @@ import { assets, serviceData } from '@/assets/assets'
 import Image from 'next/image'
 import React from 'react'
 
-const Services = () => {
+const Projects = () => {
   return (
-    <div id='services' className='w-full px-[12%] py-10 scroll-mt-20'>
+    <div id='projects' className='w-full px-[12%] py-10 scroll-mt-20'>
         <h4 className='text-center mb-2 text-lg'> "" </h4>
         <h2 className='text-center text-5xl'> MY Projects </h2>
 
@@ -33,4 +33,4 @@ const Services = () => {
   )
 }
 
-export default Services
+export default Projects
