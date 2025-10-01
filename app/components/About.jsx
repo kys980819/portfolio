@@ -2,7 +2,7 @@ import { assets, infoList, toolsData } from '@/assets/assets'
 import Image from 'next/image'
 import React from 'react'
 
-const About = ({isDarkMode}) => {
+const About = () => {
   return (
     <div id='about' className='w-full px-[12%] py-10 scroll-mt-20'>
       <h4 className='text-center mb-2 text-lg'> Introduction </h4>
@@ -26,7 +26,8 @@ const About = ({isDarkMode}) => {
                     hover:-translate-y-1 duration-500 hover:shadow-black dark:border-white 
                     dark:hover:shadow-white dark:hover:bg-darkHover/50' 
                      key={index}>
-                        <Image src={isDarkMode ? iconDark : icon} alt={title} className='w-7 mt-3'/>
+                        <Image src={icon} alt={title} className='w-7 mt-3 dark:hidden'/>
+                        <Image src={iconDark} alt={title} className='w-7 mt-3 hidden dark:block'/>
                         <h3 className='my-4 font-semibold text-gray-700 dark:text-white'>{title}</h3>
                         {Array.isArray(description) ? (
                           <ul className='list-disc pl-5 text-gray-600 text-sm dark:text-white/80 space-y-1 whitespace-pre-line'>

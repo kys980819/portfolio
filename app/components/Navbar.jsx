@@ -4,7 +4,7 @@ import { assets } from '@/assets/assets'
 import Image from 'next/image'
 import React, { useEffect, useRef, useState } from 'react'
 
-const Navbar = ({isDarkMode, setIsDarkMode}) => {
+const Navbar = () => {
 
     const [isScroll, setIsScroll] = useState(false)
     const sideMenuRef = useRef();
@@ -26,6 +26,26 @@ const Navbar = ({isDarkMode, setIsDarkMode}) => {
         })
     },[])
 
+  const [isDark, setIsDark] = useState(false)
+
+  useEffect(() => {
+    const root = document.documentElement
+    setIsDark(root.classList.contains('dark'))
+  }, [])
+
+  const toggleDark = () => {
+    const root = document.documentElement
+    const next = !root.classList.contains('dark')
+    if (next) {
+      root.classList.add('dark')
+      localStorage.theme = 'dark'
+    } else {
+      root.classList.remove('dark')
+      localStorage.theme = ''
+    }
+    setIsDark(next)
+  }
+
   return (
     <>
     <div className='fixed top-0 right-0 w-11/12 -z-10 translate-y-[-80%] dark:hidden'>
@@ -35,7 +55,7 @@ const Navbar = ({isDarkMode, setIsDarkMode}) => {
       <nav className={`w-full fixed px-5 lg:px-8 xl:px-[8%] py-0
       flex items-center justify-between z-50 ${isScroll ? "bg-white bg-opacity-50 backdrop-blur-lg shadow-sm dark:bg-darkTheme dark:shadow-white/20" : ""}`}> 
         <a href='#top'>
-          <Image src={isDarkMode ? assets.logo_dark : assets.logo} alt="" className='w-28 cursor-pointer mr-14'/> 
+          <Image src={isDark ? assets.logo_dark : assets.logo} alt="" className='w-28 cursor-pointer mr-14'/> 
         </a>
 
         <ul className={`hidden md:flex items-center gap-10 lg:gap-12
@@ -48,12 +68,12 @@ const Navbar = ({isDarkMode, setIsDarkMode}) => {
 
         <div className='flex items-center gap-4'>
 
-          <button onClick={()=>setIsDarkMode(prev => !prev)}>
-            <Image src={isDarkMode ? assets.sun_icon : assets.moon_icon} alt='' className='w-6'/>
+          <button onClick={toggleDark}>
+            <Image src={isDark ? assets.sun_icon : assets.moon_icon} alt='' className='w-6'/>
           </button>
 
           <button className='block md:hidden ml-3' onClick={openMenu}>
-            <Image src={isDarkMode ? assets.menu_white : assets.menu_black} alt='' className='w-6'/>
+            <Image src={isDark ? assets.menu_white : assets.menu_black} alt='' className='w-6'/>
           </button> 
         </div>
 
@@ -63,7 +83,7 @@ const Navbar = ({isDarkMode, setIsDarkMode}) => {
         h-screen bg-rose-50 transition duration-500 dark:bg-darkHover dark:text-white'>
 
           <div className='absolute right-6 top-6' onClick={closeMenu}>
-              <Image src={isDarkMode ? assets.close_white: assets.close_black} alt='' className='w-5 cursor-pointer'/>
+              <Image src={isDark ? assets.close_white: assets.close_black} alt='' className='w-5 cursor-pointer'/>
           </div>
 
           <li><a onClick={closeMenu} href="#top">Home</a></li>

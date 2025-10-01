@@ -9,8 +9,13 @@ module.exports = {
     extend: {
       colors: {
         lightHover: '#fcf4ff',
-        darkHover:  '#2a004a',
-        darkTheme:  '#11001F',
+        // 딥 네이비 팔레트 (옵션 A)
+        darkTheme:  '#0B1220', // 배경
+        darkSurface: '#111827', // 카드/패널 배경
+        darkText:   '#E5E7EB', // 기본 텍스트
+        darkBorder: '#2A3441', // 보더/디바이더
+        darkFocus:  '#60A5FA', // 포커스/하이라이트
+        darkHover:  '#1F2937', // 호버 배경
       },
       fontFamily: {
         Outfit: ['var(--font-outfit)', 'sans-serif'],
