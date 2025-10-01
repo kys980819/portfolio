@@ -45,7 +45,7 @@ export function ChatbotProvider({ children }) {
 
     try {
       // 2) Flask로 전송
-      const res = await fetch("http://127.0.0.1:5000/sendMessage", {
+      const res = await fetch("https://api.kysportfolio.site/sendMessage", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: trimmed }),
