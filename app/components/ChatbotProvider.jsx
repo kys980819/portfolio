@@ -44,17 +44,61 @@ export function ChatbotProvider({ children }) {
     setInput("");
 
     try {
+      // session_id & conversation_id 관리 추가
+      // session_id: 최초 1회 생성 후 localStorage 재사용
+      let sessionId = null;
+      try {
+        sessionId = localStorage.getItem("session_id");
+        if (!sessionId) {
+          sessionId = (typeof crypto !== "undefined" && crypto.randomUUID) ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`;
+          localStorage.setItem("session_id", sessionId);
+        }
+      } catch (_) {
+        // localStorage 사용 불가 시, 요청은 진행하되 헤더 생략
+      }
+
+      // conversation_id: 동일 대화 유지, 서버 응답에 있으면 갱신
+      let conversationId = null;
+      try {
+        conversationId = sessionStorage.getItem("conversation_id");
+      } catch (_) {}
+
+      // "새 대화 시작" 키워드로 대화 초기화
+      if (trimmed === "새 대화 시작") {
+        try {
+          sessionStorage.removeItem("conversation_id");
+        } catch (_) {}
+        setMessages((prev) => [
+          ...prev,
+          { role: "assistant", content: "새 대화를 시작했습니다." },
+        ]);
+        return; // 서버로 전송하지 않음
+      }
+
       // 2) Flask로 전송
       const res = await fetch("https://api.kysportfolio.site/sendMessage", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: trimmed }),
+        headers: {
+          "Content-Type": "application/json",
+          ...(sessionId ? { "X-Session-Id": sessionId } : {}),
+        },
+        body: JSON.stringify({
+          message: trimmed,
+          conversation_id: conversationId || null,
+        }),
       });
 
       // 3) 응답 JSON 파싱
       const data = await res.json();
       console.log("서버에서 받은 응답 전체:", data);
       console.log("서버가 보낸 메시지:", data.response);
+
+      // 서버가 conversation_id를 내려주면 이후 요청에 사용
+      if (data && data.conversation_id) {
+        try {
+          sessionStorage.setItem("conversation_id", String(data.conversation_id));
+        } catch (_) {}
+      }
 
       // 4) 성공/실패에 따라 보이는 메시지
       const text =

@@ -89,6 +89,17 @@ export default function Chatbot({ mode = "floating" }) {
 								</span>
 							</li>)
 						)}
+							{isLoading && (
+								<li className="text-left">
+									<span className="inline-block px-3 py-2 rounded-lg leading-relaxed bg-gray-100 text-gray-900 dark:bg-white/10 dark:text-white">
+										<span className="inline-flex gap-1 align-middle" aria-live="polite" aria-label="응답 생성 중">
+											<span className="loading-dot animation-delay-0">•</span>
+											<span className="loading-dot animation-delay-200">•</span>
+											<span className="loading-dot animation-delay-400">•</span>
+										</span>
+									</span>
+								</li>
+							)}
 					</ul>
 
 					<form onSubmit={handleSubmit} className="p-3 border-t border-gray-200 bg-gray-50 dark:bg-transparent dark:border-darkBorder">
@@ -114,6 +125,14 @@ export default function Chatbot({ mode = "floating" }) {
 					</form>
 				</div>
 			)}
+		{/* 로딩 점(…) 애니메이션 스타일 */}
+		<style jsx>{`
+			@keyframes dotFade { 0% { opacity: 0.2; } 20% { opacity: 1; } 100% { opacity: 0.2; } }
+			.loading-dot { display: inline-block; animation: dotFade 1s infinite ease-in-out; }
+			.animation-delay-0 { animation-delay: 0ms; }
+			.animation-delay-200 { animation-delay: 200ms; }
+			.animation-delay-400 { animation-delay: 400ms; }
+		`}</style>
 		</div>
 	);
 }
