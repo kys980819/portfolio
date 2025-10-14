@@ -1,8 +1,10 @@
 'use client'
 
 import Chatbot from './Chatbot'
+import { useChatbot } from './ChatbotProvider'
 
 const ChatSection = () => {
+  const { hasSavedHistory, resetConversation } = useChatbot();
   return (
     <section id='chat' className='w-full px-[12%] py-20 scroll-mt-10 bg-gray-50 dark:bg-darkTheme'>
       <div className='text-center mb-8'>

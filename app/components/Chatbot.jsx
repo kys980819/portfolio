@@ -13,7 +13,9 @@ export default function Chatbot({ mode = "floating" }) {
 		toggleChat, 
 		closeChat, 
 		handleInputChange, 
-		handleSubmit 
+		handleSubmit,
+		hasSavedHistory,
+		resetConversation 
 	} = useChatbot();
 
 	// 인라인 모드일 때는 항상 열려있음
@@ -89,18 +91,28 @@ export default function Chatbot({ mode = "floating" }) {
 								</span>
 							</li>)
 						)}
-							{isLoading && (
-								<li className="text-left">
-									<span className="inline-block px-3 py-2 rounded-lg leading-relaxed bg-gray-100 text-gray-900 dark:bg-white/10 dark:text-white">
-										<span className="inline-flex gap-1 align-middle" aria-live="polite" aria-label="응답 생성 중">
-											<span className="loading-dot animation-delay-0">•</span>
-											<span className="loading-dot animation-delay-200">•</span>
-											<span className="loading-dot animation-delay-400">•</span>
-										</span>
+						{isLoading && (
+							<li className="text-left">
+								<span className="inline-block px-3 py-2 rounded-lg leading-relaxed bg-gray-100 text-gray-900 dark:bg-white/10 dark:text-white">
+									<span className="inline-flex gap-1 align-middle" aria-live="polite" aria-label="응답 생성 중">
+										<span className="loading-dot animation-delay-0">•</span>
+										<span className="loading-dot animation-delay-200">•</span>
+										<span className="loading-dot animation-delay-400">•</span>
 									</span>
-								</li>
-							)}
+								</span>
+							</li>
+						)}
 					</ul>
+
+					{/* 인풋 바로 위: 항상 보이는 "새로 시작" 선택(저장 이력이 있을 때만) */}
+					{hasSavedHistory && (
+						<div className="px-4 pb-2 text-center">
+							<div className="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/90 dark:bg-neutral-800/90 shadow px-3 py-1 text-sm">
+								<span className="text-gray-700 dark:text-neutral-200">이전 대화가 로드되었습니다.</span>
+								<button onClick={resetConversation} className="rounded-full bg-gray-200 dark:bg-neutral-700 text-gray-800 dark:text-neutral-100 px-3 py-0.5 text-xs">새로 시작</button>
+							</div>
+						</div>
+					)}
 
 					<form onSubmit={handleSubmit} className="p-3 border-t border-gray-200 bg-gray-50 dark:bg-transparent dark:border-darkBorder">
 						<label htmlFor="chatbot-input" className="sr-only">메시지 입력</label>
@@ -136,5 +148,3 @@ export default function Chatbot({ mode = "floating" }) {
 		</div>
 	);
 }
-
-

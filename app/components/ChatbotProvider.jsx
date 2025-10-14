@@ -4,6 +4,8 @@ import { createContext, useContext, useMemo, useState, useRef, useEffect } from 
 const ChatbotContext = createContext(null);
 
 export function ChatbotProvider({ children }) {
+  const STORAGE_KEY = "chat_messages_v1";
+  const MAX_MESSAGES = 300;
   // === 중앙 집중식 상태 관리 ===
   const [messages, setMessages] = useState([
     { role: "assistant", content: "안녕하세요! 무엇을 도와드릴까요?" },
@@ -11,6 +13,7 @@ export function ChatbotProvider({ children }) {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [hasSavedHistory, setHasSavedHistory] = useState(false);
   
   // === Refs ===
   const listRef = useRef(null);
@@ -20,6 +23,29 @@ export function ChatbotProvider({ children }) {
   useEffect(() => {
     if (!listRef.current) return;
     listRef.current.scrollTop = listRef.current.scrollHeight;
+  }, [messages]);
+
+  // === 저장된 메시지 복원 ===
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const saved = JSON.parse(raw);
+        if (Array.isArray(saved) && saved.every((m) => m?.role && m?.content)) {
+          setMessages(saved);
+          setHasSavedHistory(saved.length > 0);
+        }
+      }
+    } catch (_) {}
+  }, []);
+
+  // === 메시지 변경 시 최신 300개만 저장 ===
+  useEffect(() => {
+    try {
+      const capped = messages.slice(-MAX_MESSAGES);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(capped));
+      setHasSavedHistory(capped.length > 1); // 초기 인사만 있을 때는 false
+    } catch (_) {}
   }, [messages]);
 
   // === 키보드 이벤트 관리 ===
@@ -67,11 +93,13 @@ export function ChatbotProvider({ children }) {
       if (trimmed === "새 대화 시작") {
         try {
           sessionStorage.removeItem("conversation_id");
+          localStorage.removeItem(STORAGE_KEY);
         } catch (_) {}
-        setMessages((prev) => [
-          ...prev,
+        setMessages([
+          { role: "assistant", content: "안녕하세요! 무엇을 도와드릴까요?" },
           { role: "assistant", content: "새 대화를 시작했습니다." },
         ]);
+        setHasSavedHistory(false);
         return; // 서버로 전송하지 않음
       }
 
@@ -118,6 +146,16 @@ export function ChatbotProvider({ children }) {
     }
   };
 
+  // === 대화 리셋(사용자 버튼용) ===
+  const resetConversation = () => {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      sessionStorage.removeItem("conversation_id");
+    } catch (_) {}
+    setMessages([{ role: "assistant", content: "안녕하세요! 무엇을 도와드릴까요?" }]);
+    setHasSavedHistory(false);
+  };
+
   // === UI 제어 함수들 ===
   const toggleChat = () => setIsOpen((prev) => !prev);
   const closeChat = () => setIsOpen(false);
@@ -139,6 +177,7 @@ export function ChatbotProvider({ children }) {
     isOpen,
     input,
     isLoading,
+    hasSavedHistory,
     
     // Refs
     listRef,
@@ -152,12 +191,13 @@ export function ChatbotProvider({ children }) {
     handleInputChange,
     clearInput,
     handleSubmit,
+    resetConversation,
     
     // 직접 상태 변경 (필요시)
     setMessages,
     setIsOpen,
     setInput,
-  }), [messages, isOpen, input, isLoading]);
+  }), [messages, isOpen, input, isLoading, hasSavedHistory]);
 
   return <ChatbotContext.Provider value={value}>{children}</ChatbotContext.Provider>;
 }
