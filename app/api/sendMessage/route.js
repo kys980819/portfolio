@@ -3,15 +3,29 @@ import OpenAI from 'openai';
 import { MongoClient } from 'mongodb';
 import { v4 as uuidv4 } from 'uuid';
 
-// 환경변수에서 설정값 가져오기
+// 환경변수에서 설정값 가져오기 (Vercel 배포 시 안정성을 위해 더 엄격한 체크)
 const openaiApiKey = process.env.OPENAI_API_KEY;
 const mongoUri = process.env.MONGO_URI;
 const mongoDbName = process.env.MONGO_DB;
 const mongoCollectionName = process.env.MONGO_COLLECTION;
 const vectorStoreIds = process.env.VECTOR_STORE_IDS ? 
-  process.env.VECTOR_STORE_IDS.split(',').map(id => id.trim()) : [];
+  process.env.VECTOR_STORE_IDS.split(',').map(id => id.trim()).filter(id => id.length > 0) : [];
 const maxOutputTokens = parseInt(process.env.MAX_OUTPUT_TOKENS || '256');
 const openaiTimeout = parseInt(process.env.OPENAI_TIMEOUT || '30') * 1000; // ms로 변환
+
+// 환경변수 검증 함수
+function validateEnvironment() {
+  const openaiConfigured = openaiApiKey && openaiApiKey.startsWith('sk-');
+  const mongoConfigured = mongoUri && mongoDbName && mongoCollectionName;
+  const vectorStoreConfigured = vectorStoreIds.length > 0;
+  
+  return {
+    openai_configured: openaiConfigured,
+    mongo_configured: mongoConfigured,
+    vector_store_configured: vectorStoreConfigured,
+    all_configured: openaiConfigured && mongoConfigured && vectorStoreConfigured
+  };
+}
 
 // OpenAI 클라이언트 초기화
 let openaiClient = null;
@@ -24,16 +38,78 @@ if (openaiApiKey && openaiApiKey.startsWith('sk-')) {
 
 // MongoDB 클라이언트 초기화
 let mongoClient = null;
-let mongoCollection = null;
 
 if (mongoUri && mongoDbName && mongoCollectionName) {
   try {
     mongoClient = new MongoClient(mongoUri, {
-      serverSelectionTimeoutMS: 5000
+      serverSelectionTimeoutMS: 10000,
+      connectTimeoutMS: 10000,
+      socketTimeoutMS: 10000
     });
     // 연결은 실제 사용 시점에 수행
   } catch (error) {
     console.error('MongoDB 클라이언트 초기화 실패:', error);
+  }
+}
+
+// MongoDB 연결 테스트 함수
+async function testMongoConnection() {
+  if (!mongoClient) return false;
+  
+  try {
+    await mongoClient.connect();
+    await mongoClient.db(mongoDbName).admin().ping();
+    return true;
+  } catch (error) {
+    console.error('MongoDB 연결 테스트 실패:', error);
+    return false;
+  } finally {
+    if (mongoClient) {
+      await mongoClient.close();
+    }
+  }
+}
+
+// Health check endpoint
+export async function GET() {
+  try {
+    const envStatus = validateEnvironment();
+    
+    // 실제 연결 테스트
+    let mongoConnectionTest = false;
+    if (envStatus.mongo_configured) {
+      mongoConnectionTest = await testMongoConnection();
+    }
+    
+    // OpenAI 연결 테스트
+    let openaiConnectionTest = false;
+    if (envStatus.openai_configured) {
+      try {
+        // 간단한 API 호출로 연결 테스트
+        await openaiClient.models.list();
+        openaiConnectionTest = true;
+      } catch (error) {
+        console.error('OpenAI 연결 테스트 실패:', error);
+        openaiConnectionTest = false;
+      }
+    }
+    
+    return NextResponse.json({
+      ok: true,
+      status: "healthy",
+      ...envStatus,
+      connection_tests: {
+        openai_connected: openaiConnectionTest,
+        mongo_connected: mongoConnectionTest
+      },
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
+    return NextResponse.json({
+      ok: false,
+      status: "error",
+      error: error.message
+    }, { status: 500 });
   }
 }
 
@@ -66,20 +142,31 @@ export async function POST(request) {
 
     console.log(`사용자가 보낸 메시지: ${message}`);
 
+    // 환경변수 상태 확인
+    const envStatus = validateEnvironment();
+    
     // OpenAI API 키 확인
-    if (!openaiClient) {
+    if (!envStatus.openai_configured) {
       console.error("OpenAI API 키가 설정되지 않았습니다.");
       return NextResponse.json(
-        { ok: false, error: "OpenAI API 키가 설정되지 않았습니다" },
+        { 
+          ok: false, 
+          error: "OpenAI API 키가 설정되지 않았습니다",
+          environment_status: envStatus
+        },
         { status: 500 }
       );
     }
 
     // 벡터스토어 ID 확인
-    if (!vectorStoreIds.length) {
+    if (!envStatus.vector_store_configured) {
       console.error("VECTOR_STORE_IDS 환경변수가 설정되지 않았습니다.");
       return NextResponse.json(
-        { ok: false, error: "VECTOR_STORE_IDS가 설정되지 않아 파일 검색을 사용할 수 없습니다" },
+        { 
+          ok: false, 
+          error: "VECTOR_STORE_IDS가 설정되지 않아 파일 검색을 사용할 수 없습니다",
+          environment_status: envStatus
+        },
         { status: 500 }
       );
     }
@@ -101,7 +188,7 @@ export async function POST(request) {
       console.log(`AI 응답 생성 완료: ${aiResponse.length}자`);
 
       // MongoDB 저장 (가능한 경우에만)
-      if (mongoClient && mongoDbName && mongoCollectionName) {
+      if (envStatus.mongo_configured && mongoClient) {
         try {
           // MongoDB 연결 및 저장
           await mongoClient.connect();
@@ -121,10 +208,15 @@ export async function POST(request) {
           console.log("대화 레코드가 MongoDB에 저장되었습니다.");
         } catch (mongoError) {
           console.error("MongoDB 저장 실패:", mongoError);
+          // MongoDB 저장 실패해도 챗봇 응답은 계속 진행
         } finally {
           // 연결 종료
-          if (mongoClient) {
-            await mongoClient.close();
+          try {
+            if (mongoClient) {
+              await mongoClient.close();
+            }
+          } catch (closeError) {
+            console.error("MongoDB 연결 종료 실패:", closeError);
           }
         }
       } else {
