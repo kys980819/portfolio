@@ -103,8 +103,11 @@ export function ChatbotProvider({ children }) {
         return; // 서버로 전송하지 않음
       }
 
-      // 2) Flask로 전송
-      const res = await fetch("https://api.kysportfolio.site/sendMessage", {
+      // // 2) Flask로 전송시
+      // const res = await fetch("https://api.kysportfolio.site/sendMessage"
+
+      // 2) Next.js API Routes로 전송
+      const res = await fetch("/api/sendMessage", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
