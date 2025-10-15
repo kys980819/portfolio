@@ -8,11 +8,11 @@ const About = () => {
       <h4 className='text-center mb-2 text-lg'> Introduction </h4>
       <h2 className='text-center text-5xl'> About me </h2>
 
-      <div className='flex w-full flex-col lg:flex-row items-center gap-20 my-20'>
+      <div className='flex w-full flex-col lg:flex-row items-center justify-center gap-20 my-20'>
         <div className='w-64 sm:w-80 rounded-3xl max-w-none'>
             <Image src={assets.profile_kys_img} alt='user' className='w-full rounded-3xl'/>
         </div>
-        <div className='flex-1'>
+        <div className='flex-1 flex flex-col items-center lg:items-start'>
             <p className='mb-10 max-w-2xl'>
             안녕하세요, 경찰행정학을 전공했지만 오래전부터 IT에 관심을 가져온 김윤성입니다.
             컴퓨터에 문제가 생겼을 때 직접 해결하는 과정이 멋지고 의미 있다고 느껴 도전하게 되었습니다.

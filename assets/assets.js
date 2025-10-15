@@ -8,6 +8,7 @@ import vscode from './vscode.png';
 import figma from './figma.png';
 import git from './git.png';
 import cursor from './cursor.png';
+import mongodb from './mongodb.png';
 import right_arrow_white from './right-arrow-white.png';
 import logo from './logo.png';
 import logo_dark from './logo_dark.png';
@@ -45,6 +46,7 @@ export const assets = {
     figma,
     git,
     cursor,
+    mongodb,
     right_arrow_white,
     logo,
     logo_dark,
@@ -96,8 +98,9 @@ export const workData = [
 ]
 
 export const serviceData = [
-    { icon: assets.web_icon, title: 'Portfolio Web', description: 'Ai 챗봇이 활성화 되어있는 포트폴리오 사이트 제작', link: '' },
-    { icon: assets.mobile_icon, title: 'Typing site', description: '영타와 it 용어 공부를 위한 타이핑 사이트 with Cursor', link: '' },
+    { icon: assets.web_icon, title: 'Portfolio Web', description: 
+        '• Ai 챗봇이 활성화 되어있는 포트폴리오 사이트 제작\n• Open AI(GPT-4.1) 기반의 챗봇구현\n• 채팅 내용은 MongoDB 사용해서 저장 및 관리', link: '' },
+    { icon: assets.mobile_icon, title: 'Typing site', description: '영타와 it 용어 공부를 위한 타이핑 사이트 with Cursor', link: 'https://it-typing-game.vercel.app/' },
     // { icon: assets.ui_icon, title: '', description: '', link: '' },
     // { icon: assets.graphics_icon, title: '', description: '', link: '' },
 ]
@@ -110,5 +113,5 @@ export const infoList = [
 ];
 
 export const toolsData = [
-    assets.vscode, assets.cursor, assets.figma, assets.git
+    assets.vscode, assets.cursor, assets.git, assets.mongodb
 ];
