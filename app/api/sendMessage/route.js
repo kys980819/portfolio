@@ -114,7 +114,7 @@ export async function POST(request) {
       
       const response = await openaiClient.responses.create({
         model: "gpt-4.1",
-        messages: [
+        input: [
           { role: "system", content: "너는 김윤성의 이력서를 보고 답변하는 챗봇이야" },
           { role: "user", content: message }
         ],
