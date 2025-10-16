@@ -118,12 +118,7 @@ export async function POST(request) {
           { role: "system", content: "너는 김윤성의 이력서를 보고 답변하는 챗봇이야" },
           { role: "user", content: message }
         ],
-        tools: [{ type: "file_search" }],
-        tool_resources: {
-          file_search: {
-            vector_store_ids: vectorStoreIds
-          }
-        },
+        tools: [{ type: "file_search", vector_store_ids: vectorStoreIds }],
         max_output_tokens: maxOutputTokens
       });
 
