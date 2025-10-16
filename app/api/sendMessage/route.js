@@ -3,8 +3,9 @@ import OpenAI from 'openai';
 import { MongoClient } from 'mongodb';
 import { v4 as uuidv4 } from 'uuid';
 
+export const runtime = 'nodejs';
+
 // 환경변수에서 설정값 가져오기
-const openaiApiKey = process.env.OPENAI_API_KEY;
 const mongoUri = process.env.MONGO_URI;
 const mongoDbName = process.env.MONGO_DB;
 const mongoCollectionName = process.env.MONGO_COLLECTION;
@@ -13,28 +14,50 @@ const vectorStoreIds = process.env.VECTOR_STORE_IDS ?
 const maxOutputTokens = parseInt(process.env.MAX_OUTPUT_TOKENS || '256');
 const openaiTimeout = parseInt(process.env.OPENAI_TIMEOUT || '30') * 1000; // ms로 변환
 
-// OpenAI 클라이언트 초기화
-let openaiClient = null;
-if (openaiApiKey && openaiApiKey.startsWith('sk-')) {
-  openaiClient = new OpenAI({
-    apiKey: openaiApiKey,
+// OpenAI 클라이언트 Lazy Singleton
+let openaiClientSingleton = null;
+function getOpenAIClient() {
+  if (openaiClientSingleton) return openaiClientSingleton;
+  const apiKey = process.env.OPENAI_API_KEY?.trim();
+  if (!apiKey) return null;
+  openaiClientSingleton = new OpenAI({
+    apiKey,
     timeout: openaiTimeout
   });
+  return openaiClientSingleton;
 }
 
-// MongoDB 클라이언트 초기화
-let mongoClient = null;
-let mongoCollection = null;
+// MongoDB 글로벌 캐시 연결 재사용
+const globalForMongo = globalThis;
+let cachedMongoClient = globalForMongo._mongoClient || null;
+let cachedMongoCollection = globalForMongo._mongoCollection || null;
 
-if (mongoUri && mongoDbName && mongoCollectionName) {
-  try {
-    mongoClient = new MongoClient(mongoUri, {
-      serverSelectionTimeoutMS: 5000
-    });
-    // 연결은 실제 사용 시점에 수행
-  } catch (error) {
-    console.error('MongoDB 클라이언트 초기화 실패:', error);
+async function getMongoCollection() {
+  if (!mongoUri || !mongoDbName || !mongoCollectionName) {
+    return null;
   }
+
+  if (cachedMongoClient && cachedMongoCollection) {
+    return cachedMongoCollection;
+  }
+
+  if (!cachedMongoClient) {
+    try {
+      cachedMongoClient = new MongoClient(mongoUri, {
+        serverSelectionTimeoutMS: 5000
+      });
+      await cachedMongoClient.connect();
+      globalForMongo._mongoClient = cachedMongoClient;
+    } catch (error) {
+      console.error("MongoDB 연결 실패:", error);
+      return null;
+    }
+  }
+
+  const db = cachedMongoClient.db(mongoDbName);
+  cachedMongoCollection = db.collection(mongoCollectionName);
+  globalForMongo._mongoCollection = cachedMongoCollection;
+  return cachedMongoCollection;
 }
 
 export async function POST(request) {
@@ -64,9 +87,10 @@ export async function POST(request) {
       );
     }
 
-    console.log(`사용자가 보낸 메시지: ${message}`);
+    console.log(`수신 메시지 길이: ${message.length}`);
 
     // OpenAI API 키 확인
+    const openaiClient = getOpenAIClient();
     if (!openaiClient) {
       console.error("OpenAI API 키가 설정되지 않았습니다.");
       return NextResponse.json(
@@ -90,24 +114,26 @@ export async function POST(request) {
       
       const response = await openaiClient.responses.create({
         model: "gpt-4.1",
-        input: [
+        messages: [
           { role: "system", content: "너는 김윤성의 이력서를 보고 답변하는 챗봇이야" },
           { role: "user", content: message }
         ],
-        tools: [{ type: "file_search", vector_store_ids: vectorStoreIds }]
+        tools: [{ type: "file_search" }],
+        tool_resources: {
+          file_search: {
+            vector_store_ids: vectorStoreIds
+          }
+        },
+        max_output_tokens: maxOutputTokens
       });
 
       const aiResponse = response.output_text;
       console.log(`AI 응답 생성 완료: ${aiResponse.length}자`);
 
-      // MongoDB 저장 (가능한 경우에만)
-      if (mongoClient && mongoDbName && mongoCollectionName) {
-        try {
-          // MongoDB 연결 및 저장
-          await mongoClient.connect();
-          const db = mongoClient.db(mongoDbName);
-          const collection = db.collection(mongoCollectionName);
-          
+      // MongoDB 저장 (가능한 경우에만, 글로벌 캐시 재사용)
+      try {
+        const collection = await getMongoCollection();
+        if (collection) {
           const doc = {
             session_id: sessionId,
             conversation_id: conversationId,
@@ -116,19 +142,13 @@ export async function POST(request) {
             response: aiResponse,
             time: new Date().toISOString()
           };
-          
           await collection.insertOne(doc);
           console.log("대화 레코드가 MongoDB에 저장되었습니다.");
-        } catch (mongoError) {
-          console.error("MongoDB 저장 실패:", mongoError);
-        } finally {
-          // 연결 종료
-          if (mongoClient) {
-            await mongoClient.close();
-          }
+        } else {
+          console.warn("MongoDB 설정이 없어 응답을 저장하지 않습니다.");
         }
-      } else {
-        console.warn("MongoDB 설정이 없어 응답을 저장하지 않습니다.");
+      } catch (mongoError) {
+        console.error("MongoDB 저장 실패:", mongoError);
       }
 
       // 성공 응답
