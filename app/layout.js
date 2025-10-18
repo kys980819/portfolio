@@ -16,8 +16,32 @@ const ovo = Ovo({
 });
 
 export const metadata = {
-  title: "Portfolio-KYS",
-  description: "",
+  title: {
+    default: "KYS Portfolio",
+    template: "%s | KYS Portfolio",
+  },
+  description: "윤성의 개발 포트폴리오 웹사이트입니다.",
+  keywords: ["윤성", "KYS", "포트폴리오", "Next.js", "클라우드", "AI","정보보안","클라우드 보안"],
+  openGraph: {
+    title: "KYS Portfolio",
+    description: "Next.js 기반의 포트폴리오 웹사이트",
+    url: "https://kysportfolio.site",
+    siteName: "KYS Portfolio",
+    images: [
+      {
+        url: "/thumbnail.png", // public 폴더 안 이미지
+        width: 1200,
+        height: 630,
+        alt: "KYS Portfolio 대표 이미지",
+      },
+    ],
+    locale: "ko_KR",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({ children }) {

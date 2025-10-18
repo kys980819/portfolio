@@ -14,7 +14,7 @@ const Header = () => {
       <p className='max-w-2xl mx-auto'> 
         현재는 웹개발을 기반으로 it 기초 공부중입니다. <br/> 앞으로 클라우드, 정보보안 분야에 대해서 공부 할 예정입니다. </p>
       <div className='flex flex-col sm:flex-row items-center gap-4 mt-4'>
-        <a href="#sample-resume.pdf" download className='px-10 py-3 border rounded-full
+        <a href="#sample-resume.pdf" download aria-label="이력서 다운로드" className='px-10 py-3 border rounded-full
          border-gray-500 flex items-center gap-2 bg-white dark:text-black'> 
         My Resume <Image src={assets.download_icon} alt='' className='w-4'/></a>
       </div>

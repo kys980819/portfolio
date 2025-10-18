@@ -28,6 +28,7 @@ export default function Chatbot({ mode = "floating" }) {
 					onClick={toggleChat}
 					aria-expanded={isOpen}
 					aria-controls="chatbot-panel"
+					aria-label={isOpen ? "챗봇 닫기" : "챗봇 열기"}
 					title={isOpen ? "닫기" : "챗봇 열기"}
 					className="fixed right-4 bottom-4 z-50 rounded-full bg-black text-white shadow-lg transition hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black w-14 h-14 flex items-center justify-center dark:bg-white dark:text-black dark:focus:ring-white"
 				>
@@ -63,11 +64,12 @@ export default function Chatbot({ mode = "floating" }) {
 					<header className="flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-gray-50 dark:bg-transparent dark:border-darkBorder">
 						<div className="font-semibold">도움이 필요하신가요?</div>
 						{mode === "floating" && (
-							<button
-								onClick={closeChat}
-								className="p-1 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 dark:hover:bg-white/10 dark:focus:ring-darkFocus"
-								title="닫기"
-							>
+						<button
+							onClick={closeChat}
+							className="p-1 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 dark:hover:bg-white/10 dark:focus:ring-darkFocus"
+							aria-label="챗봇 닫기"
+							title="닫기"
+						>
 								<span className="sr-only">닫기</span>
 								<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M6 6l12 12M6 18L18 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
@@ -129,6 +131,7 @@ export default function Chatbot({ mode = "floating" }) {
 							<button
 								type="submit"
 								className="rounded-md bg-black text-white px-3 py-2 text-sm hover:opacity-90 disabled:opacity-50 dark:bg-white dark:text-black hover:opacity-90"
+								aria-label="메시지 전송"
 								disabled={!input.trim() || isLoading}
 							>
 								{isLoading ? "전송중..." : "전송"}

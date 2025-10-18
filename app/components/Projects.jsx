@@ -22,7 +22,7 @@ const Projects = () => {
                         <p className='text-sm text-gray-600 leading-5 dark:text-white/80 whitespace-pre-line'>
                             {description}
                         </p>
-                        <a href={link} target="_blank" rel="noopener noreferrer" className='inline-flex items-center gap-2 text-sm mt-5 border border-gray-400 rounded-lg px-3 py-1.5 w-fit'>
+                        <a href={link} target="_blank" rel="noopener noreferrer" aria-label={`${title} 프로젝트 자세히 보기`} className='inline-flex items-center gap-2 text-sm mt-5 border border-gray-400 rounded-lg px-3 py-1.5 w-fit'>
                             Read more <Image src={assets.right_arrow} alt='' className='w-4'/>
                         </a>
 
