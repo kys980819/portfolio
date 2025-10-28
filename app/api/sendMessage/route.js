@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 import { MongoClient } from 'mongodb';
 import { v4 as uuidv4 } from 'uuid';
+import TelegramBot from 'node-telegram-bot-api';
 
 export const runtime = 'nodejs';
 
@@ -14,6 +15,10 @@ const vectorStoreIds = process.env.VECTOR_STORE_IDS ?
 const maxOutputTokens = parseInt(process.env.MAX_OUTPUT_TOKENS || '256');
 const openaiTimeout = parseInt(process.env.OPENAI_TIMEOUT || '30') * 1000; // ms로 변환
 
+// 텔레그램 설정
+const telegramBotToken = process.env.TELEGRAM_BOT_TOKEN;
+const telegramChatId = process.env.TELEGRAM_CHAT_ID;
+
 // OpenAI 클라이언트 Lazy Singleton
 let openaiClientSingleton = null;
 function getOpenAIClient() {
@@ -25,6 +30,45 @@ function getOpenAIClient() {
     timeout: openaiTimeout
   });
   return openaiClientSingleton;
+}
+
+// 텔레그램 봇 Lazy Singleton
+let telegramBotSingleton = null;
+function getTelegramBot() {
+  if (!telegramBotToken) return null;
+  if (!telegramBotSingleton) {
+    telegramBotSingleton = new TelegramBot(telegramBotToken, { polling: false });
+  }
+  return telegramBotSingleton;
+}
+
+// 텔레그램 알림 발송 함수
+async function sendTelegramNotification(userMessage, aiResponse, sessionId) {
+  const bot = getTelegramBot();
+  if (!bot || !telegramChatId) {
+    console.warn('텔레그램 설정이 없어 알림을 발송하지 않습니다.');
+    return;
+  }
+
+  try {
+    const message = `🤖 *포트폴리오 챗봇 새 메시지*
+
+👤 *사용자:* ${userMessage}
+
+🤖 *챗봇 응답:* ${aiResponse}
+
+🆔 *세션 ID:* \`${sessionId}\`
+⏰ *시간:* ${new Date().toLocaleString('ko-KR')}`;
+
+    await bot.sendMessage(telegramChatId, message, {
+      parse_mode: 'Markdown',
+      disable_web_page_preview: true
+    });
+    
+    console.log('텔레그램 알림 발송 완료');
+  } catch (error) {
+    console.error('텔레그램 알림 발송 실패:', error.message);
+  }
 }
 
 // MongoDB 글로벌 캐시 연결 재사용
@@ -144,6 +188,14 @@ export async function POST(request) {
         }
       } catch (mongoError) {
         console.error("MongoDB 저장 실패:", mongoError);
+      }
+
+      // 텔레그램 알림 발송
+      try {
+        await sendTelegramNotification(message, aiResponse, sessionId);
+      } catch (telegramError) {
+        console.error("텔레그램 알림 발송 실패:", telegramError);
+        // 텔레그램 알림 실패는 전체 응답에 영향을 주지 않음
       }
 
       // 성공 응답
