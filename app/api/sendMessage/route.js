@@ -58,7 +58,7 @@ async function sendTelegramNotification(userMessage, aiResponse, sessionId) {
 🤖 *챗봇 응답:* ${aiResponse}
 
 🆔 *세션 ID:* \`${sessionId}\`
-⏰ *시간:* ${new Date().toLocaleString('ko-KR')}`;
+⏰ *시간:* ${new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })}`;
 
     await bot.sendMessage(telegramChatId, message, {
       parse_mode: 'Markdown',
@@ -179,7 +179,7 @@ export async function POST(request) {
             user: "guest",
             message: message,
             response: aiResponse,
-            time: new Date().toISOString()
+            time: new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })
           };
           await collection.insertOne(doc);
           console.log("대화 레코드가 MongoDB에 저장되었습니다.");
