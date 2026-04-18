@@ -98,18 +98,55 @@ export const workData = [
 ]
 
 export const serviceData = [
-    { icon: assets.web_icon, title: 'Portfolio Web', description: 
-        '• Ai 챗봇이 활성화 되어있는 포트폴리오 사이트 제작\n• Open AI(GPT-4.1) 기반의 챗봇구현\n• 채팅 내용은 MongoDB 사용해서 저장 및 관리', link: '' },
-    { icon: assets.mobile_icon, title: 'Typing site', description: '영타와 it 용어 공부를 위한 타이핑 사이트 with Cursor', link: 'https://it-typing-game.vercel.app/' },
-    // { icon: assets.ui_icon, title: '', description: '', link: '' },
-    // { icon: assets.graphics_icon, title: '', description: '', link: '' },
-]
+    {
+        icon: assets.web_icon,
+        title: '포트폴리오 사이트 (AI 챗봇 포함)',
+        description: '이력서·자소서 기반으로 대화하는 AI 챗봇이 포함된 개인 포트폴리오 웹사이트',
+        period: '2025.09 ~ 2025.10 (지속 개선 중)',
+        techStack: ['Next.js', 'React', 'MongoDB', 'OpenAI API', 'Vercel', 'AWS EC2'],
+        highlights: [
+            'GPT-4.1 기반 AI 챗봇 구현 (MongoDB로 대화 저장)',
+            '텔레그램 알림 연동',
+            'GitHub Actions CI/CD + 커스텀 도메인·HTTPS',
+        ],
+        troubleshooting: 'Flask 백엔드 → Next.js API 라우트로 마이그레이션하여 프론트·백엔드를 단일 프로젝트로 통합. 배포 구조 단순화와 콜드스타트 제거 달성.',
+        link: 'https://kysportfolio.site'
+    },
+    {
+        icon: assets.code_icon,
+        title: '악성코드 분석 실습',
+        description: '정적·동적 분석 도구를 활용한 악성코드 샘플 분석 실습',
+        period: '2025.10 ~ 진행 중',
+        techStack: ['VirusTotal', '정적 분석', '동적 분석'],
+        highlights: [
+            '실제 악성코드 샘플 1개 분석 완료',
+            '분석 흐름(수집→정적→동적→보고) 체득',
+            '학습 내용 벨로그에 발행',
+        ],
+        troubleshooting: '',
+        link: 'https://velog.io/@kys980819'
+    }
+];
 
 export const infoList = [
-    { icon: assets.code_icon, iconDark: assets.code_icon_dark, title: 'Skills', description: 'HTML, CSS, JavaScript React Js, Next Js' },
-    { icon: assets.edu_icon, iconDark: assets.edu_icon_dark, title: 'Learning', description: 'AWS, 정보처리기사'},
-    { icon: assets.project_icon, iconDark: assets.project_icon_dark, title: 'Hobbies', description: 
-        '러닝, 독서' }
+    {
+        icon: assets.code_icon,
+        iconDark: assets.code_icon_dark,
+        title: '끝까지 해내는 실행력',
+        description: '포트폴리오 사이트를 기획부터 배포까지 독학으로 완성. 모르는 건 찾아서 익히고 결과물로 증명합니다.'
+    },
+    {
+        icon: assets.edu_icon,
+        iconDark: assets.edu_icon_dark,
+        title: '절차와 기준 중심',
+        description: '삼성전자 시설보안에서 매뉴얼 기반 업무와 교대근무를 1년간 수행. 입사 초반 자체 매뉴얼을 제작해 빠르게 적응했습니다.'
+    },
+    {
+        icon: assets.project_icon,
+        iconDark: assets.project_icon_dark,
+        title: '꾸준한 학습 태도',
+        description: '리눅스마스터 2급 취득, 정보처리기사 필기 합격. 현재 악성코드 분석 실습과 네트워크 보안 학습을 병행 중입니다.'
+    }
 ];
 
 export const toolsData = [

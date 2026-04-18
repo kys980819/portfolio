@@ -62,6 +62,7 @@ const Navbar = () => {
         rounded-full px-12 py-3 ${isScroll ? "" : "bg-white shadow-sm bg-opacity-50 dark:border dark:border-white/50 dark:bg-transparent"} `}>
           <li><a href="#top">Home</a></li>
           <li><a href="#about">About me</a></li>
+          <li><a href="#skills">Skills</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#chat">Chat</a></li>
         </ul>
@@ -88,6 +89,7 @@ const Navbar = () => {
 
           <li><a onClick={closeMenu} href="#top">Home</a></li>
           <li><a onClick={closeMenu} href="#about">About me</a></li>
+          <li><a onClick={closeMenu} href="#skills">Skills</a></li>
           <li><a onClick={closeMenu} href="#projects">Projects</a></li>
           <li><a onClick={closeMenu} href="#chat">Chat</a></li>
         </ul>
