@@ -1,3 +1,4 @@
+import { Target, ClipboardCheck, TrendingUp } from 'lucide-react';
 import code_icon from './code-icon.png';
 import code_icon_dark from './code-icon-dark.png';
 import edu_icon from './edu-icon.png';
@@ -99,21 +100,18 @@ export const serviceData = [
 
 export const infoList = [
     {
-        icon: assets.code_icon,
-        iconDark: assets.code_icon_dark,
+        icon: Target,
         title: '끝까지 해내는 실행력',
-        description: '포트폴리오 사이트를 기획부터 배포까지 독학으로 완성. 모르는 건 찾아서 익히고 결과물로 증명합니다.'
+        description: '기획부터 배포까지 독학으로 완성'
     },
     {
-        icon: assets.edu_icon,
-        iconDark: assets.edu_icon_dark,
+        icon: ClipboardCheck,
         title: '절차와 기준 중심',
-        description: '삼성전자 시설보안에서 매뉴얼 기반 업무와 교대근무를 1년간 수행. 입사 초반 자체 매뉴얼을 제작해 빠르게 적응했습니다.'
+        description: '매뉴얼 기반 업무 1년 수행'
     },
     {
-        icon: assets.project_icon,
-        iconDark: assets.project_icon_dark,
+        icon: TrendingUp,
         title: '꾸준한 학습 태도',
-        description: '리눅스마스터 2급 취득, 정보처리기사 필기 합격. 현재 악성코드 분석 실습과 네트워크 보안 학습을 병행 중입니다.'
+        description: '자격증·실습 병행 중'
     }
 ];

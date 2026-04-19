@@ -19,7 +19,13 @@ const skillsData = [
   },
   {
     category: 'Security (학습 중)',
-    skills: ['네트워크 기초 (OSI/TCP/IP)', '보안 장비 (방화벽/IDS/IPS)', '악성코드 분석 (VirusTotal/정적/동적)']
+    skills: [
+      '네트워크 기초 (OSI/TCP/IP)',
+      '보안 장비 (방화벽/IDS/IPS)',
+      '정적 분석: VirusTotal · ExeinfoPE · DIE · BinText · PEview',
+      '동적 분석: Process Monitor · Process Explorer · Autoruns · Wireshark',
+      '네트워크 분석: CurrPorts · SmartSniff · Wireshark'
+    ]
   },
   {
     category: 'Tools',
