@@ -5,7 +5,6 @@ import edu_icon_dark from './edu-icon-dark.png';
 import project_icon from './project-icon.png';
 import project_icon_dark from './project-icon-dark.png';
 import vscode from './vscode.png';
-import figma from './figma.png';
 import git from './git.png';
 import cursor from './cursor.png';
 import mongodb from './mongodb.png';
@@ -26,9 +25,6 @@ import menu_white from './menu-white.png';
 import close_black from './close-black.png';
 import close_white from './close-white.png';
 import web_icon from './web-icon.png';
-import mobile_icon from './mobile-icon.png';
-import ui_icon from './ui-icon.png';
-import graphics_icon from './graphics-icon.png';
 import right_arrow from './right-arrow.png';
 import send_icon from './send-icon.png';
 import right_arrow_bold from './right-arrow-bold.png';
@@ -43,7 +39,6 @@ export const assets = {
     project_icon,
     project_icon_dark,
     vscode,
-    figma,
     git,
     cursor,
     mongodb,
@@ -64,38 +59,12 @@ export const assets = {
     close_black,
     close_white,
     web_icon,
-    mobile_icon,
-    ui_icon,
-    graphics_icon,
     right_arrow,
     send_icon,
     right_arrow_bold,
     right_arrow_bold_dark,
     profile_kys_img
 };
-
-export const workData = [
-    {
-        title: 'Frontend project',
-        description: 'Web Design',
-        bgImage: '/work-1.png',
-    },
-    {
-        title: 'Geo based app',
-        description: 'Mobile App',
-        bgImage: '/work-2.png',
-    },
-    {
-        title: 'Photography site',
-        description: 'Web Design',
-        bgImage: '/work-3.png',
-    },
-    {
-        title: 'UI/UX designing',
-        description: 'UI/UX Design',
-        bgImage: '/work-4.png',
-    },
-]
 
 export const serviceData = [
     {
@@ -147,8 +116,4 @@ export const infoList = [
         title: '꾸준한 학습 태도',
         description: '리눅스마스터 2급 취득, 정보처리기사 필기 합격. 현재 악성코드 분석 실습과 네트워크 보안 학습을 병행 중입니다.'
     }
-];
-
-export const toolsData = [
-    assets.vscode, assets.cursor, assets.git, assets.mongodb
 ];

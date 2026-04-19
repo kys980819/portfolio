@@ -49,13 +49,13 @@ const Navbar = () => {
   return (
     <>
     <div className='fixed top-0 right-0 w-11/12 -z-10 translate-y-[-80%] dark:hidden'>
-      <Image src={assets.header_bg_color} alt='' className='w-full'/>
+      <Image src={assets.header_bg_color} alt="" className='w-full'/>
     </div>
 
       <nav className={`w-full fixed px-5 lg:px-8 xl:px-[8%] py-0
       flex items-center justify-between z-50 ${isScroll ? "bg-white bg-opacity-50 backdrop-blur-lg shadow-sm dark:bg-darkTheme dark:shadow-white/20" : ""}`}> 
         <a href='#top' aria-label="홈으로 이동">
-          <Image src={isDark ? assets.logo_dark : assets.logo} alt="" className='w-28 cursor-pointer mr-14'/> 
+          <Image src={isDark ? assets.logo_dark : assets.logo} alt="KYS Portfolio 로고" className='w-28 cursor-pointer mr-14'/> 
         </a>
 
         <ul className={`hidden md:flex items-center gap-10 lg:gap-12
@@ -70,21 +70,21 @@ const Navbar = () => {
         <div className='flex items-center gap-4'>
 
           <button onClick={toggleDark} aria-pressed={isDark} aria-label={isDark ? "라이트 모드로 전환" : "다크 모드로 전환"}>
-            <Image src={isDark ? assets.sun_icon : assets.moon_icon} alt='' className='w-6'/>
+            <Image src={isDark ? assets.sun_icon : assets.moon_icon} alt="테마 전환 아이콘" className='w-6'/>
           </button>
 
           <button className='block md:hidden ml-3' onClick={openMenu} aria-label="메뉴 열기">
-            <Image src={isDark ? assets.menu_white : assets.menu_black} alt='' className='w-6'/>
+            <Image src={isDark ? assets.menu_white : assets.menu_black} alt="메뉴 열기 아이콘" className='w-6'/>
           </button> 
         </div>
 
         {/* 모바일 메뉴 */}
 
         <ul ref={sideMenuRef} className='flex md:hidden flex-col gap-4 py-20 px-10 fixed -right-64 top-0 bottom-0 w-64 z-50 
-        h-screen bg-rose-50 transition duration-500 dark:bg-darkHover dark:text-white'>
+        h-screen bg-slate-50 transition duration-500 dark:bg-darkHover dark:text-white'>
 
           <button className='absolute right-6 top-6' onClick={closeMenu} aria-label="메뉴 닫기">
-              <Image src={isDark ? assets.close_white: assets.close_black} alt='' className='w-5 cursor-pointer'/>
+              <Image src={isDark ? assets.close_white: assets.close_black} alt="메뉴 닫기 아이콘" className='w-5 cursor-pointer'/>
           </button>
 
           <li><a onClick={closeMenu} href="#top">Home</a></li>

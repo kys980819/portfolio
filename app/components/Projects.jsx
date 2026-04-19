@@ -4,7 +4,7 @@ import React from 'react'
 
 const Projects = () => {
   return (
-    <div id='projects' className='w-full px-[12%] py-10 scroll-mt-20'>
+    <div id='projects' className='w-full px-[12%] py-10 scroll-mt-20 bg-gray-50 dark:bg-darkSurface'>
         <h4 className='text-center mb-2 text-lg'> Challenge </h4>
         <h2 className='text-center text-5xl'> MY Projects </h2>
 
@@ -15,7 +15,7 @@ const Projects = () => {
                 {serviceData.map(({icon, title, description, period, techStack, highlights, troubleshooting, link}, index)=>(
                     <div key={index}
                     className='border border-gray-400 rounded-lg px-8 py-10 dark:border-darkBorder'>
-                        <Image src={icon} alt='' className='w-10'/>
+                        <Image src={icon} alt="프로젝트 아이콘" className='w-10'/>
                         <h3 className='text-lg my-4 font-semibold text-gray-700 dark:text-white'>{title}</h3>
                         <p className='text-sm text-gray-600 dark:text-white/80'>{description}</p>
 

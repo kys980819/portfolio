@@ -20,16 +20,28 @@ export const metadata = {
     default: "KYS Portfolio",
     template: "%s | KYS Portfolio",
   },
-  description: "윤성의 개발 포트폴리오 웹사이트입니다.",
-  keywords: ["윤성", "KYS", "포트폴리오", "Next.js", "클라우드", "AI","정보보안","클라우드 보안"],
+  description:
+    "보안관제·IT 운영을 준비하는 김윤성의 포트폴리오입니다. 시설보안 경력과 꾸준한 IT 학습을 기반으로 보안 엔지니어를 목표합니다.",
+  keywords: [
+    "김윤성",
+    "보안관제",
+    "SOC",
+    "정보보안",
+    "포트폴리오",
+    "시설보안",
+    "악성코드 분석",
+    "네트워크 보안",
+    "IT 운영",
+    "신입 보안 엔지니어",
+  ],
   openGraph: {
     title: "KYS Portfolio",
-    description: "Next.js 기반의 포트폴리오 웹사이트",
+    description: "보안관제·IT 운영을 준비하는 김윤성의 포트폴리오",
     url: "https://kysportfolio.site",
     siteName: "KYS Portfolio",
     images: [
       {
-        url: "/thumbnail.png", // public 폴더 안 이미지
+        url: "/Thumbnail.png", // public 폴더 안 이미지
         width: 1200,
         height: 630,
         alt: "KYS Portfolio 대표 이미지",

@@ -4,7 +4,7 @@ import React from 'react'
 
 const About = () => {
   return (
-    <div id='about' className='w-full px-[12%] py-10 scroll-mt-20'>
+    <div id='about' className='w-full px-[12%] py-10 scroll-mt-20 bg-gray-50 dark:bg-darkSurface'>
       <h4 className='text-center mb-2 text-lg'> Introduction </h4>
       <h2 className='text-center text-5xl'> About me </h2>
 
@@ -24,7 +24,7 @@ const About = () => {
             </p>
             <ul className='grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl'>
                 {infoList.map(({icon, iconDark, title, description}, index)=>(
-                    <li  className='border-[0.5px] border-gray-400 rounded-xl p-6 cursor-pointer hover:bg-amber-50
+                    <li  className='border-[0.5px] border-gray-400 rounded-xl p-6 cursor-pointer hover:bg-slate-50
                     hover:-translate-y-1 duration-500 hover:shadow-black dark:border-white 
                     dark:hover:shadow-white dark:hover:bg-darkHover/50' 
                      key={index}>
