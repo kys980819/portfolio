@@ -64,6 +64,7 @@ const Navbar = () => {
           <li><a href="#about">About me</a></li>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#projects">Projects</a></li>
+          <li><a href="#learning-log">Learning Log</a></li>
           <li><a href="#chat">Chat</a></li>
         </ul>
 
@@ -91,6 +92,7 @@ const Navbar = () => {
           <li><a onClick={closeMenu} href="#about">About me</a></li>
           <li><a onClick={closeMenu} href="#skills">Skills</a></li>
           <li><a onClick={closeMenu} href="#projects">Projects</a></li>
+          <li><a onClick={closeMenu} href="#learning-log">Learning Log</a></li>
           <li><a onClick={closeMenu} href="#chat">Chat</a></li>
         </ul>
       </nav>
