@@ -9,8 +9,7 @@ const LearningLog = () => {
       <h2 className='text-center text-5xl'> Learning Log </h2>
 
       <p className='text-center max-w-2xl mx-auto mt-5 mb-6'>
-        모르는 건 찾아서 익히고, 익힌 건 기록으로 남깁니다.<br />
-        보안관제로의 전환을 위해 쌓아온 학습 궤적입니다.
+        학습 과정에서 정리한 개념과 실습 기록입니다.
       </p>
 
       <p className='text-center text-sm text-gray-500 dark:text-gray-400 mb-12'>

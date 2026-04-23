@@ -5,11 +5,10 @@ import React from 'react'
 const Projects = () => {
   return (
     <div id='projects' className='w-full px-[12%] py-10 scroll-mt-20 bg-gray-50 dark:bg-darkSurface'>
-        <h4 className='text-center mb-2 text-lg'> Challenge </h4>
         <h2 className='text-center text-5xl'> MY Projects </h2>
 
         <p className='text-center max-w-2xl mx-auto mt-5 mb-12'>
-        학습한 내용을 바탕으로 다양한 프로젝트를 시도하고 있습니다.<br/> 꾸준히 쌓아가며 제 성장을 보여드리겠습니다.
+        직접 만들고, 배포하고, 운영해온 프로젝트들입니다.
         </p>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-6 my-10 max-w-5xl mx-auto'>
                 {serviceData.map(({icon, title, description, period, techStack, highlights, troubleshooting, link}, index)=>(

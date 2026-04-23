@@ -101,17 +101,17 @@ export const serviceData = [
 export const infoList = [
     {
         icon: Target,
-        title: '끝까지 해내는 실행력',
-        description: '기획부터 배포까지 독학으로 완성'
+        title: '스스로 만드는 구조',
+        description: '시설보안 매뉴얼을 자기 방식으로 재정리했고, 악성코드 분석에는 노트 템플릿 13종을 직접 설계해 사용합니다'
     },
     {
         icon: ClipboardCheck,
-        title: '절차와 기준 중심',
-        description: '매뉴얼 기반 업무 1년 수행'
+        title: '꾸준히 쌓아가는 기록',
+        description: 'IT 학습 초기부터 개념 정리와 실습 과정을 기술 블로그에 축적해오고 있습니다'
     },
     {
         icon: TrendingUp,
-        title: '꾸준한 학습 태도',
-        description: '자격증·실습 병행 중'
+        title: '끝까지 해내는 실행력',
+        description: '포트폴리오 사이트를 기획·설계·배포까지 혼자 완성했고, 현재도 운영하며 개선해나가고 있습니다'
     }
 ];

@@ -25,10 +25,10 @@ const About = () => {
         <div className='flex min-w-0 flex-col gap-8'>
           <div className='text-gray-700 dark:text-gray-200'>
             <p className='leading-relaxed'>
-              법경찰행정학과를 졸업하고 삼성전자 사업장에서 1년간 시설보안 업무를 수행했습니다. 현장에서 절차 준수와 매뉴얼 기반 업무의 중요성을 체감하면서, 물리 보안을 넘어 정보보안과 IT 분야로 관심이 확장되었습니다.
+            삼성전자 사업장에서 1년간 시설보안으로 일하며, 다수 게이트에서 출입 통제와 보안 검색을 수행했습니다. 포지션별 매뉴얼을 자기 방식으로 재구성해 현장에서 가장 빨리 적응한 팀원으로 평가받았습니다.
             </p>
             <p className='mt-4 leading-relaxed'>
-              현재는 네트워크·보안 기초와 악성코드 분석 실습을 병행하며 보안관제 직무 전환을 준비하고 있습니다.
+            이후 IT로 방향을 전환해, 2025년 8월부터 멘토링을 시작해 포트폴리오 사이트를 직접 설계·배포했고, 학습 과정은 기술 블로그에 꾸준히 기록해오고 있습니다. 지금은 네트워크·보안 기초와 악성코드 분석 실습(정적·동적·네트워크 분석)을 병행하며 보안 직무 진입을 준비하고 있습니다.
             </p>
           </div>
 
@@ -60,9 +60,9 @@ const About = () => {
             <h4 className='mt-2 text-lg font-semibold text-gray-900 dark:text-white'>
               삼성전자 사업장 시설보안
             </h4>
-            <p className='mt-1 text-sm text-gray-500 dark:text-gray-400'>휴먼TSS · 2024.11 ~ 2025.11</p>
+            <p className='mt-1 text-sm text-gray-500 dark:text-gray-400'>휴먼TSS · 2023.11 ~ 2024.11 (1년)</p>
             <p className='mt-3 text-sm text-gray-600 dark:text-gray-300'>
-              출입통제, 매뉴얼 기반 대응, 교대근무
+              출입 통제·보안 검색·상황별 대응 훈련
             </p>
           </section>
 
@@ -76,7 +76,7 @@ const About = () => {
               </h4>
               <p className='mt-1 text-sm text-gray-500 dark:text-gray-400'>과제형 · 2025.08 ~ 현재</p>
               <p className='mt-2 text-sm text-gray-600 dark:text-gray-300'>
-                웹개발 → 네트워크/보안 → 악성코드 분석
+                웹 개발 → 네트워크·보안 → 악성코드 분석
               </p>
             </div>
             <div className='mt-6 border-t border-gray-100 pt-6 dark:border-darkBorder'>
@@ -95,15 +95,16 @@ const About = () => {
               <li className='flex flex-wrap items-center gap-2'>
                 <span className='font-medium text-gray-900 dark:text-white'>리눅스마스터 2급</span>
                 <span className='inline-flex rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-medium text-emerald-800 dark:bg-emerald-900/45 dark:text-emerald-200'>
-                  취득
+                  2025.12
                 </span>
               </li>
               <li className='flex flex-wrap items-center gap-2'>
-                <span className='font-medium text-gray-900 dark:text-white'>정보처리기사</span>
+                <span className='font-medium text-gray-900 dark:text-white'>정보처리기사 필기</span>
                 <span className='inline-flex rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-900/45 dark:text-blue-200'>
-                  필기 합격
+                  2026.03
                 </span>
               </li>
+              <li className='text-sm text-gray-600 dark:text-gray-300'>실기 2026년 2차 예정</li>
             </ul>
           </section>
         </div>

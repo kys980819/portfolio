@@ -40,7 +40,6 @@ const skillsData = [
 const Skills = () => {
   return (
     <div id='skills' className='w-full px-[12%] py-10 scroll-mt-20'>
-      <h4 className='text-center mb-2 text-lg'>What I Work With</h4>
       <h2 className='text-center text-5xl'>Skills</h2>
 
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mt-12'>

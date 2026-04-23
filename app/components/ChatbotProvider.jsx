@@ -8,7 +8,7 @@ export function ChatbotProvider({ children }) {
   const MAX_MESSAGES = 300;
   // === 중앙 집중식 상태 관리 ===
   const [messages, setMessages] = useState([
-    { role: "assistant", content: "안녕하세요! 무엇을 도와드릴까요?" },
+    { role: "assistant", content: "안녕하세요. 윤성의 이력과 프로젝트를 학습한 AI입니다. 윤성에 대해 궁금하신 점을 편하게 물어봐 주세요." },
   ]);
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
@@ -96,7 +96,7 @@ export function ChatbotProvider({ children }) {
           localStorage.removeItem(STORAGE_KEY);
         } catch (_) {}
         setMessages([
-          { role: "assistant", content: "안녕하세요! 무엇을 도와드릴까요?" },
+          { role: "assistant", content: "안녕하세요. 윤성의 이력과 프로젝트를 학습한 AI입니다. 윤성에 대해 궁금하신 점을 편하게 물어봐 주세요." },
           { role: "assistant", content: "새 대화를 시작했습니다." },
         ]);
         setHasSavedHistory(false);
@@ -155,7 +155,7 @@ export function ChatbotProvider({ children }) {
       localStorage.removeItem(STORAGE_KEY);
       sessionStorage.removeItem("conversation_id");
     } catch (_) {}
-    setMessages([{ role: "assistant", content: "안녕하세요! 무엇을 도와드릴까요?" }]);
+    setMessages([{ role: "assistant", content: "안녕하세요. 윤성의 이력과 프로젝트를 학습한 AI입니다. 윤성에 대해 궁금하신 점을 편하게 물어봐 주세요." }]);
     setHasSavedHistory(false);
   };
 
