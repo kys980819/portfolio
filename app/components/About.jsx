@@ -58,29 +58,20 @@ const About = () => {
               경력
             </h3>
             <h4 className='mt-2 text-lg font-semibold text-gray-900 dark:text-white'>
-              삼성전자 사업장 시설보안
+              삼성전자 캠퍼스 보안
             </h4>
             <p className='mt-1 text-sm text-gray-500 dark:text-gray-400'>휴먼TSS · 2023.11 ~ 2024.11 (1년)</p>
             <p className='mt-3 text-sm text-gray-600 dark:text-gray-300'>
-              출입 통제·보안 검색·상황별 대응 훈련
+              출입 통제·보안 검색(금속탐지·문서감응·엑스레이), 반입·반출 통제, 모의훈련 대응
             </p>
           </section>
 
           <section className='rounded-xl border border-gray-200 bg-white p-5 dark:border-darkBorder dark:bg-darkSurface/40'>
             <h3 className='text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400'>
-              교육
+              학력
             </h3>
             <div>
               <h4 className='mt-2 text-lg font-semibold text-gray-900 dark:text-white'>
-                IT 직무 전환 멘토링
-              </h4>
-              <p className='mt-1 text-sm text-gray-500 dark:text-gray-400'>과제형 · 2025.08 ~ 현재</p>
-              <p className='mt-2 text-sm text-gray-600 dark:text-gray-300'>
-                웹 개발 → 네트워크·보안 → 악성코드 분석
-              </p>
-            </div>
-            <div className='mt-6 border-t border-gray-100 pt-6 dark:border-darkBorder'>
-              <h4 className='text-lg font-semibold text-gray-900 dark:text-white'>
                 호서대학교 법경찰행정학과
               </h4>
               <p className='mt-1 text-sm text-gray-500 dark:text-gray-400'>졸업 · 2024.08</p>

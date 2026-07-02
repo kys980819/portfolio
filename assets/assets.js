@@ -69,29 +69,44 @@ export const assets = {
 
 export const serviceData = [
     {
+        icon: assets.code_icon,
+        title: 'Snort IDS 탐지 환경 구축 + 악성코드 분석 (CEaN.exe / 정보탈취형)',
+        description: 'VMware 격리 환경에 Snort 기반 IDS를 직접 구축하고, 정보탈취형 악성코드를 분석해 IOC 기반 탐지 룰을 작성·검증한 메인 프로젝트',
+        techStack: ['Snort', 'VMware', 'BASE', 'MalwareBazaar', 'Wireshark', 'Process Monitor'],
+        highlights: [
+            'VMware 격리 환경에 Snort 2.9.2.3 + BASE + MySQL 기반 IDS 탐지 환경 직접 구축 (Windows 미러링 제약을 단일 VM 구조로 재설계, 버전 호환성을 다운그레이드로 해결)',
+            '"C2 통신·평문 통신" 두 기준을 직접 세워 MalwareBazaar에서 반복 검증으로 검체(정보탈취형) 선별',
+            '기초·정적·동적·네트워크 분석으로 자격증명 수집→평문 SMTP 유출(전송 완료 응답까지)→Run 키 지속성을 실증, 파일·레지스트리·네트워크 IOC 도출',
+            'IOC 기반 Snort 룰 작성·BASE 검증',
+        ],
+        troubleshooting: '탐지 누락 원인을 트래픽→인터페이스→룰 문법→패킷 처리 순으로 좁혀 체크섬 오프로드 문제로 규명, -k none 옵션으로 해결.',
+        link: ''
+    },
+    {
         icon: assets.web_icon,
         title: '포트폴리오 사이트 (AI 챗봇 포함)',
         description: '이력서·자소서 기반으로 대화하는 AI 챗봇이 포함된 개인 포트폴리오 웹사이트',
-        period: '2025.09 ~ 2025.10 (지속 개선 중)',
+        period: '지속 개선 중',
         techStack: ['Next.js', 'React', 'MongoDB', 'OpenAI API', 'Vercel', 'AWS EC2'],
         highlights: [
-            'GPT-4.1 기반 AI 챗봇 구현 (MongoDB로 대화 저장)',
+            'gpt-5-mini 기반 AI 챗봇 구현 (MongoDB로 대화 저장)',
             '텔레그램 알림 연동',
             'GitHub Actions CI/CD + 커스텀 도메인·HTTPS',
+            'CVE-2025-55182(React Server Components 원격 코드 실행 취약점) 공개 시 사용 버전을 확인해 패치된 버전(Next.js 15.5.7)으로 재배포, 노출 가능성에 대비해 API 키(OpenAI·MongoDB) 재발급',
         ],
         troubleshooting: 'Flask 백엔드 → Next.js API 라우트로 마이그레이션하여 프론트·백엔드를 단일 프로젝트로 통합. 배포 구조 단순화와 콜드스타트 제거 달성.',
         link: 'https://kysportfolio.site'
     },
     {
         icon: assets.code_icon,
-        title: '악성코드 분석 실습',
-        description: '정적·동적 분석 도구를 활용한 악성코드 샘플 분석 실습',
-        period: '2025.10 ~ 진행 중',
-        techStack: ['VirusTotal', '정적 분석', '동적 분석'],
+        title: '악성코드 분석 실습 (bton02·dgrep.exe)',
+        description: 'VM 격리 환경에서 기초·정적·동적·네트워크 분석 절차를 정립하고 두 검체에 동일하게 적용한 분석 실습',
+        techStack: ['VirusTotal', '정적 분석', '동적 분석', 'Snort'],
         highlights: [
-            '실제 악성코드 샘플 1개 분석 완료',
-            '분석 흐름(수집→정적→동적→보고) 체득',
-            '학습 내용 벨로그에 발행',
+            'VM 격리 환경에서 기초·정적·동적·네트워크로 이어지는 분석 절차를 직접 정립, 도구별 분석 노트 양식 설계',
+            'bton02 — 트로이목마·다운로더 유형(VirusTotal 기준) 분석',
+            'dgrep.exe — 트로이목마·백도어 유형, 이중 패킹(UPX + SVK-Protector) 해제, 자기복제·rundll32 페이로드 로드·Run 키 지속성 규명',
+            '네트워크 IOC 기반 Snort 룰 3종(IP / URL content / DNS) 작성',
         ],
         troubleshooting: '',
         link: 'https://velog.io/@kys980819'

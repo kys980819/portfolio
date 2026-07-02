@@ -50,12 +50,14 @@ const Projects = () => {
                             </div>
                         )}
 
-                        <a href={link} target="_blank" rel="noopener noreferrer"
-                            aria-label={`${title} 자세히 보기`}
-                            className='inline-flex items-center gap-2 text-sm mt-5 border border-gray-400 rounded-lg px-3 py-1.5 w-fit dark:border-darkBorder'>
-                            {link.includes('velog') ? '블로그에서 보기' : '사이트 보기'}
-                            <Image src={assets.right_arrow} alt='화살표 아이콘' className='w-4'/>
-                        </a>
+                        {link && (
+                            <a href={link} target="_blank" rel="noopener noreferrer"
+                                aria-label={`${title} 자세히 보기`}
+                                className='inline-flex items-center gap-2 text-sm mt-5 border border-gray-400 rounded-lg px-3 py-1.5 w-fit dark:border-darkBorder'>
+                                {link.includes('velog') ? '블로그에서 보기' : '사이트 보기'}
+                                <Image src={assets.right_arrow} alt='화살표 아이콘' className='w-4'/>
+                            </a>
+                        )}
                     </div>
                 ))}
             </div>

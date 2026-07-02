@@ -2,6 +2,17 @@ import React from 'react'
 
 const skillsData = [
   {
+    category: 'Security',
+    skills: [
+      'Snort (IDS 탐지 환경 구축·룰 작성)',
+      '네트워크 기초 (OSI/TCP/IP)',
+      '보안 장비 (방화벽/IDS/IPS)',
+      '정적 분석: VirusTotal · ExeinfoPE · DIE · BinText · PEview',
+      '동적 분석: Process Monitor · Process Explorer · Autoruns · Wireshark',
+      '네트워크 분석: CurrPorts · SmartSniff · Wireshark'
+    ]
+  },
+  {
     category: 'Frontend',
     skills: ['JavaScript', 'React', 'Next.js', 'HTML/CSS']
   },
@@ -18,22 +29,8 @@ const skillsData = [
     skills: ['AWS EC2', 'Vercel', 'GitHub Actions']
   },
   {
-    category: 'Security (학습 중)',
-    skills: [
-      '네트워크 기초 (OSI/TCP/IP)',
-      '보안 장비 (방화벽/IDS/IPS)',
-      '정적 분석: VirusTotal · ExeinfoPE · DIE · BinText · PEview',
-      '동적 분석: Process Monitor · Process Explorer · Autoruns · Wireshark',
-      '네트워크 분석: CurrPorts · SmartSniff · Wireshark'
-    ]
-  },
-  {
     category: 'Tools',
-    skills: ['Git/GitHub', 'Cursor', 'VS Code', 'Linux/Ubuntu']
-  },
-  {
-    category: 'Currently Learning',
-    skills: ['악성코드 분석 심화', '정보처리기사 실기']
+    skills: ['Git/GitHub', 'Cursor', 'VS Code', 'Linux/Ubuntu', 'VMware']
   }
 ]
 

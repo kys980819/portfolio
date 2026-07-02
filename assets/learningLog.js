@@ -1,6 +1,6 @@
 ﻿// 섹션 상단 메타 정보 (헤드라인 수치 바에 사용)
 export const learningLogMeta = {
-  totalSeries: 6,
+  totalSeries: 5,
   totalPosts: 73,
   period: '2025.08 ~ 현재',
 }
@@ -30,13 +30,6 @@ export const categoryStyles = {
 // 채용담당자 시선 동선을 고려해 보안 시리즈를 상단에 배치
 // 카드에 postCount / lastUpdated 를 노출하지 않는 디자인 결정에 따라 해당 필드는 제거
 export const learningLogSeries = [
-  {
-    id: 'site-security-audit',
-    category: 'Security',
-    title: '내 사이트 보안 점검 · 관제 구축',
-    description: '2026년 Vercel 사고와 React CVE를 계기로, 실제 운영 중인 내 사이트를 취약점 진단·조치·관제 구축까지 직접 수행한 실전 대응 기록입니다.',
-    url: 'https://velog.io/@kys980819',
-  },
   {
     id: 'malware-analysis',
     category: 'Security',
