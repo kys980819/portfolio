@@ -39,3 +39,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+# 에디터 설정 파일 (아까 본 폴더)
+.vscode/

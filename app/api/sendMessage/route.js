@@ -12,7 +12,7 @@ const mongoDbName = process.env.MONGO_DB;
 const mongoCollectionName = process.env.MONGO_COLLECTION;
 const vectorStoreIds = process.env.VECTOR_STORE_IDS ? 
   process.env.VECTOR_STORE_IDS.split(',').map(id => id.trim()) : [];
-const maxOutputTokens = parseInt(process.env.MAX_OUTPUT_TOKENS || '256');
+const maxOutputTokens = parseInt(process.env.MAX_OUTPUT_TOKENS || '500');
 const openaiTimeout = parseInt(process.env.OPENAI_TIMEOUT || '30') * 1000; // ms로 변환
 
 // 텔레그램 설정
@@ -61,7 +61,7 @@ async function sendTelegramNotification(userMessage, aiResponse, sessionId) {
 ⏰ *시간:* ${new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })}`;
 
     await bot.sendMessage(telegramChatId, message, {
-      parse_mode: 'Markdown',
+      parse_mode: "MarkdownV2",
       disable_web_page_preview: true
     });
     
@@ -157,16 +157,62 @@ export async function POST(request) {
       console.log("OpenAI API 호출 시작");
       
       const response = await openaiClient.responses.create({
-        model: "gpt-4.1",
+        model: "gpt-5-mini",
         input: [
-          { role: "system", content: "너는 김윤성의 이력서를 보고 답변하는 챗봇이야" },
-          { role: "user", content: message }
+          {
+            role: "system",
+            content: `
+          당신은 김윤성의 포트폴리오 웹사이트에서 동작하는 AI 챗봇입니다.
+          
+          # 역할
+          - file_search로 검색된 문서를 최우선 근거로 답변합니다.
+          - 업로드된 문서는 이력서, 자기소개서, 프로젝트 보고서, 악성코드 분석 보고서 및 학습 문서입니다.
+          - 방문자가 김윤성에 대해 정확하게 이해할 수 있도록 답변합니다.
+          
+          # 답변 규칙
+          1. 항상 검색된 문서를 우선 사용합니다.
+          2. 여러 문서에 관련 내용이 있으면 종합하여 답변합니다.
+          3. 문서에 없는 내용은 절대 추측하거나 생성하지 않습니다.
+          4. 정보가 없으면 "업로드된 문서에서 확인되지 않습니다."라고 답합니다.
+          5. 일반적인 지식을 설명하는 경우에는 문서 내용과 명확히 구분합니다.
+          6. 질문이 모호하면 필요한 정보를 먼저 질문합니다.
+          7. 문서의 원문을 그대로 길게 인용하지 말고 핵심 내용을 요약하여 답변합니다.
+          8. 답변에 필요한 근거가 검색되지 않으면 추측하지 말고 "업로드된 문서에서 확인되지 않습니다."라고 답하십시오.
+
+          # 금지사항
+          - 존재하지 않는 프로젝트, 경험, 기술, 자격증, 수상, 활동을 만들어내지 않습니다.
+          - 문서 내용을 과장하거나 확대 해석하지 않습니다.
+          - 확신할 수 없는 내용을 사실처럼 말하지 않습니다.
+          
+          # 답변 스타일
+          - 자연스럽고 전문적으로 작성합니다.
+          - 불필요한 서론과 반복을 피합니다.
+          - 기본적으로 300자 이내로 답변합니다.
+          - 사용자가 추가 설명을 요청한 경우에만 자세히 설명합니다.
+          - 필요한 경우에만 Markdown을 사용합니다.
+          
+          # 자기소개 규칙
+          - 자기소개를 요청받으면 김윤성의 입장에서 1인칭으로 답변합니다.
+          - 그 외의 질문은 제3자가 읽기 자연스러운 표현으로 답변합니다.
+
+          정확성이 가장 중요합니다. 문서에 없는 내용은 절대로 만들어내지 마십시오.
+          `
+          },
+          {
+            role: "user",
+            content: `사용자 질문:
+          
+          ${message}
+          
+          먼저 file_search에서 검색된 문서를 확인한 뒤 답변하십시오.`
+          }
         ],
         tools: [{ type: "file_search", vector_store_ids: vectorStoreIds }],
         max_output_tokens: maxOutputTokens
       });
 
-      const aiResponse = response.output_text;
+      const aiResponse =
+        response.output_text || "응답을 생성하지 못했습니다.";  
       console.log(`AI 응답 생성 완료: ${aiResponse.length}자`);
 
       // MongoDB 저장 (가능한 경우에만, 글로벌 캐시 재사용)
