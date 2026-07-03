@@ -17,7 +17,7 @@ const Header = () => {
       <br/>탐지 룰 작성·검증까지 보안관제 한 흐름을 직접 끝까지 돌려봤습니다.
       <br/>끝까지 검증하고 확인하는 태도로, 정보보안 담당자를 목표로 하고 있습니다.</p>
       <div className='flex flex-col sm:flex-row items-center gap-4 mt-4'>
-        <a href="/sample-resume.pdf" download aria-label="이력서 다운로드" className='px-10 py-3 border rounded-full
+        <a href="/kim-yunsung-resume.pdf" download="김윤성_이력서.pdf" aria-label="이력서 다운로드" className='px-10 py-3 border rounded-full
          border-gray-500 flex items-center gap-2 bg-white dark:text-black'> 
         My Resume <Image src={assets.download_icon} alt='다운로드 아이콘' className='w-4'/></a>
       </div>
