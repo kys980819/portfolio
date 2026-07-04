@@ -124,6 +124,7 @@ export default function Chatbot({ mode = "floating" }) {
 								type="text"
 								value={input}
 								onChange={(e) => handleInputChange(e.target.value)}
+								maxLength={1000}
 								placeholder="메시지를 입력하세요..."
 								className="flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black dark:bg-transparent dark:text-darkText dark:placeholder-white/50 dark:border-darkBorder dark:focus:ring-darkFocus"
 								disabled={isLoading}

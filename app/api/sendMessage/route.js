@@ -18,6 +18,38 @@ const openaiTimeout = parseInt(process.env.OPENAI_TIMEOUT || '30') * 1000; // ms
 const telegramBotToken = process.env.TELEGRAM_BOT_TOKEN;
 const telegramChatId = process.env.TELEGRAM_CHAT_ID;
 
+// 요청 방어선 설정 (실운영 값은 환경변수로 관리 — 코드에 노출된 기본값과 다르게 운영 가능)
+const MAX_MESSAGE_LENGTH = parseInt(process.env.CHAT_MAX_MESSAGE_LENGTH || '1000'); // 메시지 길이 상한 (자)
+const MAX_ID_LENGTH = parseInt(process.env.CHAT_MAX_ID_LENGTH || '100');            // 세션/대화 ID 길이 상한
+const RATE_LIMIT_WINDOW_MS = parseInt(process.env.CHAT_RATE_LIMIT_WINDOW_SECONDS || '60') * 1000; // rate limit 윈도우
+const RATE_LIMIT_MAX = parseInt(process.env.CHAT_RATE_LIMIT_MAX || '10');           // 윈도우 내 최대 요청 수
+const RATE_LIMIT_MAP_MAX = 1000;       // 추적 IP 수 상한 (메모리 보호)
+
+// 인메모리 rate limit (서버리스 인스턴스별 분리 한계는 감수)
+const rateLimitMap = new Map();
+function isRateLimited(ip) {
+  const now = Date.now();
+  const recent = (rateLimitMap.get(ip) || []).filter(t => now - t < RATE_LIMIT_WINDOW_MS);
+  if (recent.length >= RATE_LIMIT_MAX) {
+    rateLimitMap.set(ip, recent);
+    return true;
+  }
+  if (rateLimitMap.size >= RATE_LIMIT_MAP_MAX && !rateLimitMap.has(ip)) {
+    rateLimitMap.clear();
+  }
+  recent.push(now);
+  rateLimitMap.set(ip, recent);
+  return false;
+}
+
+// 클라이언트가 보낸 ID를 검증 — 문자열·길이 조건을 벗어나면 새 uuid로 대체
+function sanitizeId(value) {
+  if (typeof value === 'string' && value.length > 0 && value.length <= MAX_ID_LENGTH) {
+    return value;
+  }
+  return uuidv4();
+}
+
 // OpenAI 클라이언트 Lazy Singleton
 let openaiClientSingleton = null;
 function getOpenAIClient() {
@@ -104,6 +136,15 @@ async function getMongoCollection() {
 
 export async function POST(request) {
   try {
+    // rate limit (IP 기준)
+    const clientIp = request.headers.get('x-forwarded-for')?.split(',')[0].trim() || 'unknown';
+    if (isRateLimited(clientIp)) {
+      return NextResponse.json(
+        { ok: false, error: "짧은 시간에 요청이 많았어요. 잠시 후 다시 시도해 주세요." },
+        { status: 429 }
+      );
+    }
+
     // Content-Type 확인
     const contentType = request.headers.get('content-type');
     if (!contentType || !contentType.includes('application/json')) {
@@ -116,15 +157,23 @@ export async function POST(request) {
     // JSON 데이터 파싱
     const data = await request.json();
     
-    // 세션/대화 ID 수집
-    const sessionId = request.headers.get('x-session-id') || uuidv4();
-    const conversationId = data.conversation_id || uuidv4();
+    // 세션/대화 ID 수집 (신뢰 경계 — 문자열·길이 검증, 부적합 시 새 uuid)
+    const sessionId = sanitizeId(request.headers.get('x-session-id'));
+    const conversationId = sanitizeId(data.conversation_id);
     const message = data.message;
 
     // 메시지 검증
-    if (!message || !message.trim()) {
+    if (typeof message !== 'string' || !message.trim()) {
       return NextResponse.json(
         { ok: false, error: "Message is required and cannot be empty" },
+        { status: 400 }
+      );
+    }
+
+    // 메시지 길이 상한
+    if (message.length > MAX_MESSAGE_LENGTH) {
+      return NextResponse.json(
+        { ok: false, error: `메시지가 너무 길어요. ${MAX_MESSAGE_LENGTH}자 이내로 줄여서 보내주세요.` },
         { status: 400 }
       );
     }
