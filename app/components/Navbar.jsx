@@ -17,13 +17,15 @@ const Navbar = () => {
     }
 
     useEffect(()=>{
-        window.addEventListener('scroll',()=>{
-          if(scrollY > 50){
+        const handleScroll = ()=>{
+          if(window.scrollY > 50){
               setIsScroll(true)
           }else{
               setIsScroll(false)
           }
-        })
+        }
+        window.addEventListener('scroll', handleScroll)
+        return ()=> window.removeEventListener('scroll', handleScroll)
     },[])
 
   const [isDark, setIsDark] = useState(false)
@@ -41,7 +43,7 @@ const Navbar = () => {
       localStorage.theme = 'dark'
     } else {
       root.classList.remove('dark')
-      localStorage.theme = ''
+      localStorage.theme = 'light'
     }
     setIsDark(next)
   }

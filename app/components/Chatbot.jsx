@@ -1,25 +1,38 @@
 "use client";
 
+import { useRef, useEffect } from "react";
 import { useChatbot } from "./ChatbotProvider";
 
 export default function Chatbot({ mode = "floating" }) {
-	const { 
-		messages, 
-		isOpen, 
-		input, 
+	const {
+		messages,
+		isOpen,
+		input,
 		isLoading,
-		listRef, 
-		panelRef,
-		toggleChat, 
-		closeChat, 
-		handleInputChange, 
+		toggleChat,
+		closeChat,
+		handleInputChange,
 		handleSubmit,
 		hasSavedHistory,
-		resetConversation 
+		isBannerDismissed,
+		dismissBanner,
+		resetConversation
 	} = useChatbot();
 
 	// 인라인 모드일 때는 항상 열려있음
 	const isChatOpen = mode === "inline" ? true : isOpen;
+
+	// 인스턴스별 로컬 ref — 플로팅/인라인 두 창이 독립적으로 스크롤되도록
+	const listRef = useRef(null);
+	const panelRef = useRef(null);
+
+	// 자동 스크롤: 메시지 추가·복원 시, 그리고 (플로팅) 창을 열 때 맨 아래로
+	useEffect(() => {
+		if (!isChatOpen || !listRef.current) return;
+		listRef.current.scrollTop = listRef.current.scrollHeight;
+	}, [messages, isLoading, isChatOpen]);
+
+	const panelId = mode === "floating" ? "chatbot-panel-floating" : "chatbot-panel-inline";
 
 	return (
 		<div aria-live="polite">
@@ -27,7 +40,7 @@ export default function Chatbot({ mode = "floating" }) {
 				<button
 					onClick={toggleChat}
 					aria-expanded={isOpen}
-					aria-controls="chatbot-panel"
+					aria-controls="chatbot-panel-floating"
 					aria-label={isOpen ? "챗봇 닫기" : "챗봇 열기"}
 					title={isOpen ? "닫기" : "챗봇 열기"}
 					className="fixed right-4 bottom-4 z-50 rounded-full bg-black text-white shadow-lg transition hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black w-14 h-14 flex items-center justify-center dark:bg-white dark:text-black dark:focus:ring-white"
@@ -51,7 +64,7 @@ export default function Chatbot({ mode = "floating" }) {
 
 			{isChatOpen && (
 				<div
-					id="chatbot-panel"
+					id={panelId}
 					ref={panelRef}
 					className={
 						mode === "floating"
@@ -106,12 +119,17 @@ export default function Chatbot({ mode = "floating" }) {
 						)}
 					</ul>
 
-					{/* 인풋 바로 위: 항상 보이는 "새로 시작" 선택(저장 이력이 있을 때만) */}
-					{hasSavedHistory && (
+					{/* 인풋 바로 위: 이전 대화 복원 안내 배너 (페이지 로드 시 복원된 경우에만, X로 이번 방문 동안 숨김 가능) */}
+					{hasSavedHistory && !isBannerDismissed && (
 						<div className="px-4 pb-2 text-center">
 							<div className="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/90 dark:bg-neutral-800/90 shadow px-3 py-1 text-sm">
 								<span className="text-gray-700 dark:text-neutral-200">이전 대화가 로드되었습니다.</span>
 								<button onClick={resetConversation} className="rounded-full bg-gray-200 dark:bg-neutral-700 text-gray-800 dark:text-neutral-100 px-3 py-0.5 text-xs">새로 시작</button>
+								<button onClick={dismissBanner} className="rounded-full p-0.5 text-gray-500 hover:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-100" aria-label="안내 닫기" title="안내 닫기">
+									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M6 6l12 12M6 18L18 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+									</svg>
+								</button>
 							</div>
 						</div>
 					)}

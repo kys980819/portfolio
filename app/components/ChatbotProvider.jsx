@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useMemo, useState, useRef, useEffect } from "react";
+import { createContext, useContext, useMemo, useState, useEffect } from "react";
 
 const ChatbotContext = createContext(null);
 
@@ -14,16 +14,7 @@ export function ChatbotProvider({ children }) {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [hasSavedHistory, setHasSavedHistory] = useState(false);
-  
-  // === Refs ===
-  const listRef = useRef(null);
-  const panelRef = useRef(null);
-
-  // === 자동 스크롤 관리 ===
-  useEffect(() => {
-    if (!listRef.current) return;
-    listRef.current.scrollTop = listRef.current.scrollHeight;
-  }, [messages]);
+  const [isBannerDismissed, setIsBannerDismissed] = useState(false);
 
   // === 저장된 메시지 복원 ===
   useEffect(() => {
@@ -33,7 +24,8 @@ export function ChatbotProvider({ children }) {
         const saved = JSON.parse(raw);
         if (Array.isArray(saved) && saved.every((m) => m?.role && m?.content)) {
           setMessages(saved);
-          setHasSavedHistory(saved.length > 0);
+          // 초기 인사만 저장돼 있으면 "이전 대화"가 아님 — 복원 시점에만 배너 표시
+          setHasSavedHistory(saved.length > 1);
         }
       }
     } catch (_) {}
@@ -44,7 +36,6 @@ export function ChatbotProvider({ children }) {
     try {
       const capped = messages.slice(-MAX_MESSAGES);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(capped));
-      setHasSavedHistory(capped.length > 1); // 초기 인사만 있을 때는 false
     } catch (_) {}
   }, [messages]);
 
@@ -166,6 +157,7 @@ export function ChatbotProvider({ children }) {
   
   const handleInputChange = (value) => setInput(value);
   const clearInput = () => setInput("");
+  const dismissBanner = () => setIsBannerDismissed(true); // 배너만 숨김(대화 유지), 재방문 시 다시 표시
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -181,11 +173,8 @@ export function ChatbotProvider({ children }) {
     input,
     isLoading,
     hasSavedHistory,
-    
-    // Refs
-    listRef,
-    panelRef,
-    
+    isBannerDismissed,
+
     // 함수들
     sendMessage,
     toggleChat,
@@ -195,12 +184,13 @@ export function ChatbotProvider({ children }) {
     clearInput,
     handleSubmit,
     resetConversation,
-    
+    dismissBanner,
+
     // 직접 상태 변경 (필요시)
     setMessages,
     setIsOpen,
     setInput,
-  }), [messages, isOpen, input, isLoading, hasSavedHistory]);
+  }), [messages, isOpen, input, isLoading, hasSavedHistory, isBannerDismissed]);
 
   return <ChatbotContext.Provider value={value}>{children}</ChatbotContext.Provider>;
 }
