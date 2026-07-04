@@ -6,8 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint",
-    "tailwind:watch": "npx tailwindcss -i ./src/index.css -o ./src/output.css --watch"
+    "lint": "eslint"
   },
   "dependencies": {
     "lucide-react": "^1.8.0",

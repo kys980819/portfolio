@@ -12,7 +12,7 @@ const Footer = () => {
         <div className='w-max flex items-center gap-2 mx-auto'>
             <Image src={assets.mail_icon} alt='이메일 아이콘' className='w-6 dark:hidden'/>
             <Image src={assets.mail_icon_dark} alt='이메일 아이콘' className='w-6 hidden dark:block'/>
-            kys980819@gmail.com
+            <a href='mailto:kys980819@gmail.com' aria-label='이메일 보내기'>kys980819@gmail.com</a>
         </div>
       </div>
 

@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# KYS Portfolio
 
-## Getting Started
+정보보안 담당자를 목표로, 정보보안을 기반으로 개발·운영까지 아우르는
+DevSecOps를 지향하는 김윤성의 개인 포트폴리오 사이트입니다.
 
-First, run the development server:
+🔗 라이브 사이트: https://kysportfolio.site
 
+## 기술 스택
+- **Frontend**: Next.js 15 (App Router), React 19, Tailwind CSS
+- **Backend**: Next.js Route Handlers (Node.js runtime)
+- **AI 챗봇**: OpenAI Responses API + Vector Store (RAG, file_search)
+- **Database**: MongoDB (대화 로그)
+- **알림**: Telegram Bot API
+- **배포**: Vercel
+
+## 주요 기능
+- 반응형 레이아웃, 라이트/다크 테마
+- 이력서·프로젝트·스킬 소개 섹션
+- 문서 기반(RAG) AI 챗봇 — 업로드된 이력서·분석 보고서를 근거로 방문자 질문에 응답
+- 프로젝트 증빙 문서(분석 보고서 PDF) 연결
+
+## 보안 고려사항
+공개 API(챗봇)를 운영하며 적용한 방어 조치:
+- **요청 남용 방지**: IP 기준 rate limit
+- **입력 검증**: 메시지 길이 상한, 세션·대화 ID 타입·길이 검증(신뢰 경계)
+- **대화 이력 검증**: 클라이언트가 보낸 맥락을 서버에서 sanitize·트리밍 후 사용
+- **정보 노출 최소화**: health 엔드포인트 시크릿 게이트, 서버 로그에서 대화 본문 제외
+- **운영 유연성**: 방어 수치(제한 횟수·길이 등)를 하드코딩하지 않고 환경변수로 관리
+- 알림 메시지의 사용자 입력 이스케이프 처리
+
+## 로컬 실행
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`.env.local`에 다음 환경변수 필요 (값은 비공개):
+`OPENAI_API_KEY`, `VECTOR_STORE_IDS`, `MONGO_URI`, `MONGO_DB`, `MONGO_COLLECTION`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`
