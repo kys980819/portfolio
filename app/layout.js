@@ -16,27 +16,31 @@ const ovo = Ovo({
 });
 
 export const metadata = {
+  metadataBase: new URL('https://kysportfolio.site'),
   title: {
     default: "KYS Portfolio",
     template: "%s | KYS Portfolio",
   },
   description:
-    "보안관제·IT 운영을 준비하는 김윤성의 포트폴리오입니다. 시설보안 경력과 꾸준한 IT 학습을 기반으로 보안 엔지니어를 목표합니다.",
+    "정보보안 담당자를 목표로 하는 김윤성의 포트폴리오. IDS 탐지 환경 구축, 악성코드 분석·탐지 룰 작성부터 서비스 직접 개발·배포까지, 정보보안을 기반으로 DevSecOps를 지향합니다.",
   keywords: [
     "김윤성",
-    "보안관제",
-    "SOC",
     "정보보안",
     "포트폴리오",
-    "시설보안",
+    "IDS",
+    "Snort",
+    "탐지 룰",
     "악성코드 분석",
+    "DevSecOps",
+    "보안관제",
+    "SOC",
     "네트워크 보안",
     "IT 운영",
     "신입 보안 엔지니어",
   ],
   openGraph: {
     title: "KYS Portfolio",
-    description: "보안관제·IT 운영을 준비하는 김윤성의 포트폴리오",
+    description: "정보보안 담당자를 목표로, DevSecOps를 지향하는 김윤성의 포트폴리오",
     url: "https://kysportfolio.site",
     siteName: "KYS Portfolio",
     images: [

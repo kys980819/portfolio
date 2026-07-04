@@ -179,6 +179,7 @@ export default function Chatbot({ mode = "floating" }) {
 								{isLoading ? "전송중..." : "전송"}
 							</button>
 						</div>
+						<p className="mt-2 text-[11px] text-gray-400 text-center dark:text-neutral-500">대화 내용은 답변 품질 개선을 위해 저장될 수 있습니다.</p>
 					</form>
 				</div>
 			)}
