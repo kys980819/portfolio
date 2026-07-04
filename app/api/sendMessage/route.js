@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 import { MongoClient } from 'mongodb';
 import { v4 as uuidv4 } from 'uuid';
-import TelegramBot from 'node-telegram-bot-api';
 
 export const runtime = 'nodejs';
 
@@ -32,20 +31,9 @@ function getOpenAIClient() {
   return openaiClientSingleton;
 }
 
-// 텔레그램 봇 Lazy Singleton
-let telegramBotSingleton = null;
-function getTelegramBot() {
-  if (!telegramBotToken) return null;
-  if (!telegramBotSingleton) {
-    telegramBotSingleton = new TelegramBot(telegramBotToken, { polling: false });
-  }
-  return telegramBotSingleton;
-}
-
-// 텔레그램 알림 발송 함수
+// 텔레그램 알림 발송 함수 (Telegram HTTP API 직접 호출)
 async function sendTelegramNotification(userMessage, aiResponse, sessionId) {
-  const bot = getTelegramBot();
-  if (!bot || !telegramChatId) {
+  if (!telegramBotToken || !telegramChatId) {
     console.warn('텔레그램 설정이 없어 알림을 발송하지 않습니다.');
     return;
   }
@@ -60,10 +48,21 @@ async function sendTelegramNotification(userMessage, aiResponse, sessionId) {
 🆔 *세션 ID:* \`${sessionId}\`
 ⏰ *시간:* ${new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })}`;
 
-    await bot.sendMessage(telegramChatId, message, {
-      disable_web_page_preview: true
+    const res = await fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: telegramChatId,
+        text: message,
+        link_preview_options: { is_disabled: true }
+      })
     });
-    
+
+    if (!res.ok) {
+      const body = await res.text();
+      throw new Error(`Telegram API ${res.status}: ${body}`);
+    }
+
     console.log('텔레그램 알림 발송 완료');
   } catch (error) {
     console.error('텔레그램 알림 발송 실패:', error.message);
