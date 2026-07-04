@@ -11,7 +11,7 @@ const mongoDbName = process.env.MONGO_DB;
 const mongoCollectionName = process.env.MONGO_COLLECTION;
 const vectorStoreIds = process.env.VECTOR_STORE_IDS ? 
   process.env.VECTOR_STORE_IDS.split(',').map(id => id.trim()) : [];
-const maxOutputTokens = parseInt(process.env.MAX_OUTPUT_TOKENS || '500');
+const maxOutputTokens = parseInt(process.env.MAX_OUTPUT_TOKENS || '1000');
 const openaiTimeout = parseInt(process.env.OPENAI_TIMEOUT || '30') * 1000; // ms로 변환
 
 // 텔레그램 설정
@@ -84,6 +84,11 @@ function getOpenAIClient() {
   return openaiClientSingleton;
 }
 
+// 텔레그램 HTML parse_mode용 이스케이프 (방문자 입력이 태그로 해석되어 발송이 깨지는 것 방지)
+function escapeHtml(text) {
+  return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 // 텔레그램 알림 발송 함수 (Telegram HTTP API 직접 호출)
 async function sendTelegramNotification(userMessage, aiResponse, sessionId) {
   if (!telegramBotToken || !telegramChatId) {
@@ -92,14 +97,14 @@ async function sendTelegramNotification(userMessage, aiResponse, sessionId) {
   }
 
   try {
-    const message = `🤖 *포트폴리오 챗봇 새 메시지*
+    const message = `🤖 <b>포트폴리오 챗봇 새 메시지</b>
 
-👤 *사용자:* ${userMessage}
+👤 <b>사용자:</b> ${escapeHtml(userMessage)}
 
-🤖 *챗봇 응답:* ${aiResponse}
+🤖 <b>챗봇 응답:</b> ${escapeHtml(aiResponse)}
 
-🆔 *세션 ID:* \`${sessionId}\`
-⏰ *시간:* ${new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })}`;
+🆔 <b>세션 ID:</b> <code>${escapeHtml(sessionId)}</code>
+⏰ <b>시간:</b> ${new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })}`;
 
     const res = await fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
       method: 'POST',
@@ -107,6 +112,7 @@ async function sendTelegramNotification(userMessage, aiResponse, sessionId) {
       body: JSON.stringify({
         chat_id: telegramChatId,
         text: message,
+        parse_mode: 'HTML',
         link_preview_options: { is_disabled: true }
       })
     });
@@ -267,18 +273,14 @@ export async function POST(request) {
         reasoning: {effort: "low"},
         max_output_tokens: maxOutputTokens
       });
-      console.log("===== RESPONSE =====");
-      console.dir(response, { depth: null });
-
-      console.log("status:", response.status);
-      console.log("output_text:", response.output_text);
-      console.log("output:", response.output);
-      console.log("error:", response.error);
-      console.log("incomplete_details:", response.incomplete_details);
+      // 대화 본문은 로그에 남기지 않고, 문제 추적용 신호(상태·길이)만 남김
+      if (response.status !== "completed" || response.error) {
+        console.warn("OpenAI 응답 비정상:", response.status, response.error, response.incomplete_details);
+      }
 
       const aiResponse =
-        response.output_text || "응답을 생성하지 못했습니다.";  
-      console.log(`AI 응답 생성 완료: ${aiResponse.length}자`);
+        response.output_text || "응답을 생성하지 못했습니다.";
+      console.log(`AI 응답 생성 완료: status=${response.status}, ${aiResponse.length}자`);
 
       // MongoDB 저장 (가능한 경우에만, 글로벌 캐시 재사용)
       try {
@@ -290,7 +292,8 @@ export async function POST(request) {
             user: "guest",
             message: message,
             response: aiResponse,
-            time: new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })
+            time: new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' }),
+            created_at: new Date() // 정렬·기간검색용 Date 타입 (한국어 time 문자열과 병행)
           };
           await collection.insertOne(doc);
           console.log("대화 레코드가 MongoDB에 저장되었습니다.");
