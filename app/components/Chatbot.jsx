@@ -3,6 +3,13 @@
 import { useRef, useEffect } from "react";
 import { useChatbot } from "./ChatbotProvider";
 
+// 빈 대화창에서 첫 질문을 유도하는 추천 질문 칩
+const SUGGESTED_QUESTIONS = [
+	"김윤성님은 어떤 사람인가요?",
+	"어떤 프로젝트를 해봤나요?",
+	"트러블슈팅 경험이 궁금해요",
+];
+
 export default function Chatbot({ mode = "floating" }) {
 	const {
 		messages,
@@ -13,6 +20,7 @@ export default function Chatbot({ mode = "floating" }) {
 		closeChat,
 		handleInputChange,
 		handleSubmit,
+		sendMessage,
 		hasSavedHistory,
 		isBannerDismissed,
 		dismissBanner,
@@ -118,6 +126,21 @@ export default function Chatbot({ mode = "floating" }) {
 							</li>
 						)}
 					</ul>
+
+					{/* 빈 대화창(인사만 있음)일 때 첫 질문을 유도하는 추천 질문 칩 */}
+					{messages.length <= 1 && !isLoading && (
+						<div className="px-4 pb-2 flex flex-wrap gap-2 justify-center">
+							{SUGGESTED_QUESTIONS.map((q) => (
+								<button
+									key={q}
+									onClick={() => sendMessage(q)}
+									className="rounded-full border border-gray-300 bg-white/90 px-3 py-1 text-xs text-gray-700 shadow-sm hover:bg-gray-100 dark:border-darkBorder dark:bg-neutral-800/90 dark:text-neutral-200 dark:hover:bg-white/10"
+								>
+									{q}
+								</button>
+							))}
+						</div>
+					)}
 
 					{/* 인풋 바로 위: 이전 대화 복원 안내 배너 (페이지 로드 시 복원된 경우에만, X로 이번 방문 동안 숨김 가능) */}
 					{hasSavedHistory && !isBannerDismissed && (

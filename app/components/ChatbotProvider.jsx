@@ -97,6 +97,12 @@ export function ChatbotProvider({ children }) {
       // // 2) Flask로 전송시
       // const res = await fetch("https://api.kysportfolio.site/sendMessage"
 
+      // 최근 대화 맥락 — 이번 질문 이전의 대화 텍스트만 동봉 (최종 검증·트리밍은 서버가 수행)
+      const history = messages
+        .filter((m) => m.role === "user" || m.role === "assistant")
+        .slice(-12)
+        .map((m) => ({ role: m.role, content: m.content }));
+
       // 2) Next.js API Routes로 전송
       const res = await fetch("/api/sendMessage", {
         method: "POST",
@@ -107,6 +113,7 @@ export function ChatbotProvider({ children }) {
         body: JSON.stringify({
           message: trimmed,
           conversation_id: conversationId || null,
+          history,
         }),
       });
 
