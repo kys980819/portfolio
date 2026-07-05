@@ -5,11 +5,14 @@ const skillsData = [
     category: 'Security',
     skills: [
       'Snort (IDS 탐지 환경 구축·룰 작성)',
+      'BASE (탐지 대시보드) · MySQL/XAMPP (구동 환경)',
       '네트워크 기초 (OSI/TCP/IP)',
       '보안 장비 (방화벽/IDS/IPS)',
       '정적 분석: VirusTotal · ExeinfoPE · DIE · BinText · PEview',
+      '언패킹: mal_unpack · de4dot',
       '동적 분석: Process Monitor · Process Explorer · Autoruns · Wireshark',
-      '네트워크 분석: CurrPorts · SmartSniff · Wireshark'
+      '네트워크 분석: CurrPorts · SmartSniff · Wireshark',
+      '홈네트워크 구성·장애 진단 (스위치 교체·Wi-Fi/SSD 원인 분리)'
     ]
   },
   {
@@ -31,6 +34,10 @@ const skillsData = [
   {
     category: 'Tools',
     skills: ['Git/GitHub', 'Cursor', 'VS Code', 'Linux/Ubuntu', 'VMware']
+  },
+  {
+    category: '문서화',
+    skills: ['분석 보고서·분석 노트 작성', 'MS Word', 'PowerPoint']
   }
 ]
 

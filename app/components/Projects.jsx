@@ -11,7 +11,7 @@ const Projects = () => {
         직접 만들고, 배포하고, 운영해온 프로젝트들입니다.
         </p>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-6 my-10 max-w-5xl mx-auto'>
-                {serviceData.map(({icon, title, description, period, techStack, highlights, troubleshooting, link}, index)=>(
+                {serviceData.map(({icon, title, description, period, techStack, highlights, troubleshooting, link, attachments}, index)=>(
                     <div key={index}
                     className='border border-gray-400 rounded-lg px-8 py-10 dark:border-darkBorder'>
                         <Image src={icon} alt="프로젝트 아이콘" className='w-10'/>
@@ -47,6 +47,22 @@ const Projects = () => {
                             <div className='mt-4 p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/30'>
                                 <p className='text-xs font-semibold text-blue-700 dark:text-blue-300 mb-1'>트러블슈팅</p>
                                 <p className='text-sm text-blue-600 dark:text-blue-200'>{troubleshooting}</p>
+                            </div>
+                        )}
+
+                        {attachments && attachments.length > 0 && (
+                            <div className='mt-5 pt-4 border-t border-gray-200 dark:border-darkBorder'>
+                                <p className='text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2'>증빙 문서</p>
+                                <div className='flex flex-col gap-2'>
+                                    {attachments.map(({label, href}, i) => (
+                                        <a key={i} href={href} target="_blank" rel="noopener noreferrer"
+                                            aria-label={`${label} 열기`}
+                                            className='inline-flex items-center gap-2 text-sm border border-gray-400 rounded-lg px-3 py-1.5 w-fit dark:border-darkBorder'>
+                                            {label}
+                                            <Image src={assets.right_arrow} alt='' className='w-3'/>
+                                        </a>
+                                    ))}
+                                </div>
                             </div>
                         )}
 

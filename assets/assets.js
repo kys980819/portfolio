@@ -72,15 +72,20 @@ export const serviceData = [
         icon: assets.code_icon,
         title: 'Snort IDS 탐지 환경 구축 + 악성코드 분석 (CEaN.exe / 정보탈취형)',
         description: 'VMware 격리 환경에 Snort 기반 IDS를 직접 구축하고, 정보탈취형 악성코드를 분석해 IOC 기반 탐지 룰을 작성·검증한 메인 프로젝트',
+        period: '2026.05.13 ~ 2026.06.05',
         techStack: ['Snort', 'VMware', 'BASE', 'MalwareBazaar', 'Wireshark', 'Process Monitor'],
         highlights: [
             'VMware 격리 환경에 Snort 2.9.2.3 + BASE + MySQL 기반 IDS 탐지 환경 직접 구축 (Windows 미러링 제약을 단일 VM 구조로 재설계, 버전 호환성을 다운그레이드로 해결)',
             '"C2 통신·평문 통신" 두 기준을 직접 세워 MalwareBazaar에서 반복 검증으로 검체(정보탈취형) 선별',
-            '기초·정적·동적·네트워크 분석으로 자격증명 수집→평문 SMTP 유출(전송 완료 응답까지)→Run 키 지속성을 실증, 파일·레지스트리·네트워크 IOC 도출',
+            '기초·정적·동적·네트워크 분석으로 자격증명 수집→평문 SMTP 유출(전송 완료 응답까지)→Run 키 지속성을 실증, 파일·레지스트리·네트워크 IOC 도출 (코드·메모리 단위는 분석 범위 외)',
             'IOC 기반 Snort 룰 작성·BASE 검증',
         ],
         troubleshooting: '탐지 누락 원인을 트래픽→인터페이스→룰 문법→패킷 처리 순으로 좁혀 체크섬 오프로드 문제로 규명, -k none 옵션으로 해결.',
-        link: ''
+        link: '',
+        attachments: [
+            { label: 'Snort IDS 탐지 프로젝트 보고서', href: '/reports/snort-ids-report.pdf' },
+            { label: '악성코드 분석 보고서 — CEaN.exe (AgentTesla)', href: '/reports/malware-report-cean-agenttesla.pdf' },
+        ]
     },
     {
         icon: assets.web_icon,
@@ -92,7 +97,9 @@ export const serviceData = [
             'gpt-5-mini 기반 AI 챗봇 구현 (MongoDB로 대화 저장)',
             '텔레그램 알림 연동',
             'GitHub Actions CI/CD + 커스텀 도메인·HTTPS',
-            'CVE-2025-55182(React Server Components 원격 코드 실행 취약점) 공개 시 사용 버전을 확인해 패치된 버전(Next.js 15.5.7)으로 재배포, 노출 가능성에 대비해 API 키(OpenAI·MongoDB) 재발급',
+            'CVE-2025-55182(React Server Components 원격 코드 실행 취약점) 공개 시 영향 버전을 확인해 패치 버전(Next.js 15.5.7)으로 즉시 재배포',
+            'Vercel 공급망 침해(서드파티 AI 도구 OAuth 토큰 탈취로 고객 환경변수 노출) 사고 발생 시 영향 가능성을 판단해 환경변수·API 키(OpenAI·MongoDB 등) 전수 교체',
+            'Claude Code 기반 보안 점검: /api/sendMessage 요청 속도 제한(rate limit) 적용, 의존성 취약점 정리, /api/health 정보 노출 축소',
         ],
         troubleshooting: 'Flask 백엔드 → Next.js API 라우트로 마이그레이션하여 프론트·백엔드를 단일 프로젝트로 통합. 배포 구조 단순화와 콜드스타트 제거 달성.',
         link: 'https://kysportfolio.site'
@@ -105,11 +112,14 @@ export const serviceData = [
         highlights: [
             'VM 격리 환경에서 기초·정적·동적·네트워크로 이어지는 분석 절차를 직접 정립, 도구별 분석 노트 양식 설계',
             'bton02 — 트로이목마·다운로더 유형(VirusTotal 기준) 분석',
-            'dgrep.exe — 트로이목마·백도어 유형, 이중 패킹(UPX + SVK-Protector) 해제, 자기복제·rundll32 페이로드 로드·Run 키 지속성 규명',
+            'dgrep.exe — 트로이목마·백도어 유형, 이중 패킹(UPX + SVK-Protector) 해제, 자기복제·rundll32 페이로드 로드·Run 키 지속성 규명, C2 통신이 전송 시도 단계임을 판별',
             '네트워크 IOC 기반 Snort 룰 3종(IP / URL content / DNS) 작성',
         ],
         troubleshooting: '',
-        link: 'https://velog.io/@kys980819'
+        link: 'https://velog.io/@kys980819',
+        attachments: [
+            { label: '악성코드 분석 보고서 — dgrep.exe', href: '/reports/malware-report-dgrep.pdf' },
+        ]
     }
 ];
 
