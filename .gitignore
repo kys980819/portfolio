@@ -41,6 +41,7 @@ yarn-error.log*
 next-env.d.ts
 # 에디터 설정 파일 (아까 본 폴더)
 .vscode/
+.claude/
 
 # 개인 이력서 원본·세션 작업 메모 (비공개, 로컬 전용)
 /local-notes/
