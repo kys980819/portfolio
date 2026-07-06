@@ -21,7 +21,7 @@ const skillsData = [
   },
   {
     category: 'Backend',
-    skills: ['Node.js', 'Flask (Python)', 'OpenAI API']
+    skills: ['Node.js', 'OpenAI API']
   },
   {
     category: 'Database',
