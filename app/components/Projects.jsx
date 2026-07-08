@@ -7,10 +7,7 @@ const Projects = () => {
     <div id='projects' className='w-full px-[12%] py-10 scroll-mt-20 bg-gray-50 dark:bg-darkSurface'>
         <h2 className='text-center text-5xl'> MY Projects </h2>
 
-        <p className='text-center max-w-2xl mx-auto mt-5 mb-12'>
-        직접 만들고, 배포하고, 운영해온 프로젝트들입니다.
-        </p>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-6 my-10 max-w-5xl mx-auto'>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mt-12 mb-10 max-w-5xl mx-auto'>
                 {serviceData.map(({icon, title, description, period, techStack, highlights, troubleshooting, link, attachments}, index)=>(
                     <div key={index}
                     className='border border-gray-400 rounded-lg px-8 py-10 dark:border-darkBorder'>

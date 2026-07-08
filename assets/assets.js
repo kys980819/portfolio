@@ -1,4 +1,4 @@
-import { Target, ClipboardCheck, TrendingUp } from 'lucide-react';
+import { Target, Search, TrendingUp } from 'lucide-react';
 import code_icon from './code-icon.png';
 import code_icon_dark from './code-icon-dark.png';
 import edu_icon from './edu-icon.png';
@@ -72,7 +72,7 @@ export const serviceData = [
         icon: assets.code_icon,
         title: 'Snort IDS 탐지 환경 구축 + 악성코드 분석 (CEaN.exe / 정보탈취형)',
         description: 'VMware 격리 환경에 Snort 기반 IDS를 직접 구축하고, 정보탈취형 악성코드를 분석해 IOC 기반 탐지 룰을 작성·검증한 메인 프로젝트',
-        period: '2026.05.13 ~ 2026.06.05',
+        period: '2026.05.11 ~ 2026.06.05',
         techStack: ['Snort', 'VMware', 'BASE', 'MalwareBazaar', 'Wireshark', 'Process Monitor'],
         highlights: [
             'VMware 격리 환경에 Snort 2.9.2.3 + BASE + MySQL 기반 IDS 탐지 환경 직접 구축 (Windows 미러링 제약을 단일 VM 구조로 재설계, 버전 호환성을 다운그레이드로 해결)',
@@ -94,14 +94,14 @@ export const serviceData = [
         period: '지속 개선 중',
         techStack: ['Next.js', 'React', 'MongoDB', 'OpenAI API', 'Vercel', 'AWS EC2'],
         highlights: [
-            'gpt-5-mini 기반 AI 챗봇 구현 (MongoDB로 대화 저장)',
+            'OpenAI 기반 AI 챗봇 구현 (MongoDB로 대화 저장)',
             '텔레그램 알림 연동',
             'GitHub Actions CI/CD + 커스텀 도메인·HTTPS',
             'CVE-2025-55182(React Server Components 원격 코드 실행 취약점) 공개 시 영향 버전을 확인해 패치 버전(Next.js 15.5.7)으로 즉시 재배포',
             'Vercel 공급망 침해(서드파티 AI 도구 OAuth 토큰 탈취로 고객 환경변수 노출) 사고 발생 시 영향 가능성을 판단해 환경변수·API 키(OpenAI·MongoDB 등) 전수 교체',
             'Claude Code 기반 보안 점검: /api/sendMessage 요청 속도 제한(rate limit) 적용, 의존성 취약점 정리, /api/health 정보 노출 축소',
         ],
-        troubleshooting: 'Flask 백엔드 → Next.js API 라우트로 마이그레이션하여 프론트·백엔드를 단일 프로젝트로 통합. 배포 구조 단순화와 콜드스타트 제거 달성.',
+        troubleshooting: 'Flask 백엔드 → Next.js API 라우트로 마이그레이션하여 프론트·백엔드를 단일 프로젝트로 통합. 배포 구조 단순화.',
         link: 'https://kysportfolio.site'
     },
     {
@@ -112,11 +112,11 @@ export const serviceData = [
         highlights: [
             'VM 격리 환경에서 기초·정적·동적·네트워크로 이어지는 분석 절차를 직접 정립, 도구별 분석 노트 양식 설계',
             'bton02 — 트로이목마·다운로더 유형(VirusTotal 기준) 분석',
-            'dgrep.exe — 트로이목마·백도어 유형, 이중 패킹(UPX + SVK-Protector) 해제, 자기복제·rundll32 페이로드 로드·Run 키 지속성 규명, C2 통신이 전송 시도 단계임을 판별',
+            'dgrep.exe — 트로이목마·백도어 유형, 이중 패킹, 자기복제·rundll32 페이로드 로드·Run 키 지속성 규명, C2 통신이 전송 시도 단계임을 판별',
             '네트워크 IOC 기반 Snort 룰 3종(IP / URL content / DNS) 작성',
         ],
         troubleshooting: '',
-        link: 'https://velog.io/@kys980819',
+        link: '',
         attachments: [
             { label: '악성코드 분석 보고서 — dgrep.exe', href: '/reports/malware-report-dgrep.pdf' },
         ]
@@ -126,17 +126,17 @@ export const serviceData = [
 export const infoList = [
     {
         icon: Target,
-        title: '스스로 만드는 구조',
-        description: '시설보안 매뉴얼을 자기 방식으로 재정리했고, 악성코드 분석에는 노트 템플릿 13종을 직접 설계해 사용합니다'
+        title: '요구 이상을 만드는 태도',
+        description: '요청받은 A에서 멈추지 않고 A+를 만듭니다. 시설보안 매뉴얼을 현장에서 쓰기 쉽게 재구성했고, 악성코드 분석에는 단계별 노트 양식을 직접 설계해 사용했습니다'
     },
     {
-        icon: ClipboardCheck,
-        title: '꾸준히 쌓아가는 기록',
-        description: 'IT 학습 초기부터 개념 정리와 실습 과정을 기술 블로그에 축적해오고 있습니다'
+        icon: Search,
+        title: '나눠서 좁히는 문제 해결',
+        description: '원인 모를 문제일수록 트래픽·설정·룰·처리 과정으로 구간을 나눠 하나씩 배제하며 좁힙니다. Snort 탐지 실패를 체크섬 오프로드 문제로 규명해 해결했습니다'
     },
     {
         icon: TrendingUp,
-        title: '끝까지 해내는 실행력',
-        description: '포트폴리오 사이트를 기획·설계·배포까지 혼자 완성했고, 현재도 운영하며 개선해나가고 있습니다'
+        title: '끝까지 해내는 완주력',
+        description: '포트폴리오 사이트와 보안관제 준비를 각각 기획·구현·배포, 분석·탐지·검증까지 처음부터 끝까지 완주했습니다'
     }
 ];

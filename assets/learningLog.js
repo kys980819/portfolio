@@ -2,7 +2,7 @@
 export const learningLogMeta = {
   totalSeries: 5,
   totalPosts: 73,
-  period: '2025.08 ~ 현재',
+  period: '2025.09 ~ 현재',
 }
 
 // 카테고리별 스타일 (Tailwind 클래스)

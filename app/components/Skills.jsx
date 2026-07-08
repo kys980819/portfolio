@@ -2,42 +2,41 @@ import React from 'react'
 
 const skillsData = [
   {
-    category: 'Security',
+    category: '탐지 · 관제',
     skills: [
       'Snort (IDS 탐지 환경 구축·룰 작성)',
       'BASE (탐지 대시보드) · MySQL/XAMPP (구동 환경)',
-      '네트워크 기초 (OSI/TCP/IP)',
-      '보안 장비 (방화벽/IDS/IPS)',
-      '정적 분석: VirusTotal · ExeinfoPE · DIE · BinText · PEview',
-      '언패킹: mal_unpack · de4dot',
-      '동적 분석: Process Monitor · Process Explorer · Autoruns · Wireshark',
-      '네트워크 분석: CurrPorts · SmartSniff · Wireshark',
-      '홈네트워크 구성·장애 진단 (스위치 교체·Wi-Fi/SSD 원인 분리)'
+      '보안 장비 개념 이해 (방화벽/IDS/IPS)'
     ]
   },
   {
-    category: 'Frontend',
-    skills: ['JavaScript', 'React', 'Next.js', 'HTML/CSS']
+    category: '악성코드 분석',
+    skills: [
+      '정적: VirusTotal · ExeinfoPE · DIE · BinText · PEview',
+      '언패킹: mal_unpack · de4dot',
+      '동적: Process Monitor · Process Explorer · Autoruns',
+      '네트워크: Wireshark · CurrPorts · SmartSniff'
+    ]
   },
   {
-    category: 'Backend',
-    skills: ['Node.js', 'OpenAI API']
+    category: '네트워크',
+    skills: [
+      '네트워크 기초 (OSI 7계층 · TCP/IP · HTTP/HTTPS · SSH · DNS)',
+      '패킷 분석 (Wireshark) — 악성코드 통신·유출 분석',
+      '홈네트워크 구성·장애 진단 (스위치 교체·서브넷 통합)'
+    ]
   },
   {
-    category: 'Database',
-    skills: ['MongoDB', 'Supabase']
+    category: 'OS · 가상화 · 클라우드',
+    skills: ['Linux/Ubuntu', 'Windows', 'VMware', 'AWS EC2', 'Vercel']
   },
   {
-    category: 'DevOps / Cloud',
-    skills: ['AWS EC2', 'Vercel', 'GitHub Actions']
+    category: '개발',
+    skills: ['JavaScript', 'React', 'Next.js', 'HTML/CSS', 'Node.js', 'Python/Flask', 'OpenAI API', 'MongoDB', 'Supabase']
   },
   {
-    category: 'Tools',
-    skills: ['Git/GitHub', 'Cursor', 'VS Code', 'Linux/Ubuntu', 'VMware']
-  },
-  {
-    category: '문서화',
-    skills: ['분석 보고서·분석 노트 작성', 'MS Word', 'PowerPoint']
+    category: 'DevOps · 협업 · 문서화',
+    skills: ['Git/GitHub', 'GitHub Actions', 'Cursor', 'VS Code', '분석 보고서·노트 작성', 'MS Word', 'PowerPoint']
   }
 ]
 

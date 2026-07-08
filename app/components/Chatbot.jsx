@@ -76,7 +76,7 @@ export default function Chatbot({ mode = "floating" }) {
 					ref={panelRef}
 					className={
 						mode === "floating"
-							? "fixed right-4 bottom-20 z-50 w-[320px] sm:w-[380px] max-h-[70vh] flex flex-col bg-gray-50 text-gray-900 border border-gray-300 rounded-xl shadow-2xl overflow-hidden dark:bg-darkSurface dark:text-darkText dark:border-darkBorder"
+							? "fixed right-4 bottom-20 z-50 w-[340px] sm:w-[460px] lg:w-[560px] h-[520px] sm:h-[620px] max-h-[80vh] flex flex-col bg-gray-50 text-gray-900 border border-gray-300 rounded-xl shadow-2xl overflow-hidden dark:bg-darkSurface dark:text-darkText dark:border-darkBorder"
 							: "w-full max-w-3xl mx-auto my-6 h-[70vh] flex flex-col bg-gray-50 text-gray-900 border border-gray-300 rounded-xl shadow-lg overflow-hidden dark:bg-darkSurface dark:text-darkText dark:border-darkBorder"
 					}
 					role="dialog"
