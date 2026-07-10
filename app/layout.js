@@ -1,4 +1,5 @@
 import { JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import Script from "next/script";
 import "./globals.css";
 import Chatbot from "./components/Chatbot";
@@ -8,6 +9,14 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
   variable: "--font-mono",
+});
+
+// 셀프호스팅 (OFL 라이선스) — 외부 CDN 단일 장애점 제거, next/font가 preload와 font-display 처리
+const pretendard = localFont({
+  src: "../public/fonts/PretendardVariable.woff2",
+  display: "swap",
+  weight: "45 920",
+  variable: "--font-pretendard",
 });
 
 export const metadata = {
@@ -59,12 +68,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko" className="scroll-smooth">
       <head>
-        <link
-          rel="stylesheet"
-          as="style"
-          crossOrigin="anonymous"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
-        />
+        {/* JS 미지원 환경에서 Reveal(스크롤 페이드) 요소가 숨겨진 채 남지 않도록 하는 폴백 */}
+        <noscript>
+          <style>{`.reveal { opacity: 1 !important; transform: none !important; }`}</style>
+        </noscript>
         <Script id="theme-init" strategy="beforeInteractive">
           {`
           (function() {
@@ -79,7 +86,7 @@ export default function RootLayout({ children }) {
           `}
         </Script>
       </head>
-      <body className={`${jetbrainsMono.variable} font-sans
+      <body className={`${pretendard.variable} ${jetbrainsMono.variable} font-sans
       antialiased leading-8 overflow-x-hidden bg-lightBg text-lightInk dark:bg-darkTheme dark:text-darkText`}>
         <ChatbotProvider>
           {children}

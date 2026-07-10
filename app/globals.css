@@ -6,9 +6,7 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
-  font-family: "Pretendard Variable", Pretendard, system-ui, sans-serif;
-}
+/* 본문 폰트는 layout.js의 next/font(--font-pretendard) + body의 font-sans 클래스가 담당 */
 
 /* 스크롤 진입 페이드 — Reveal 컴포넌트가 토글하는 클래스 */
 .reveal {

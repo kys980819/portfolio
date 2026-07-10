@@ -1,3 +1,6 @@
+// 포인트 색 단일 원본 — colors와 boxShadow가 같은 값을 공유 (색 변경 시 여기 한 곳만 수정)
+const ACCENT = '#22D3EE';
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -9,7 +12,7 @@ module.exports = {
     extend: {
       colors: {
         // 포인트 색 — 시안 1색 (다크/라이트 각각 대비 확보)
-        accent:     '#22D3EE', // 밝은 시안 (다크 배경·보더·강조)
+        accent:     ACCENT, // 밝은 시안 (다크 배경·보더·강조)
         accentDark: '#0E7490', // 진한 시안 (라이트 배경 위 텍스트 대비 4.5:1)
         accentAmber: '#F59E0B', // 보조 앰버 (태그 소량)
 
@@ -25,16 +28,16 @@ module.exports = {
         darkSurface:'#101623', // 카드/패널 배경
         darkText:   '#CBD5E1', // 기본 텍스트
         darkBorder: '#1E293B', // 보더/디바이더
-        darkFocus:  '#22D3EE', // 포커스/하이라이트
+        darkFocus:  ACCENT, // 포커스/하이라이트
         darkHover:  '#161E2A', // 호버 배경
       },
       fontFamily: {
-        sans: ['"Pretendard Variable"', 'Pretendard', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-pretendard)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
       boxShadow: {
         'panel': '0 1px 2px rgba(0,0,0,0.04)',
-        'accent': '0 0 0 1px rgba(34,211,238,0.4), 0 8px 30px rgba(34,211,238,0.08)',
+        'accent': `0 0 0 1px ${ACCENT}66, 0 8px 30px ${ACCENT}14`, // 66/14 = 40%/8% 투명도
       },
       keyframes: {
         blink: {

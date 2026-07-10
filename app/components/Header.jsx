@@ -3,14 +3,16 @@
 import { serviceData } from '@/assets/assets'
 import { Download, MessageSquareText } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
+import TrafficDots from './TrafficDots'
 
-// 히어로 로그 카드에 순환 출력할 문자열 — 전부 serviceData의 기존 텍스트(새 문구 생성 없음)
+// 히어로 로그 카드에 순환 출력할 문자열 — 전부 serviceData의 기존 텍스트(새 문구 생성 없음).
+// 콘텐츠 갱신으로 항목이 줄거나 비어도 크래시 없이 존재하는 문자열만 남긴다.
 const logLines = [
-  serviceData[0].troubleshooting,
-  serviceData[0].highlights[3],
-  serviceData[2].highlights[3],
-  serviceData[1].troubleshooting,
-].filter(Boolean)
+  serviceData[0]?.troubleshooting,
+  serviceData[0]?.highlights?.[3],
+  serviceData[2]?.highlights?.[3],
+  serviceData[1]?.troubleshooting,
+].filter((line) => typeof line === 'string' && line.trim() !== '')
 
 // 로그 카드 타이핑 효과 (CSS + 소량 JS). reduced-motion이면 전체를 즉시 표시.
 function useTypedLog(lines) {
@@ -19,6 +21,7 @@ function useTypedLog(lines) {
   const [reduced, setReduced] = useState(false)
 
   useEffect(() => {
+    if (!lines.length) return // 표시할 문구가 없으면 타이핑 자체를 시작하지 않음
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
     if (mq.matches) {
       setReduced(true)
@@ -121,9 +124,7 @@ const Header = () => {
         {/* 우: 라이브 로그 카드 */}
         <div className="animate-revealUp rounded-xl border border-lightBorder bg-lightSurface shadow-panel overflow-hidden dark:border-darkBorder dark:bg-darkSurface">
           <div className="flex items-center gap-2 px-4 py-3 border-b border-lightBorder dark:border-darkBorder">
-            <span className="w-3 h-3 rounded-full bg-red-400/80" />
-            <span className="w-3 h-3 rounded-full bg-amber-400/80" />
-            <span className="w-3 h-3 rounded-full bg-green-400/80" />
+            <TrafficDots />
             <span className="ml-2 font-mono text-xs text-gray-500 dark:text-gray-400">
               analyst.log
             </span>

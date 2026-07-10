@@ -2,6 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import { useChatbot } from "./ChatbotProvider";
+import TrafficDots from "./TrafficDots";
 
 // 빈 대화창에서 첫 질문을 유도하는 추천 질문 칩
 const SUGGESTED_QUESTIONS = [
@@ -83,11 +84,7 @@ export default function Chatbot({ mode = "floating" }) {
 					aria-label="채팅 상담"
 				>
 					<header className="flex items-center gap-3 px-4 py-3 border-b border-lightBorder dark:border-darkBorder">
-						<span className="flex items-center gap-1.5" aria-hidden>
-								<span className="w-3 h-3 rounded-full bg-red-400/80" />
-								<span className="w-3 h-3 rounded-full bg-amber-400/80" />
-								<span className="w-3 h-3 rounded-full bg-green-400/80" />
-							</span>
+						<TrafficDots />
 							<div className="font-mono text-xs text-gray-500 dark:text-gray-400 flex-1">도움이 필요하신가요?</div>
 						{mode === "floating" && (
 						<button

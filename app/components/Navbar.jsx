@@ -76,11 +76,11 @@ const Navbar = () => {
         <div className='flex items-center gap-4'>
           <button onClick={toggleDark} aria-pressed={isDark} aria-label={isDark ? "라이트 모드로 전환" : "다크 모드로 전환"}
             className='text-gray-600 hover:text-accentDark dark:text-gray-300 dark:hover:text-accent transition-colors'>
-            {isDark ? <Sun className='w-5 h-5' /> : <Moon className='w-5 h-5' />}
+            {isDark ? <Sun className='w-5 h-5' aria-hidden /> : <Moon className='w-5 h-5' aria-hidden />}
           </button>
 
           <button className='block md:hidden text-gray-600 dark:text-gray-300' onClick={openMenu} aria-label="메뉴 열기">
-            <Menu className='w-6 h-6' />
+            <Menu className='w-6 h-6' aria-hidden />
           </button>
         </div>
 
@@ -89,7 +89,7 @@ const Navbar = () => {
         h-screen bg-lightSurface font-mono transition duration-500 dark:bg-darkSurface dark:text-darkText border-l border-lightBorder dark:border-darkBorder'>
 
           <button className='absolute right-6 top-6 text-gray-600 dark:text-gray-300' onClick={closeMenu} aria-label="메뉴 닫기">
-            <X className='w-5 h-5' />
+            <X className='w-5 h-5' aria-hidden />
           </button>
 
           {navLinks.map(({ href, label }) => (
