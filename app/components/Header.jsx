@@ -87,10 +87,8 @@ const Header = () => {
             안녕하세요, 김윤성입니다
           </h2>
 
-          <h1 className="mt-3 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] text-lightInk dark:text-white break-keep">
-            정보보안 담당자를 목표로
-            <br />
-            합니다
+          <h1 className="mt-3 text-4xl sm:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1] text-lightInk dark:text-white break-keep text-balance">
+            정보보안 담당자를 목표로 합니다
             <span className="cursor-blink inline-block w-[0.6ch] ml-1 animate-blink text-accentDark dark:text-accent">
               _
             </span>

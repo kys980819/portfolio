@@ -8,6 +8,13 @@ html {
 
 /* 본문 폰트는 layout.js의 next/font(--font-pretendard) + body의 font-sans 클래스가 담당 */
 
+/* 한국어 줄바꿈 — 조사·단어가 홀로 다음 줄로 꺾이지 않도록 전역 keep-all.
+   긴 영단어·URL은 넘치지 않게 overflow-wrap으로 보완. */
+body {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
 /* 스크롤 진입 페이드 — Reveal 컴포넌트가 토글하는 클래스 */
 .reveal {
   opacity: 0;

@@ -11,18 +11,17 @@ const About = () => {
         <SectionHeading kicker='ABOUT' title='About me' />
 
         <div className='grid grid-cols-1 md:grid-cols-[260px_1fr] gap-10 items-start mt-12'>
-          {/* 프로필 사진 — 사각 크롭 + 듀오톤 (CSS 필터, 원본 불변) */}
+          {/* 프로필 사진 — 사각 크롭, 원본 컬러 그대로 표시 */}
           <Reveal className='flex justify-center md:justify-start shrink-0'>
-            <div className='group relative w-[240px] h-[320px] overflow-hidden rounded-xl border border-lightBorder dark:border-darkBorder'>
+            <div className='relative w-[240px] h-[320px] overflow-hidden rounded-xl border border-lightBorder dark:border-darkBorder'>
               <Image
                 src={assets.profile_kys_img}
                 alt='김윤성 프로필 사진'
                 width={240}
                 height={320}
-                className='h-full w-full object-cover grayscale contrast-125 brightness-95 transition-all duration-500 group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-100'
+                className='h-full w-full object-cover'
                 sizes='240px'
               />
-              <div className='pointer-events-none absolute inset-0 bg-accentDark/50 dark:bg-accent/40 mix-blend-color transition-opacity duration-500 group-hover:opacity-0' />
               <span className='pointer-events-none absolute left-2 top-2 font-mono text-[10px] px-1.5 py-0.5 rounded bg-black/40 text-white/90 backdrop-blur-sm'>
                 PROFILE_01
               </span>

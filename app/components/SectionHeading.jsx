@@ -8,7 +8,7 @@ const SectionHeading = ({ kicker, title, align = 'left' }) => {
       <p className="font-mono text-sm text-accentDark dark:text-accent">
         <span className="text-gray-400 dark:text-gray-600">{'//'}</span> {kicker}
       </p>
-      <h2 className="mt-2 text-3xl sm:text-4xl font-bold tracking-tight text-lightInk dark:text-white break-keep">
+      <h2 className="mt-2 text-3xl sm:text-4xl font-bold tracking-tight text-lightInk dark:text-white break-keep text-balance">
         {title}
       </h2>
     </Reveal>
