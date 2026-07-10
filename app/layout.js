@@ -1,18 +1,13 @@
-import { Outfit, Ovo } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import Chatbot from "./components/Chatbot";
 import { ChatbotProvider } from "./components/ChatbotProvider";
 
-const outfit = Outfit({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-outfit",
-});
-const ovo = Ovo({
-  subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-ovo",
+  weight: ["400", "500", "700"],
+  variable: "--font-mono",
 });
 
 export const metadata = {
@@ -64,6 +59,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko" className="scroll-smooth">
       <head>
+        <link
+          rel="stylesheet"
+          as="style"
+          crossOrigin="anonymous"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+        />
         <Script id="theme-init" strategy="beforeInteractive">
           {`
           (function() {
@@ -78,8 +79,8 @@ export default function RootLayout({ children }) {
           `}
         </Script>
       </head>
-      <body className={`${outfit.variable} ${ovo.variable} 
-      antialiased leading-8 overflow-x-hidden dark:bg-darkTheme dark:text-white`}>
+      <body className={`${jetbrainsMono.variable} font-sans
+      antialiased leading-8 overflow-x-hidden bg-lightBg text-lightInk dark:bg-darkTheme dark:text-darkText`}>
         <ChatbotProvider>
           {children}
           <Chatbot />

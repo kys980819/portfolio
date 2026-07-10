@@ -13,9 +13,9 @@ export default function Home() {
    <>
    <Navbar />
    <Header />
-   <About />
-   <Skills />
    <Projects />
+   <Skills />
+   <About />
    <LearningLog />
    <ChatSection />
    <Footer />

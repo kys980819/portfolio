@@ -1,4 +1,6 @@
 import React from 'react'
+import Reveal from './Reveal'
+import SectionHeading from './SectionHeading'
 
 const skillsData = [
   {
@@ -42,22 +44,27 @@ const skillsData = [
 
 const Skills = () => {
   return (
-    <div id='skills' className='w-full px-[12%] py-10 scroll-mt-20'>
-      <h2 className='text-center text-5xl'>Skills</h2>
+    <div id='skills' className='w-full px-[8%] lg:px-[10%] py-20 scroll-mt-20 bg-lightHover/60 dark:bg-darkSurface/40'>
+      <div className='max-w-6xl mx-auto'>
+        <SectionHeading kicker='SKILLS' title='Skills' />
 
-      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mt-12'>
-        {skillsData.map((group, index) => (
-          <div key={index} className='border border-gray-400 rounded-xl p-6 dark:border-darkBorder'>
-            <h3 className='font-semibold text-gray-800 dark:text-white mb-3'>{group.category}</h3>
-            <div className='flex flex-wrap gap-2'>
-              {group.skills.map((skill, i) => (
-                <span key={i} className='text-sm px-3 py-1 rounded-full bg-gray-100 text-gray-700 dark:bg-darkSurface dark:text-gray-300'>
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
-        ))}
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-12'>
+          {skillsData.map((group, index) => (
+            <Reveal key={index} delay={index * 60}
+              className='rounded-xl border border-lightBorder bg-lightSurface p-6 shadow-panel hover:border-accentDark/50 dark:border-darkBorder dark:bg-darkSurface dark:hover:border-accent/50 transition-colors'>
+              <h3 className='font-mono text-sm font-semibold text-accentDark dark:text-accent mb-4'>
+                <span className='text-gray-400 dark:text-gray-600'>#</span> {group.category}
+              </h3>
+              <ul className='flex flex-wrap gap-2'>
+                {group.skills.map((skill, i) => (
+                  <li key={i} className='font-mono text-xs px-2.5 py-1 rounded border border-lightBorder text-gray-600 dark:border-darkBorder dark:text-gray-300 break-keep'>
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </div>
   )

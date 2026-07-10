@@ -1,8 +1,16 @@
 'use client'
 
-import { assets } from '@/assets/assets'
-import Image from 'next/image'
+import { Menu, X, Moon, Sun } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
+
+const navLinks = [
+  { href: '#top', label: 'Home' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#skills', label: 'Skills' },
+  { href: '#about', label: 'About me' },
+  { href: '#learning-log', label: 'Learning Log' },
+  { href: '#chat', label: 'Chat' },
+]
 
 const Navbar = () => {
 
@@ -50,52 +58,45 @@ const Navbar = () => {
 
   return (
     <>
-    <div className='fixed top-0 right-0 w-11/12 -z-10 translate-y-[-80%] dark:hidden'>
-      <Image src={assets.header_bg_color} alt="" className='w-full'/>
-    </div>
-
-      <nav className={`w-full fixed px-5 lg:px-8 xl:px-[8%] py-0
-      flex items-center justify-between z-50 ${isScroll ? "bg-white bg-opacity-50 backdrop-blur-lg shadow-sm dark:bg-darkTheme dark:shadow-white/20" : ""}`}> 
-        <a href='#top' aria-label="홈으로 이동">
-          <Image src={isDark ? assets.logo_dark : assets.logo} alt="KYS Portfolio 로고" className='w-28 cursor-pointer mr-14'/> 
+      <nav className={`w-full fixed top-0 left-0 px-5 lg:px-8 xl:px-[8%] py-4
+      flex items-center justify-between z-50 transition-colors duration-300
+      ${isScroll ? "bg-lightBg/80 backdrop-blur-lg border-b border-lightBorder dark:bg-darkTheme/80 dark:border-darkBorder" : "border-b border-transparent"}`}>
+        <a href='#top' aria-label="홈으로 이동" className='font-mono text-lg font-bold tracking-tight text-lightInk dark:text-white'>
+          <span className='text-accentDark dark:text-accent'>[</span>kys<span className='text-accentDark dark:text-accent'>]</span>
         </a>
 
-        <ul className={`hidden md:flex items-center gap-10 lg:gap-12
-        rounded-full px-12 py-3 ${isScroll ? "" : "bg-white shadow-sm bg-opacity-50 dark:border dark:border-white/50 dark:bg-transparent"} `}>
-          <li><a href="#top">Home</a></li>
-          <li><a href="#about">About me</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#learning-log">Learning Log</a></li>
-          <li><a href="#chat">Chat</a></li>
+        <ul className='hidden md:flex items-center gap-8 lg:gap-10 font-mono text-sm'>
+          {navLinks.map(({ href, label }) => (
+            <li key={href}>
+              <a href={href} className='text-gray-600 hover:text-accentDark dark:text-gray-300 dark:hover:text-accent transition-colors'>{label}</a>
+            </li>
+          ))}
         </ul>
 
         <div className='flex items-center gap-4'>
-
-          <button onClick={toggleDark} aria-pressed={isDark} aria-label={isDark ? "라이트 모드로 전환" : "다크 모드로 전환"}>
-            <Image src={isDark ? assets.sun_icon : assets.moon_icon} alt="테마 전환 아이콘" className='w-6'/>
+          <button onClick={toggleDark} aria-pressed={isDark} aria-label={isDark ? "라이트 모드로 전환" : "다크 모드로 전환"}
+            className='text-gray-600 hover:text-accentDark dark:text-gray-300 dark:hover:text-accent transition-colors'>
+            {isDark ? <Sun className='w-5 h-5' /> : <Moon className='w-5 h-5' />}
           </button>
 
-          <button className='block md:hidden ml-3' onClick={openMenu} aria-label="메뉴 열기">
-            <Image src={isDark ? assets.menu_white : assets.menu_black} alt="메뉴 열기 아이콘" className='w-6'/>
-          </button> 
+          <button className='block md:hidden text-gray-600 dark:text-gray-300' onClick={openMenu} aria-label="메뉴 열기">
+            <Menu className='w-6 h-6' />
+          </button>
         </div>
 
         {/* 모바일 메뉴 */}
+        <ul ref={sideMenuRef} className='flex md:hidden flex-col gap-5 py-20 px-10 fixed -right-64 top-0 bottom-0 w-64 z-50
+        h-screen bg-lightSurface font-mono transition duration-500 dark:bg-darkSurface dark:text-darkText border-l border-lightBorder dark:border-darkBorder'>
 
-        <ul ref={sideMenuRef} className='flex md:hidden flex-col gap-4 py-20 px-10 fixed -right-64 top-0 bottom-0 w-64 z-50 
-        h-screen bg-slate-50 transition duration-500 dark:bg-darkHover dark:text-white'>
-
-          <button className='absolute right-6 top-6' onClick={closeMenu} aria-label="메뉴 닫기">
-              <Image src={isDark ? assets.close_white: assets.close_black} alt="메뉴 닫기 아이콘" className='w-5 cursor-pointer'/>
+          <button className='absolute right-6 top-6 text-gray-600 dark:text-gray-300' onClick={closeMenu} aria-label="메뉴 닫기">
+            <X className='w-5 h-5' />
           </button>
 
-          <li><a onClick={closeMenu} href="#top">Home</a></li>
-          <li><a onClick={closeMenu} href="#about">About me</a></li>
-          <li><a onClick={closeMenu} href="#skills">Skills</a></li>
-          <li><a onClick={closeMenu} href="#projects">Projects</a></li>
-          <li><a onClick={closeMenu} href="#learning-log">Learning Log</a></li>
-          <li><a onClick={closeMenu} href="#chat">Chat</a></li>
+          {navLinks.map(({ href, label }) => (
+            <li key={href}>
+              <a onClick={closeMenu} href={href} className='hover:text-accentDark dark:hover:text-accent transition-colors'>{label}</a>
+            </li>
+          ))}
         </ul>
       </nav>
     </>
