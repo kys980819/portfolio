@@ -12,5 +12,6 @@ export default function sitemap() {
         changeFrequency: 'monthly',
         priority: 0.8,
       })), // 프로젝트 케이스 스터디 상세 페이지
+      { url: `${baseUrl}/resume`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 }, // 웹 이력서
     ];
   }
