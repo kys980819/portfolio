@@ -42,22 +42,26 @@ const skillsData = [
 
 const Skills = () => {
   return (
-    <div id='skills' className='w-full px-[12%] py-10 scroll-mt-20'>
-      <h2 className='text-center text-5xl'>Skills</h2>
+    <div id='skills' className='w-full border-b border-ink dark:border-darkBorder scroll-mt-20'>
+      <div className='max-w-5xl mx-auto px-5 lg:px-8 py-16 md:py-20'>
+        <p className='text-xs font-bold uppercase tracking-[0.2em] text-accent dark:text-darkFocus mb-3'>02 — Capabilities</p>
+        <h2 className='text-4xl md:text-5xl font-extrabold tracking-tight'>Skills</h2>
 
-      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mt-12'>
-        {skillsData.map((group, index) => (
-          <div key={index} className='border border-gray-400 rounded-xl p-6 dark:border-darkBorder'>
-            <h3 className='font-semibold text-gray-800 dark:text-white mb-3'>{group.category}</h3>
-            <div className='flex flex-wrap gap-2'>
-              {group.skills.map((skill, i) => (
-                <span key={i} className='text-sm px-3 py-1 rounded-full bg-gray-100 text-gray-700 dark:bg-darkSurface dark:text-gray-300'>
-                  {skill}
-                </span>
-              ))}
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-l border-ink dark:border-darkBorder mt-12'>
+          {skillsData.map((group, index) => (
+            <div key={index} className='border-r border-b border-ink dark:border-darkBorder p-6'>
+              <p className='text-xs font-bold tracking-[0.15em] text-accent dark:text-darkFocus mb-2'>{String(index + 1).padStart(2, '0')}</p>
+              <h3 className='font-bold text-ink dark:text-darkText mb-3'>{group.category}</h3>
+              <div className='flex flex-wrap gap-1.5'>
+                {group.skills.map((skill, i) => (
+                  <span key={i} className='text-sm px-2.5 py-1 border border-gray-300 text-sub dark:border-darkSub/40 dark:text-darkSub'>
+                    {skill}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   )

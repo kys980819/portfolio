@@ -1,30 +1,31 @@
-import { assets, serviceData } from '@/assets/assets'
+import { serviceData } from '@/assets/assets'
 import { caseStudies } from '@/assets/caseStudies'
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
 const Projects = () => {
   return (
-    <div id='projects' className='w-full px-[12%] py-10 scroll-mt-20 bg-gray-50 dark:bg-darkSurface'>
-        <h2 className='text-center text-5xl'> MY Projects </h2>
+    <div id='projects' className='w-full border-b border-ink dark:border-darkBorder scroll-mt-20'>
+        <div className='max-w-5xl mx-auto px-5 lg:px-8 py-16 md:py-20'>
+            <p className='text-xs font-bold uppercase tracking-[0.2em] text-accent dark:text-darkFocus mb-3'>03 — Work</p>
+            <h2 className='text-4xl md:text-5xl font-extrabold tracking-tight'>Projects</h2>
 
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mt-12 mb-10 max-w-5xl mx-auto'>
-                {serviceData.map(({icon, slug, title, description, period, techStack, highlights, troubleshooting, link, attachments}, index)=>(
+            <div className='grid grid-cols-1 md:grid-cols-2 border-t border-l border-ink dark:border-darkBorder mt-12'>
+                {serviceData.map(({slug, title, description, period, techStack, highlights, troubleshooting, link, attachments}, index)=>(
                     <div key={index}
-                    className='border border-gray-400 rounded-lg px-8 py-10 dark:border-darkBorder'>
-                        <Image src={icon} alt="프로젝트 아이콘" className='w-10'/>
-                        <h3 className='text-lg my-4 font-semibold text-gray-700 dark:text-white'>{title}</h3>
-                        <p className='text-sm text-gray-600 dark:text-white/80'>{description}</p>
+                    className='border-r border-b border-ink dark:border-darkBorder px-7 py-8'>
+                        <p className='text-xs font-bold tracking-[0.15em] text-accent dark:text-darkFocus'>{String(index + 1).padStart(2, '0')}</p>
+                        <h3 className='text-lg my-3 font-bold text-ink dark:text-darkText'>{title}</h3>
+                        <p className='text-sm text-sub dark:text-darkSub'>{description}</p>
 
                         {period && (
-                            <p className='text-xs text-gray-500 dark:text-gray-400 mt-3'>기간: {period}</p>
+                            <p className='text-xs text-sub dark:text-darkSub mt-3'>기간: {period}</p>
                         )}
 
                         {techStack && techStack.length > 0 && (
                             <div className='flex flex-wrap gap-1.5 mt-3'>
                                 {techStack.map((tech, i) => (
-                                    <span key={i} className='text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 dark:bg-darkSurface dark:text-gray-300'>
+                                    <span key={i} className='text-xs px-2 py-0.5 border border-gray-300 text-sub dark:border-darkSub/40 dark:text-darkSub'>
                                         {tech}
                                     </span>
                                 ))}
@@ -34,8 +35,8 @@ const Projects = () => {
                         {highlights && highlights.length > 0 && (
                             <ul className='mt-4 space-y-1'>
                                 {highlights.map((item, i) => (
-                                    <li key={i} className='text-sm text-gray-600 dark:text-white/80 flex items-start gap-2'>
-                                        <span className='text-gray-400 mt-0.5'>•</span>
+                                    <li key={i} className='text-sm text-sub dark:text-darkSub flex items-start gap-2'>
+                                        <span className='text-accent dark:text-darkFocus mt-0.5'>—</span>
                                         <span>{item}</span>
                                     </li>
                                 ))}
@@ -43,22 +44,22 @@ const Projects = () => {
                         )}
 
                         {troubleshooting && (
-                            <div className='mt-4 p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/30'>
-                                <p className='text-xs font-semibold text-blue-700 dark:text-blue-300 mb-1'>트러블슈팅</p>
-                                <p className='text-sm text-blue-600 dark:text-blue-200'>{troubleshooting}</p>
+                            <div className='mt-4 border-l-2 border-accent dark:border-darkFocus pl-4 py-1'>
+                                <p className='text-xs font-bold uppercase tracking-[0.12em] text-accent dark:text-darkFocus mb-1'>Troubleshooting</p>
+                                <p className='text-sm text-sub dark:text-darkSub'>{troubleshooting}</p>
                             </div>
                         )}
 
                         {attachments && attachments.length > 0 && (
-                            <div className='mt-5 pt-4 border-t border-gray-200 dark:border-darkBorder'>
-                                <p className='text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2'>증빙 문서</p>
+                            <div className='mt-5 pt-4 border-t border-gray-300 dark:border-darkSub/40'>
+                                <p className='text-xs font-bold uppercase tracking-[0.12em] text-sub dark:text-darkSub mb-2'>증빙 문서</p>
                                 <div className='flex flex-col gap-2'>
                                     {attachments.map(({label, href}, i) => (
                                         <a key={i} href={href} target="_blank" rel="noopener noreferrer"
                                             aria-label={`${label} 열기`}
-                                            className='inline-flex items-center gap-2 text-sm border border-gray-400 rounded-lg px-3 py-1.5 w-fit dark:border-darkBorder'>
+                                            className='inline-flex items-center gap-2 text-sm border border-ink px-3 py-1.5 w-fit font-semibold hover:bg-ink hover:text-white transition-colors dark:border-darkBorder dark:hover:bg-darkText dark:hover:text-darkTheme'>
                                             {label}
-                                            <Image src={assets.right_arrow} alt='' className='w-3'/>
+                                            <span aria-hidden='true'>→</span>
                                         </a>
                                     ))}
                                 </div>
@@ -68,23 +69,24 @@ const Projects = () => {
                         {link && (
                             <a href={link} target="_blank" rel="noopener noreferrer"
                                 aria-label={`${title} 자세히 보기`}
-                                className='inline-flex items-center gap-2 text-sm mt-5 border border-gray-400 rounded-lg px-3 py-1.5 w-fit dark:border-darkBorder'>
+                                className='inline-flex items-center gap-2 text-sm mt-5 border border-ink px-3 py-1.5 w-fit font-semibold hover:bg-ink hover:text-white transition-colors dark:border-darkBorder dark:hover:bg-darkText dark:hover:text-darkTheme'>
                                 {link.includes('velog') ? '블로그에서 보기' : '사이트 보기'}
-                                <Image src={assets.right_arrow} alt='화살표 아이콘' className='w-4'/>
+                                <span aria-hidden='true'>→</span>
                             </a>
                         )}
 
                         {slug && caseStudies[slug] && (
                             <Link href={`/projects/${slug}`}
                                 aria-label={`${title} 자세히 보기`}
-                                className='inline-flex items-center gap-2 text-sm mt-5 border border-gray-400 rounded-lg px-3 py-1.5 w-fit dark:border-darkBorder'>
+                                className='inline-flex items-center gap-2 text-sm mt-5 bg-accent text-white px-3 py-1.5 w-fit font-semibold hover:opacity-90 transition-opacity dark:bg-darkFocus'>
                                 자세히 보기
-                                <Image src={assets.right_arrow} alt='화살표 아이콘' className='w-4'/>
+                                <span aria-hidden='true'>→</span>
                             </Link>
                         )}
                     </div>
                 ))}
             </div>
+        </div>
     </div>
   )
 }

@@ -12,7 +12,7 @@ const sectionIcons = { Target, ServerCog, Filter, Bug, ShieldCheck, Wrench };
 function renderWithCode(text) {
     return text.split(/(`[^`]+`)/g).map((part, i) =>
         part.startsWith('`') && part.endsWith('`') ? (
-            <code key={i} className='font-mono text-[13px] bg-gray-100 dark:bg-darkSurface px-1.5 py-0.5 rounded'>
+            <code key={i} className='font-mono text-[13px] bg-gray-100 dark:bg-darkSurface px-1.5 py-0.5'>
                 {part.slice(1, -1)}
             </code>
         ) : (
@@ -58,23 +58,24 @@ export default async function CaseStudyPage({ params }) {
                 ← 프로젝트 목록으로
             </Link>
 
-            <h1 className='font-Ovo text-3xl md:text-4xl mt-6 leading-snug'>{study.title}</h1>
+            <p className='text-xs font-bold uppercase tracking-[0.2em] text-accent dark:text-darkFocus mt-6 mb-3'>Case Study</p>
+            <h1 className='text-3xl md:text-4xl font-extrabold tracking-tight leading-snug'>{study.title}</h1>
 
-            <div className='mt-6 rounded-xl border border-gray-200 dark:border-darkBorder bg-gray-50 dark:bg-darkSurface/40 p-6'>
-                <p className='text-base md:text-lg text-gray-700 dark:text-white/90 leading-relaxed'>{study.summary}</p>
+            <div className='mt-6 border border-ink dark:border-darkBorder p-6'>
+                <p className='text-base md:text-lg text-ink dark:text-darkText leading-relaxed'>{study.summary}</p>
 
                 {study.period && (
-                    <p className='text-sm text-gray-500 dark:text-gray-400 mt-3'>기간: {study.period}</p>
+                    <p className='text-sm text-sub dark:text-darkSub mt-3'>기간: {study.period}</p>
                 )}
 
                 {study.techStack && study.techStack.length > 0 && (
                     <div className='mt-4'>
-                        <p className='text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2'>기술 스택</p>
+                        <p className='text-xs font-bold uppercase tracking-[0.12em] text-sub dark:text-darkSub mb-2'>기술 스택</p>
                         <div className='flex flex-wrap gap-1.5'>
                             {study.techStack.map((tech, i) => (
                                 <span
                                     key={i}
-                                    className='text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 dark:bg-darkSurface dark:text-gray-300'
+                                    className='text-xs px-2 py-0.5 border border-gray-300 text-sub dark:border-darkSub/40 dark:text-darkSub'
                                 >
                                     {tech}
                                 </span>
@@ -89,7 +90,7 @@ export default async function CaseStudyPage({ params }) {
                     <a
                         key={i}
                         href={`#section-${i}`}
-                        className='text-xs px-3 py-1 rounded-full border border-gray-300 dark:border-darkBorder hover:bg-gray-50 dark:hover:bg-darkHover transition-colors'
+                        className='text-xs font-semibold px-3 py-1 border border-ink dark:border-darkBorder hover:bg-ink hover:text-white dark:hover:bg-darkText dark:hover:text-darkTheme transition-colors'
                     >
                         {heading}
                     </a>
@@ -102,22 +103,22 @@ export default async function CaseStudyPage({ params }) {
                     const isCallout = variant === 'callout';
                     return (
                         <section key={i} id={`section-${i}`} className='scroll-mt-24'>
-                            <div className='border-b border-gray-200 dark:border-darkBorder pb-2'>
+                            <div className='border-b-2 border-ink dark:border-darkBorder pb-2'>
                                 <div className='flex items-center gap-2'>
                                     <span
-                                        className='flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-gray-300 dark:border-darkBorder text-xs font-semibold text-gray-500 dark:text-gray-400'
+                                        className='shrink-0 text-xs font-bold tracking-[0.15em] text-accent dark:text-darkFocus'
                                         aria-hidden='true'
                                     >
-                                        {i + 1}
+                                        {String(i + 1).padStart(2, '0')}
                                     </span>
-                                    {Icon && <Icon className='h-4 w-4 shrink-0 text-gray-500 dark:text-gray-400' strokeWidth={1.5} aria-hidden />}
-                                    <h2 className='text-xl font-semibold text-gray-700 dark:text-white'>{heading}</h2>
+                                    {Icon && <Icon className='h-4 w-4 shrink-0 text-sub dark:text-darkSub' strokeWidth={1.5} aria-hidden />}
+                                    <h2 className='text-xl font-bold text-ink dark:text-darkText'>{heading}</h2>
                                 </div>
                             </div>
                             <div
                                 className={
                                     isCallout
-                                        ? 'mt-3 space-y-2 p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/30'
+                                        ? 'mt-3 space-y-2 py-2 pl-4 border-l-2 border-accent dark:border-darkFocus'
                                         : 'mt-3 space-y-2'
                                 }
                             >
@@ -125,7 +126,7 @@ export default async function CaseStudyPage({ params }) {
                                     typeof block === 'object' && block.type === 'code' ? (
                                         <pre
                                             key={j}
-                                            className='my-3 p-4 rounded-lg overflow-x-auto text-xs leading-6 font-mono bg-gray-100 text-gray-800 dark:bg-darkSurface dark:text-gray-200 border border-gray-200 dark:border-darkBorder'
+                                            className='my-3 p-4 overflow-x-auto text-xs leading-6 font-mono bg-gray-100 text-ink dark:bg-darkSurface dark:text-darkText border border-ink dark:border-darkBorder'
                                         >
                                             <code>{block.text}</code>
                                         </pre>
@@ -134,7 +135,7 @@ export default async function CaseStudyPage({ params }) {
                                             key={j}
                                             className={
                                                 isCallout
-                                                    ? 'text-sm text-blue-600 dark:text-blue-200 leading-7'
+                                                    ? 'text-sm text-ink dark:text-darkText leading-7'
                                                     : 'text-gray-600 dark:text-white/80 leading-8'
                                             }
                                         >
@@ -149,8 +150,8 @@ export default async function CaseStudyPage({ params }) {
             </div>
 
             {study.attachments && study.attachments.length > 0 && (
-                <div className='mt-12 pt-6 border-t border-gray-200 dark:border-darkBorder'>
-                    <p className='text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3'>증빙 문서</p>
+                <div className='mt-12 pt-6 border-t-2 border-ink dark:border-darkBorder'>
+                    <p className='text-xs font-bold uppercase tracking-[0.12em] text-sub dark:text-darkSub mb-3'>증빙 문서</p>
                     <div className='flex flex-col gap-2'>
                         {study.attachments.map(({ label, href }, i) => (
                             <a
@@ -159,7 +160,7 @@ export default async function CaseStudyPage({ params }) {
                                 target='_blank'
                                 rel='noopener noreferrer'
                                 aria-label={`${label} 열기 (PDF)`}
-                                className='inline-flex items-center gap-2 text-sm border border-gray-400 rounded-lg px-3 py-1.5 w-fit dark:border-darkBorder hover:bg-gray-50 dark:hover:bg-darkHover'
+                                className='inline-flex items-center gap-2 text-sm font-semibold border border-ink px-3 py-1.5 w-fit dark:border-darkBorder hover:bg-ink hover:text-white dark:hover:bg-darkText dark:hover:text-darkTheme transition-colors'
                             >
                                 <FileText className='h-4 w-4 text-gray-500 dark:text-gray-400' strokeWidth={1.5} aria-hidden />
                                 {label}

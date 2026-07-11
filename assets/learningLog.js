@@ -6,22 +6,23 @@ export const learningLogMeta = {
 }
 
 // 카테고리별 스타일 (Tailwind 클래스)
+// 스위스 그리드 규칙: 포인트 컬러는 코발트 하나 — 카테고리 구분은 색이 아니라 라벨 텍스트로
 export const categoryStyles = {
   Security: {
-    badge: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/45 dark:text-emerald-200',
-    accent: 'hover:border-emerald-400 dark:hover:border-emerald-500/60',
+    badge: 'border border-accent text-accent dark:border-darkFocus dark:text-darkFocus',
+    accent: 'hover:border-accent dark:hover:border-darkFocus',
   },
   Certification: {
-    badge: 'bg-amber-300 text-amber-900 dark:bg-amber-800/70 dark:text-amber-50',
-    accent: 'hover:border-amber-400 dark:hover:border-amber-500/60',
+    badge: 'border border-ink text-ink dark:border-darkText dark:text-darkText',
+    accent: 'hover:border-accent dark:hover:border-darkFocus',
   },
   'Hands-on': {
-    badge: 'bg-blue-100 text-blue-800 dark:bg-blue-900/45 dark:text-blue-200',
-    accent: 'hover:border-blue-400 dark:hover:border-blue-500/60',
+    badge: 'border border-ink text-ink dark:border-darkText dark:text-darkText',
+    accent: 'hover:border-accent dark:hover:border-darkFocus',
   },
   Foundation: {
-    badge: 'bg-slate-300 text-slate-800 dark:bg-slate-600/70 dark:text-slate-50',
-    accent: 'hover:border-slate-400 dark:hover:border-slate-500/60',
+    badge: 'border border-ink text-ink dark:border-darkText dark:text-darkText',
+    accent: 'hover:border-accent dark:hover:border-darkFocus',
   },
 }
 

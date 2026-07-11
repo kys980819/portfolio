@@ -40,22 +40,22 @@ const VelogLatest = async () => {
   if (posts.length === 0) return null
 
   return (
-    <div className='max-w-5xl mx-auto mt-2'>
-      <p className='text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3'>최신 글</p>
-      <ul className='flex flex-col gap-2'>
+    <div className='mt-2'>
+      <p className='text-xs font-bold uppercase tracking-[0.15em] text-sub dark:text-darkSub mb-3'>최신 글</p>
+      <ul className='flex flex-col border-t border-ink dark:border-darkBorder'>
         {posts.map(({ title, link, pubDate }) => (
           <li key={link}>
             <a
               href={link}
               target='_blank'
               rel='noopener noreferrer'
-              className='group flex items-center justify-between gap-4 border border-gray-300 rounded-lg px-5 py-3 hover:-translate-y-0.5 hover:shadow-md transition-all duration-300 dark:border-darkBorder'
+              className='group flex items-center justify-between gap-4 border-b border-ink dark:border-darkBorder px-2 py-3.5 hover:bg-gray-50 dark:hover:bg-darkHover transition-colors'
             >
-              <span className='text-sm text-gray-700 dark:text-white/90 truncate'>{title}</span>
-              <span className='flex items-center gap-2 shrink-0 text-xs text-gray-500 dark:text-gray-400'>
+              <span className='text-sm font-medium text-ink dark:text-darkText truncate'>{title}</span>
+              <span className='flex items-center gap-2 shrink-0 text-xs text-sub dark:text-darkSub'>
                 {formatDate(pubDate)}
                 <ArrowUpRight
-                  className='h-4 w-4 text-gray-400 group-hover:text-gray-700 dark:text-gray-500 dark:group-hover:text-gray-200 transition-colors'
+                  className='h-4 w-4 text-sub group-hover:text-accent dark:text-darkSub dark:group-hover:text-darkFocus transition-colors'
                   aria-hidden
                 />
               </span>

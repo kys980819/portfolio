@@ -75,7 +75,7 @@ const reports = [
 ];
 
 const SectionTitle = ({ children }) => (
-    <h2 className='text-xl font-semibold text-gray-700 dark:text-white border-b border-gray-200 dark:border-darkBorder pb-2 mt-12'>
+    <h2 className='text-lg font-extrabold tracking-tight text-ink dark:text-darkText border-b-2 border-ink dark:border-darkBorder pb-2 mt-12'>
         {children}
     </h2>
 );
@@ -95,7 +95,8 @@ export default function ResumePage() {
             </Link>
 
             <header className='mt-6'>
-                <h1 className='font-Ovo text-4xl'>김윤성</h1>
+                <p className='text-xs font-bold uppercase tracking-[0.2em] text-accent dark:text-darkFocus mb-3 print:hidden'>Resume</p>
+                <h1 className='text-4xl md:text-5xl font-extrabold tracking-tight'>김윤성</h1>
                 <ul className='flex flex-wrap gap-x-4 gap-y-1 mt-3 text-sm text-gray-600 dark:text-gray-300'>
                     <li><a href='mailto:kys980819@gmail.com' className='hover:underline'>kys980819@gmail.com</a></li>
                     <li><a href='https://github.com/kys980819' target='_blank' rel='noopener noreferrer' className='hover:underline'>github.com/kys980819</a></li>
@@ -105,7 +106,7 @@ export default function ResumePage() {
                     href='/kim-yunsung-resume.pdf'
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='inline-flex items-center gap-2 text-sm mt-5 border border-gray-400 rounded-lg px-4 py-2 w-fit hover:bg-gray-50 dark:border-darkBorder dark:hover:bg-darkHover print:hidden'
+                    className='inline-flex items-center gap-2 text-sm font-bold mt-5 border-2 border-ink px-4 py-2 w-fit hover:bg-ink hover:text-white transition-colors dark:border-darkBorder dark:hover:bg-darkText dark:hover:text-darkTheme print:hidden'
                 >
                     이력서 PDF 다운로드 <span aria-hidden='true'>↓</span>
                 </a>

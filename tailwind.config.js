@@ -8,22 +8,21 @@ module.exports = {
    theme: {
     extend: {
       colors: {
-        lightHover: '#fcf4ff',
-        // 딥 네이비 팔레트 (옵션 A)
-        darkTheme:  '#0B1220', // 배경
-        darkSurface: '#111827', // 카드/패널 배경
-        darkText:   '#E5E7EB', // 기본 텍스트
-        darkBorder: '#2A3441', // 보더/디바이더
-        darkFocus:  '#60A5FA', // 포커스/하이라이트
-        darkHover:  '#1F2937', // 호버 배경
+        // 스위스 그리드 팔레트 (옵션 B)
+        ink:    '#111111', // 라이트 본문·보더
+        sub:    '#555555', // 라이트 보조 텍스트
+        accent: '#1F3BE0', // 코발트 블루 (유일한 포인트 컬러)
+        darkTheme:  '#111111', // 다크 배경
+        darkSurface: '#161616', // 다크 패널 배경
+        darkText:   '#F5F5F5', // 다크 기본 텍스트
+        darkSub:    '#A3A3A3', // 다크 보조 텍스트
+        darkBorder: '#F5F5F5', // 다크 보더 (스위스: 보더가 곧 디자인)
+        darkFocus:  '#5C6FFF', // 다크 포인트 (코발트 밝힘)
+        darkHover:  '#1F1F1F', // 다크 호버 배경
       },
       fontFamily: {
         Outfit: ['var(--font-outfit)', 'sans-serif'],
         Ovo:    ['var(--font-ovo)', 'serif'],
-      },
-      boxShadow: {
-        'black' : '4px 4px #000',
-        'white' : '4px 4px #fff',
       },
       gridTemplateColumns: {
         'auto': 'repeat(auto-fit, minmax(200px, 1fr))',
