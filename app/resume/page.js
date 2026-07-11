@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Navbar from '@/app/components/Navbar';
 import Footer from '@/app/components/Footer';
+import { FileText, ArrowUpRight, ArrowRight } from 'lucide-react';
 
 // 콘텐츠 출처: public/kim-yunsung-resume.pdf(공개용 이력서) + 사이트 렌더링 텍스트(About·assets.js)
 // 연락처는 사이트가 이미 공개한 것(이메일·GitHub·Velog)까지만 노출한다.
@@ -154,7 +155,8 @@ export default function ResumePage() {
                                 href={detailLink}
                                 className='inline-flex items-center gap-1 text-sm mt-3 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white underline underline-offset-4 print:hidden'
                             >
-                                케이스 스터디 자세히 보기 →
+                                케이스 스터디 자세히 보기
+                                <ArrowRight className='h-3.5 w-3.5' aria-hidden />
                             </Link>
                         )}
                     </section>
@@ -172,7 +174,9 @@ export default function ResumePage() {
                             aria-label={`${label} 열기 (PDF)`}
                             className='inline-flex items-center gap-2 text-sm text-gray-600 dark:text-white/80 hover:underline'
                         >
-                            {label} <span aria-hidden='true'>↗</span>
+                            <FileText className='h-4 w-4 text-gray-500 dark:text-gray-400' strokeWidth={1.5} aria-hidden />
+                            {label}
+                            <ArrowUpRight className='h-3.5 w-3.5' aria-hidden />
                         </a>
                     </li>
                 ))}
