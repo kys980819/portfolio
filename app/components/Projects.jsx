@@ -1,5 +1,6 @@
 import { assets, serviceData } from '@/assets/assets'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 const Projects = () => {
@@ -8,7 +9,7 @@ const Projects = () => {
         <h2 className='text-center text-5xl'> MY Projects </h2>
 
             <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mt-12 mb-10 max-w-5xl mx-auto'>
-                {serviceData.map(({icon, title, description, period, techStack, highlights, troubleshooting, link, attachments}, index)=>(
+                {serviceData.map(({icon, slug, title, description, period, techStack, highlights, troubleshooting, link, attachments}, index)=>(
                     <div key={index}
                     className='border border-gray-400 rounded-lg px-8 py-10 dark:border-darkBorder'>
                         <Image src={icon} alt="프로젝트 아이콘" className='w-10'/>
@@ -70,6 +71,15 @@ const Projects = () => {
                                 {link.includes('velog') ? '블로그에서 보기' : '사이트 보기'}
                                 <Image src={assets.right_arrow} alt='화살표 아이콘' className='w-4'/>
                             </a>
+                        )}
+
+                        {slug && (
+                            <Link href={`/projects/${slug}`}
+                                aria-label={`${title} 자세히 보기`}
+                                className='inline-flex items-center gap-2 text-sm mt-5 border border-gray-400 rounded-lg px-3 py-1.5 w-fit dark:border-darkBorder'>
+                                자세히 보기
+                                <Image src={assets.right_arrow} alt='화살표 아이콘' className='w-4'/>
+                            </Link>
                         )}
                     </div>
                 ))}
