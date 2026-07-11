@@ -1,4 +1,5 @@
 import { assets, serviceData } from '@/assets/assets'
+import { caseStudies } from '@/assets/caseStudies'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -73,7 +74,7 @@ const Projects = () => {
                             </a>
                         )}
 
-                        {slug && (
+                        {slug && caseStudies[slug] && (
                             <Link href={`/projects/${slug}`}
                                 aria-label={`${title} 자세히 보기`}
                                 className='inline-flex items-center gap-2 text-sm mt-5 border border-gray-400 rounded-lg px-3 py-1.5 w-fit dark:border-darkBorder'>
