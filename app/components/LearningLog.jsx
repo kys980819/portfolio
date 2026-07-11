@@ -1,6 +1,7 @@
 import { categoryStyles, learningLogMeta, learningLogSeries, velogMainUrl } from '@/assets/learningLog'
 import { ArrowUpRight } from 'lucide-react'
 import React from 'react'
+import VelogLatest from './VelogLatest'
 
 const LearningLog = () => {
   return (
@@ -49,6 +50,8 @@ const LearningLog = () => {
           </a>
         ))}
       </div>
+
+      <VelogLatest />
 
       <div className='text-center mt-12'>
         <a
