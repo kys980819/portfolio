@@ -1,5 +1,6 @@
 import { Outfit, Ovo } from "next/font/google";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Chatbot from "./components/Chatbot";
 import { ChatbotProvider } from "./components/ChatbotProvider";
@@ -100,6 +101,7 @@ export default function RootLayout({ children }) {
           {children}
           <Chatbot />
         </ChatbotProvider>
+        <Analytics />
       </body>
     </html>
   );
