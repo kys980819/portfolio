@@ -64,11 +64,20 @@ export default async function CaseStudyPage({ params }) {
                             {heading}
                         </h2>
                         <div className='mt-3 space-y-2'>
-                            {(Array.isArray(body) ? body : [body]).map((para, j) => (
-                                <p key={j} className='text-gray-600 dark:text-white/80 leading-8'>
-                                    {para}
-                                </p>
-                            ))}
+                            {(Array.isArray(body) ? body : [body]).map((block, j) =>
+                                typeof block === 'object' && block.type === 'code' ? (
+                                    <pre
+                                        key={j}
+                                        className='my-3 p-4 rounded-lg overflow-x-auto text-xs leading-6 font-mono bg-gray-100 text-gray-800 dark:bg-darkSurface dark:text-gray-200 border border-gray-200 dark:border-darkBorder'
+                                    >
+                                        <code>{block.text}</code>
+                                    </pre>
+                                ) : (
+                                    <p key={j} className='text-gray-600 dark:text-white/80 leading-8'>
+                                        {block}
+                                    </p>
+                                )
+                            )}
                         </div>
                     </section>
                 ))}
