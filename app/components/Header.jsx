@@ -1,5 +1,6 @@
 import { assets } from '@/assets/assets'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 const Header = () => {
@@ -15,8 +16,11 @@ const Header = () => {
       문제나 모르는 것은 찾아서 해결하고, 시작한 것은 끝까지 완수합니다.<br/> IDS 탐지 환경 구축부터 악성코드 분석·탐지 룰 검증까지 보안 문제를 직접 다뤘고,<br/> 이 포트폴리오 사이트도 기획·개발·배포까지 스스로 해냈습니다.</p>
       <div className='flex flex-col sm:flex-row items-center gap-4 mt-4'>
         <a href="/kim-yunsung-resume.pdf" download="김윤성_이력서.pdf" aria-label="이력서 다운로드" className='px-10 py-3 border rounded-full
-         border-gray-500 flex items-center gap-2 bg-white dark:text-black'> 
+         border-gray-500 flex items-center gap-2 bg-white dark:text-black'>
         My Resume <Image src={assets.download_icon} alt='다운로드 아이콘' className='w-4'/></a>
+        <Link href="/resume" aria-label="이력서 웹으로 보기" className='px-10 py-3 border rounded-full
+         border-gray-500 flex items-center gap-2'>
+        웹으로 보기 <Image src={assets.right_arrow_bold} alt='화살표 아이콘' className='w-4 dark:hidden'/><Image src={assets.right_arrow_bold_dark} alt='화살표 아이콘' className='w-4 hidden dark:block'/></Link>
       </div>
     </div>
   )

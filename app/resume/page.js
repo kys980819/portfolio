@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import Navbar from '@/app/components/Navbar';
+import Footer from '@/app/components/Footer';
 
 // 콘텐츠 출처: public/kim-yunsung-resume.pdf(공개용 이력서) + 사이트 렌더링 텍스트(About·assets.js)
 // 연락처는 사이트가 이미 공개한 것(이메일·GitHub·Velog)까지만 노출한다.
@@ -79,6 +81,10 @@ const SectionTitle = ({ children }) => (
 
 export default function ResumePage() {
     return (
+        <>
+        <div className='print:hidden'>
+            <Navbar />
+        </div>
         <main className='px-[8%] md:px-[12%] pt-28 pb-20 max-w-4xl mx-auto min-h-screen dark:bg-darkTheme dark:text-white print:pt-8'>
             <Link
                 href='/'
@@ -215,5 +221,9 @@ export default function ResumePage() {
                 ))}
             </dl>
         </main>
+        <div className='print:hidden'>
+            <Footer />
+        </div>
+        </>
     );
 }

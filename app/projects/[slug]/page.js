@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { caseStudies, caseStudySlugs } from '@/assets/caseStudies';
+import Navbar from '@/app/components/Navbar';
+import Footer from '@/app/components/Footer';
 
 export function generateStaticParams() {
     return caseStudySlugs.map((slug) => ({ slug }));
@@ -29,6 +31,8 @@ export default async function CaseStudyPage({ params }) {
     if (!study) notFound();
 
     return (
+        <>
+        <Navbar />
         <main className='px-[8%] md:px-[12%] pt-28 pb-20 max-w-4xl mx-auto min-h-screen dark:bg-darkTheme dark:text-white'>
             <Link
                 href='/#projects'
@@ -104,5 +108,7 @@ export default async function CaseStudyPage({ params }) {
                 </div>
             )}
         </main>
+        <Footer />
+        </>
     );
 }

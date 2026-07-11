@@ -1,5 +1,6 @@
 import { assets } from '@/assets/assets'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 const Footer = () => {
@@ -21,6 +22,7 @@ const Footer = () => {
         <ul className='flex items-center gap-10 justify-center mt-4 sm:mt-0'>
             <li><a target='_blank' rel='noopener noreferrer' href='https://github.com/kys980819' aria-label='GitHub 열기(새 탭)'>GitHub</a></li>
             <li><a target='_blank' rel='noopener noreferrer' href='https://velog.io/@kys980819' aria-label='블로그 열기(새 탭)'>Blog</a></li>
+            <li><Link href='/resume' aria-label='웹 이력서 보기'>Resume</Link></li>
         </ul>
       </div>
     </div>

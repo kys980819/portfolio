@@ -56,18 +56,18 @@ const Navbar = () => {
 
       <nav className={`w-full fixed px-5 lg:px-8 xl:px-[8%] py-0
       flex items-center justify-between z-50 ${isScroll ? "bg-white bg-opacity-50 backdrop-blur-lg shadow-sm dark:bg-darkTheme dark:shadow-white/20" : ""}`}> 
-        <a href='#top' aria-label="홈으로 이동">
+        <a href='/#top' aria-label="홈으로 이동">
           <Image src={isDark ? assets.logo_dark : assets.logo} alt="KYS Portfolio 로고" className='w-28 cursor-pointer mr-14'/> 
         </a>
 
         <ul className={`hidden md:flex items-center gap-10 lg:gap-12
         rounded-full px-12 py-3 ${isScroll ? "" : "bg-white shadow-sm bg-opacity-50 dark:border dark:border-white/50 dark:bg-transparent"} `}>
-          <li><a href="#top">Home</a></li>
-          <li><a href="#about">About me</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#learning-log">Learning Log</a></li>
-          <li><a href="#chat">Chat</a></li>
+          <li><a href="/#top">Home</a></li>
+          <li><a href="/#about">About me</a></li>
+          <li><a href="/#skills">Skills</a></li>
+          <li><a href="/#projects">Projects</a></li>
+          <li><a href="/#learning-log">Learning Log</a></li>
+          <li><a href="/#chat">Chat</a></li>
         </ul>
 
         <div className='flex items-center gap-4'>
@@ -90,12 +90,12 @@ const Navbar = () => {
               <Image src={isDark ? assets.close_white: assets.close_black} alt="메뉴 닫기 아이콘" className='w-5 cursor-pointer'/>
           </button>
 
-          <li><a onClick={closeMenu} href="#top">Home</a></li>
-          <li><a onClick={closeMenu} href="#about">About me</a></li>
-          <li><a onClick={closeMenu} href="#skills">Skills</a></li>
-          <li><a onClick={closeMenu} href="#projects">Projects</a></li>
-          <li><a onClick={closeMenu} href="#learning-log">Learning Log</a></li>
-          <li><a onClick={closeMenu} href="#chat">Chat</a></li>
+          <li><a onClick={closeMenu} href="/#top">Home</a></li>
+          <li><a onClick={closeMenu} href="/#about">About me</a></li>
+          <li><a onClick={closeMenu} href="/#skills">Skills</a></li>
+          <li><a onClick={closeMenu} href="/#projects">Projects</a></li>
+          <li><a onClick={closeMenu} href="/#learning-log">Learning Log</a></li>
+          <li><a onClick={closeMenu} href="/#chat">Chat</a></li>
         </ul>
       </nav>
     </>
