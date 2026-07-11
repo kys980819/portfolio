@@ -60,10 +60,26 @@ export const metadata = {
   },
 };
 
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "김윤성",
+  url: "https://kysportfolio.site",
+  description: metadata.description,
+  sameAs: [
+    "https://github.com/kys980819",
+    "https://velog.io/@kys980819",
+  ],
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="ko" className="scroll-smooth">
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <Script id="theme-init" strategy="beforeInteractive">
           {`
           (function() {

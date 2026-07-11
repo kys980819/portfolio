@@ -3,6 +3,6 @@ export default function sitemap() {
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://kysportfolio.site';
   
     return [
-      { url: `${baseUrl}/`, lastModified: new Date() }, // 홈 페이지
+      { url: `${baseUrl}/`, lastModified: new Date(), changeFrequency: 'monthly', priority: 1 }, // 홈 페이지
     ];
   }
