@@ -51,7 +51,7 @@ export default function Chatbot({ mode = "floating" }) {
 					aria-controls="chatbot-panel-floating"
 					aria-label={isOpen ? "챗봇 닫기" : "챗봇 열기"}
 					title={isOpen ? "닫기" : "챗봇 열기"}
-					className="fixed right-4 bottom-4 z-50 rounded-full bg-black text-white shadow-lg transition hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black w-14 h-14 flex items-center justify-center dark:bg-white dark:text-black dark:focus:ring-white"
+					className="fixed right-4 bottom-4 z-50 rounded-full bg-accent text-white shadow-lg transition hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent w-14 h-14 flex items-center justify-center dark:bg-accent-dark dark:text-darkTheme dark:focus:ring-accent-dark"
 				>
 					<span className="sr-only">Chatbot</span>
 					{/* 간단한 말풍선 아이콘 */}
@@ -76,13 +76,13 @@ export default function Chatbot({ mode = "floating" }) {
 					ref={panelRef}
 					className={
 						mode === "floating"
-							? "fixed right-4 bottom-20 z-50 w-[340px] sm:w-[460px] lg:w-[560px] h-[520px] sm:h-[620px] max-h-[80vh] flex flex-col bg-gray-50 text-gray-900 border border-gray-300 rounded-xl shadow-2xl overflow-hidden dark:bg-darkSurface dark:text-darkText dark:border-darkBorder"
-							: "w-full max-w-3xl mx-auto my-6 h-[70vh] flex flex-col bg-gray-50 text-gray-900 border border-gray-300 rounded-xl shadow-lg overflow-hidden dark:bg-darkSurface dark:text-darkText dark:border-darkBorder"
+							? "fixed right-4 bottom-20 z-50 w-[340px] sm:w-[460px] lg:w-[560px] h-[520px] sm:h-[620px] max-h-[80vh] flex flex-col bg-panel text-ink border border-line rounded-lg shadow-2xl overflow-hidden dark:bg-darkSurface dark:text-darkText dark:border-darkBorder"
+							: "w-full max-w-3xl mx-auto my-6 h-[70vh] flex flex-col bg-panel text-ink border border-line rounded-lg shadow-lg overflow-hidden dark:bg-darkSurface dark:text-darkText dark:border-darkBorder"
 					}
 					role="dialog"
 					aria-label="채팅 상담"
 				>
-					<header className="flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-gray-50 dark:bg-transparent dark:border-darkBorder">
+					<header className="flex items-center justify-between px-4 py-3 border-b border-line bg-panel dark:bg-transparent dark:border-darkBorder">
 						<div className="font-semibold">도움이 필요하신가요?</div>
 						{mode === "floating" && (
 						<button
@@ -106,8 +106,8 @@ export default function Chatbot({ mode = "floating" }) {
 									className={
 										"inline-block px-3 py-2 rounded-lg leading-relaxed " +
 										(m.role === "assistant"
-											? "bg-gray-100 text-gray-900 dark:bg-white/10 dark:text-white"
-											: "bg-black text-white dark:bg-white dark:text-black")
+											? "bg-pageBg text-ink dark:bg-white/10 dark:text-darkText"
+											: "bg-accent text-white dark:bg-accent-dark dark:text-darkTheme")
 									}
 								>
 									{m.content}
@@ -116,7 +116,7 @@ export default function Chatbot({ mode = "floating" }) {
 						)}
 						{isLoading && (
 							<li className="text-left">
-								<span className="inline-block px-3 py-2 rounded-lg leading-relaxed bg-gray-100 text-gray-900 dark:bg-white/10 dark:text-white">
+								<span className="inline-block px-3 py-2 rounded-lg leading-relaxed bg-pageBg text-ink dark:bg-white/10 dark:text-darkText">
 									<span className="inline-flex gap-1 align-middle" aria-live="polite" aria-label="응답 생성 중">
 										<span className="loading-dot animation-delay-0">•</span>
 										<span className="loading-dot animation-delay-200">•</span>
@@ -134,7 +134,7 @@ export default function Chatbot({ mode = "floating" }) {
 								<button
 									key={q}
 									onClick={() => sendMessage(q)}
-									className="rounded-full border border-gray-300 bg-white/90 px-3 py-1 text-xs text-gray-700 shadow-sm hover:bg-gray-100 dark:border-darkBorder dark:bg-neutral-800/90 dark:text-neutral-200 dark:hover:bg-white/10"
+									className="rounded-md border border-line bg-panel px-3 py-1 text-xs text-ink shadow-sm hover:bg-pageBg dark:border-darkBorder dark:bg-darkTheme dark:text-darkText dark:hover:bg-white/10"
 								>
 									{q}
 								</button>
@@ -145,10 +145,10 @@ export default function Chatbot({ mode = "floating" }) {
 					{/* 인풋 바로 위: 이전 대화 복원 안내 배너 (페이지 로드 시 복원된 경우에만, X로 이번 방문 동안 숨김 가능) */}
 					{hasSavedHistory && !isBannerDismissed && (
 						<div className="px-4 pb-2 text-center">
-							<div className="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/90 dark:bg-neutral-800/90 shadow px-3 py-1 text-sm">
-								<span className="text-gray-700 dark:text-neutral-200">이전 대화가 로드되었습니다.</span>
-								<button onClick={resetConversation} className="rounded-full bg-gray-200 dark:bg-neutral-700 text-gray-800 dark:text-neutral-100 px-3 py-0.5 text-xs">새로 시작</button>
-								<button onClick={dismissBanner} className="rounded-full p-0.5 text-gray-500 hover:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-100" aria-label="안내 닫기" title="안내 닫기">
+							<div className="inline-flex items-center gap-2 rounded-md border border-line bg-panel dark:bg-darkTheme dark:border-darkBorder shadow px-3 py-1 text-sm">
+								<span className="text-ink dark:text-darkText">이전 대화가 로드되었습니다.</span>
+								<button onClick={resetConversation} className="rounded bg-pageBg dark:bg-darkHover text-ink dark:text-darkText px-3 py-0.5 text-xs">새로 시작</button>
+								<button onClick={dismissBanner} className="rounded-full p-0.5 text-inkMuted hover:text-ink dark:text-darkMuted dark:hover:text-darkText" aria-label="안내 닫기" title="안내 닫기">
 									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path d="M6 6l12 12M6 18L18 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
 									</svg>
@@ -157,7 +157,7 @@ export default function Chatbot({ mode = "floating" }) {
 						</div>
 					)}
 
-					<form onSubmit={handleSubmit} className="p-3 border-t border-gray-200 bg-gray-50 dark:bg-transparent dark:border-darkBorder">
+					<form onSubmit={handleSubmit} className="p-3 border-t border-line bg-panel dark:bg-transparent dark:border-darkBorder">
 						<label htmlFor="chatbot-input" className="sr-only">메시지 입력</label>
 						<div className="flex items-center gap-2">
 							<input
@@ -167,19 +167,19 @@ export default function Chatbot({ mode = "floating" }) {
 								onChange={(e) => handleInputChange(e.target.value)}
 								maxLength={1000}
 								placeholder="메시지를 입력하세요..."
-								className="flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black dark:bg-transparent dark:text-darkText dark:placeholder-white/50 dark:border-darkBorder dark:focus:ring-darkFocus"
+								className="flex-1 rounded-md border border-line px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent dark:bg-transparent dark:text-darkText dark:placeholder-white/50 dark:border-darkBorder dark:focus:ring-darkFocus"
 								disabled={isLoading}
 							/>
 							<button
 								type="submit"
-								className="rounded-md bg-black text-white px-3 py-2 text-sm hover:opacity-90 disabled:opacity-50 dark:bg-white dark:text-black hover:opacity-90"
+								className="rounded-md bg-accent text-white px-3 py-2 text-sm hover:opacity-90 disabled:opacity-50 dark:bg-accent-dark dark:text-darkTheme hover:opacity-90"
 								aria-label="메시지 전송"
 								disabled={!input.trim() || isLoading}
 							>
 								{isLoading ? "전송중..." : "전송"}
 							</button>
 						</div>
-						<p className="mt-2 text-[11px] text-gray-400 text-center dark:text-neutral-500">대화 내용은 답변 품질 개선을 위해 저장될 수 있습니다.</p>
+						<p className="mt-2 text-[11px] text-inkMuted/80 text-center dark:text-darkMuted/80">대화 내용은 답변 품질 개선을 위해 저장될 수 있습니다.</p>
 					</form>
 				</div>
 			)}

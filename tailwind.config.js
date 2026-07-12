@@ -4,6 +4,7 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./assets/**/*.{js,jsx}", // learningLog.js 등 데이터 파일의 Tailwind 클래스 문자열 수집
   ],
    theme: {
     extend: {

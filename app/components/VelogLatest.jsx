@@ -40,22 +40,27 @@ const VelogLatest = async () => {
   if (posts.length === 0) return null
 
   return (
-    <div className='max-w-5xl mx-auto mt-2'>
-      <p className='text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3'>최신 글</p>
-      <ul className='flex flex-col gap-2'>
+    <div className='max-w-5xl mx-auto mt-2 rounded-lg border border-line bg-panel overflow-hidden dark:border-darkBorder dark:bg-darkSurface'>
+      <div className='flex items-center justify-between border-b border-line px-5 py-3 dark:border-darkBorder'>
+        <p className='font-mono text-xs font-bold uppercase tracking-[0.15em] text-inkMuted dark:text-darkMuted'>최신 글</p>
+        <span className='rounded bg-info-soft px-2 py-0.5 font-mono text-[11px] font-bold tracking-wider text-info dark:bg-blue-900/45 dark:text-blue-300'>
+          LIVE
+        </span>
+      </div>
+      <ul className='flex flex-col'>
         {posts.map(({ title, link, pubDate }) => (
-          <li key={link}>
+          <li key={link} className='border-b border-line last:border-b-0 dark:border-darkBorder'>
             <a
               href={link}
               target='_blank'
               rel='noopener noreferrer'
-              className='group flex items-center justify-between gap-4 border border-gray-300 rounded-lg px-5 py-3 hover:-translate-y-0.5 hover:shadow-md transition-all duration-300 dark:border-darkBorder'
+              className='group flex items-center justify-between gap-4 px-5 py-3 hover:bg-pageBg transition-colors dark:hover:bg-darkHover'
             >
-              <span className='text-sm text-gray-700 dark:text-white/90 truncate'>{title}</span>
-              <span className='flex items-center gap-2 shrink-0 text-xs text-gray-500 dark:text-gray-400'>
+              <span className='text-sm text-ink dark:text-darkText/90 truncate'>{title}</span>
+              <span className='flex items-center gap-2 shrink-0 font-mono text-xs text-inkMuted dark:text-darkMuted'>
                 {formatDate(pubDate)}
                 <ArrowUpRight
-                  className='h-4 w-4 text-gray-400 group-hover:text-gray-700 dark:text-gray-500 dark:group-hover:text-gray-200 transition-colors'
+                  className='h-4 w-4 text-inkMuted group-hover:text-ink dark:text-darkMuted dark:group-hover:text-darkText transition-colors'
                   aria-hidden
                 />
               </span>

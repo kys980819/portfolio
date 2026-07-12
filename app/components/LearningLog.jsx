@@ -6,14 +6,14 @@ import VelogLatest from './VelogLatest'
 const LearningLog = () => {
   return (
     <div id='learning-log' className='w-full px-[12%] py-10 scroll-mt-20'>
-      <h4 className='text-center mb-2 text-lg'> Writing </h4>
-      <h2 className='text-center text-5xl'> Learning Log </h2>
+      <h4 className='text-center mb-2 font-mono text-xs font-bold uppercase tracking-[0.2em] text-inkMuted dark:text-darkMuted'> Writing </h4>
+      <h2 className='text-center text-3xl font-bold'> Learning Log </h2>
 
-      <p className='text-center max-w-2xl mx-auto mt-5 mb-6'>
+      <p className='text-center max-w-2xl mx-auto mt-5 mb-6 text-inkMuted dark:text-darkMuted'>
         학습 과정에서 정리한 개념과 실습 기록입니다.
       </p>
 
-      <p className='text-center text-sm text-gray-500 dark:text-gray-400 mb-12'>
+      <p className='text-center font-mono text-sm text-inkMuted dark:text-darkMuted mb-12'>
         시리즈 {learningLogMeta.totalSeries} · 포스트 {learningLogMeta.totalPosts}+ · {learningLogMeta.period}
       </p>
 
@@ -25,27 +25,27 @@ const LearningLog = () => {
             target='_blank'
             rel='noopener noreferrer'
             className={
-              'group block border border-gray-300 rounded-lg px-8 py-8 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md dark:border-darkBorder ' +
+              'group block rounded-lg border border-line bg-panel px-8 py-8 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md dark:border-darkBorder dark:bg-darkSurface ' +
               categoryStyles[series.category].accent
             }
           >
             <div className='flex items-start justify-between mb-4'>
               <span
                 className={
-                  'inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium ' +
+                  'inline-flex rounded px-2 py-0.5 font-mono text-[11px] font-bold uppercase tracking-wider ' +
                   categoryStyles[series.category].badge
                 }
               >
                 {series.category}
               </span>
               <ArrowUpRight
-                className='h-4 w-4 text-gray-400 group-hover:text-gray-700 dark:text-gray-500 dark:group-hover:text-gray-200 transition-colors'
+                className='h-4 w-4 text-inkMuted group-hover:text-ink dark:text-darkMuted dark:group-hover:text-darkText transition-colors'
                 aria-hidden
               />
             </div>
 
-            <h3 className='text-lg font-semibold text-gray-800 dark:text-white mb-2'>{series.title}</h3>
-            <p className='text-sm text-gray-600 dark:text-white/80 leading-relaxed'>{series.description}</p>
+            <h3 className='text-lg font-semibold text-ink dark:text-darkText mb-2'>{series.title}</h3>
+            <p className='text-sm text-inkMuted dark:text-darkMuted leading-relaxed'>{series.description}</p>
 
           </a>
         ))}
@@ -58,7 +58,7 @@ const LearningLog = () => {
           href={velogMainUrl}
           target='_blank'
           rel='noopener noreferrer'
-          className='inline-flex items-center gap-2 text-sm border border-gray-400 rounded-lg px-5 py-2 hover:bg-gray-50 dark:border-darkBorder dark:hover:bg-darkHover transition-colors'
+          className='inline-flex items-center gap-2 text-sm border border-line bg-panel rounded-md px-5 py-2 hover:bg-pageBg dark:bg-darkSurface dark:border-darkBorder dark:hover:bg-darkHover transition-colors'
         >
           모든 글 보기
           <ArrowUpRight className='h-4 w-4' aria-hidden />
