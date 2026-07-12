@@ -6,10 +6,10 @@ import React, { useEffect, useRef, useState } from 'react'
 
 const NAV_LINKS = [
   { href: '/#top', label: 'Home' },
-  { href: '/#about', label: 'About' },
+  { href: '/#about', label: 'About me' },
   { href: '/#skills', label: 'Skills' },
   { href: '/#projects', label: 'Projects' },
-  { href: '/#learning-log', label: 'Log' },
+  { href: '/#learning-log', label: 'Learning Log' },
   { href: '/#chat', label: 'Chat' },
 ]
 
@@ -50,7 +50,7 @@ const Navbar = () => {
       px-5 lg:px-8 xl:px-[8%] py-4 bg-white border-b-2 border-ink dark:bg-darkTheme dark:border-darkBorder'>
         <a href='/#top' aria-label="홈으로 이동"
           className='text-sm font-extrabold tracking-tight text-ink dark:text-darkText'>
-          KIM YUNSEONG
+          KYS Portfolio
         </a>
 
         <ul className='hidden md:flex items-center gap-7 lg:gap-9 text-xs font-semibold uppercase tracking-[0.08em]'>

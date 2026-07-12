@@ -7,8 +7,8 @@ const Projects = () => {
   return (
     <div id='projects' className='w-full border-b border-ink dark:border-darkBorder scroll-mt-20'>
         <div className='max-w-5xl mx-auto px-5 lg:px-8 py-16 md:py-20'>
-            <p className='text-xs font-bold uppercase tracking-[0.2em] text-accent dark:text-darkFocus mb-3'>03 — Work</p>
-            <h2 className='text-4xl md:text-5xl font-extrabold tracking-tight'>Projects</h2>
+            <p className='text-xs font-bold uppercase tracking-[0.2em] text-accent dark:text-darkFocus mb-3'>03 — Projects</p>
+            <h2 className='text-4xl md:text-5xl font-extrabold tracking-tight'>MY Projects</h2>
 
             <div className='grid grid-cols-1 md:grid-cols-2 border-t border-l border-ink dark:border-darkBorder mt-12'>
                 {serviceData.map(({slug, title, description, period, techStack, highlights, troubleshooting, link, attachments}, index)=>(

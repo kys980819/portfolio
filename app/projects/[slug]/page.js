@@ -50,10 +50,10 @@ export default async function CaseStudyPage({ params }) {
     return (
         <>
         <Navbar />
-        <main className='px-[8%] md:px-[12%] pt-28 pb-20 max-w-4xl mx-auto min-h-screen dark:bg-darkTheme dark:text-white'>
+        <main className='px-[8%] md:px-[12%] pt-28 pb-20 max-w-4xl mx-auto min-h-screen dark:bg-darkTheme dark:text-darkText'>
             <Link
                 href='/#projects'
-                className='inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white'
+                className='inline-flex items-center gap-1 text-sm text-sub hover:text-ink dark:text-darkSub dark:hover:text-darkText'
             >
                 ← 프로젝트 목록으로
             </Link>
@@ -136,7 +136,7 @@ export default async function CaseStudyPage({ params }) {
                                             className={
                                                 isCallout
                                                     ? 'text-sm text-ink dark:text-darkText leading-7'
-                                                    : 'text-gray-600 dark:text-white/80 leading-8'
+                                                    : 'text-sub dark:text-darkSub leading-8'
                                             }
                                         >
                                             {renderWithCode(block)}
@@ -162,7 +162,7 @@ export default async function CaseStudyPage({ params }) {
                                 aria-label={`${label} 열기 (PDF)`}
                                 className='inline-flex items-center gap-2 text-sm font-semibold border border-ink px-3 py-1.5 w-fit dark:border-darkBorder hover:bg-ink hover:text-white dark:hover:bg-darkText dark:hover:text-darkTheme transition-colors'
                             >
-                                <FileText className='h-4 w-4 text-gray-500 dark:text-gray-400' strokeWidth={1.5} aria-hidden />
+                                <FileText className='h-4 w-4 text-sub dark:text-darkSub' strokeWidth={1.5} aria-hidden />
                                 {label}
                                 <ArrowUpRight className='h-3.5 w-3.5' aria-hidden />
                             </a>

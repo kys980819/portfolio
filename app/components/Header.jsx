@@ -10,7 +10,7 @@ const Header = () => {
         <div className='grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 items-start'>
           <div>
             <p className='text-xs font-bold uppercase tracking-[0.2em] text-accent dark:text-darkFocus mb-5'>
-              Security Analyst — Portfolio
+              KYS Portfolio
             </p>
             <h3 className='flex items-end gap-2 text-lg md:text-xl mb-4 font-medium'>
               안녕하세요, 김윤성입니다 <Image src={assets.hand_icon} alt='인사 아이콘' className='w-6'/>

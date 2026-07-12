@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <div className='mt-20 border-t-2 border-ink dark:border-darkBorder'>
       <div className='max-w-5xl mx-auto px-5 lg:px-8 pt-10'>
-        <p className='text-sm font-extrabold tracking-tight text-ink dark:text-darkText mb-2'>KIM YUNSEONG</p>
+        <p className='text-sm font-extrabold tracking-tight text-ink dark:text-darkText mb-2'>KYS Portfolio</p>
         <div className='w-max flex items-center gap-2'>
             <Image src={assets.mail_icon} alt='이메일 아이콘' className='w-6 dark:hidden'/>
             <Image src={assets.mail_icon_dark} alt='이메일 아이콘' className='w-6 hidden dark:block'/>

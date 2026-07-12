@@ -86,10 +86,10 @@ export default function ResumePage() {
         <div className='print:hidden'>
             <Navbar />
         </div>
-        <main className='px-[8%] md:px-[12%] pt-28 pb-20 max-w-4xl mx-auto min-h-screen dark:bg-darkTheme dark:text-white print:pt-8'>
+        <main className='px-[8%] md:px-[12%] pt-28 pb-20 max-w-4xl mx-auto min-h-screen dark:bg-darkTheme dark:text-darkText print:pt-8'>
             <Link
                 href='/'
-                className='inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white print:hidden'
+                className='inline-flex items-center gap-1 text-sm text-sub hover:text-ink dark:text-darkSub dark:hover:text-darkText print:hidden'
             >
                 ← 홈으로
             </Link>
@@ -97,7 +97,7 @@ export default function ResumePage() {
             <header className='mt-6'>
                 <p className='text-xs font-bold uppercase tracking-[0.2em] text-accent dark:text-darkFocus mb-3 print:hidden'>Resume</p>
                 <h1 className='text-4xl md:text-5xl font-extrabold tracking-tight'>김윤성</h1>
-                <ul className='flex flex-wrap gap-x-4 gap-y-1 mt-3 text-sm text-gray-600 dark:text-gray-300'>
+                <ul className='flex flex-wrap gap-x-4 gap-y-1 mt-3 text-sm text-sub dark:text-darkSub'>
                     <li><a href='mailto:kys980819@gmail.com' className='hover:underline'>kys980819@gmail.com</a></li>
                     <li><a href='https://github.com/kys980819' target='_blank' rel='noopener noreferrer' className='hover:underline'>github.com/kys980819</a></li>
                     <li><a href='https://velog.io/@kys980819' target='_blank' rel='noopener noreferrer' className='hover:underline'>velog.io/@kys980819</a></li>
@@ -113,11 +113,11 @@ export default function ResumePage() {
             </header>
 
             <SectionTitle>소개</SectionTitle>
-            <p className='mt-3 text-gray-600 dark:text-white/80 leading-8'>
+            <p className='mt-3 text-sub dark:text-darkSub leading-8'>
                 모르는 문제를 조사하여 직접 풀어 나가며, IDS 탐지 환경을 직접 구축하고 악성코드를 정적·동적·네트워크로 분석해
                 IOC를 도출하고 탐지 룰로 검증하는 흐름을 단독으로 끝까지 수행했습니다.
             </p>
-            <p className='mt-2 text-gray-600 dark:text-white/80 leading-8'>
+            <p className='mt-2 text-sub dark:text-darkSub leading-8'>
                 3교대 보안 근무 1년 무결근으로, 관제 현장의 지속 근무에도 준비되어 있습니다.
             </p>
 
@@ -125,11 +125,11 @@ export default function ResumePage() {
             <dl className='mt-4 space-y-4'>
                 {skills.map(({ area, items }) => (
                     <div key={area} className='sm:grid sm:grid-cols-[180px_1fr] sm:gap-4'>
-                        <dt className='text-sm font-semibold text-gray-700 dark:text-white'>{area}</dt>
+                        <dt className='text-sm font-semibold text-ink dark:text-darkText'>{area}</dt>
                         <dd className='mt-1 sm:mt-0'>
                             <ul className='space-y-1'>
                                 {items.map((item, i) => (
-                                    <li key={i} className='text-sm text-gray-600 dark:text-white/80 leading-7'>{item}</li>
+                                    <li key={i} className='text-sm text-sub dark:text-darkSub leading-7'>{item}</li>
                                 ))}
                             </ul>
                         </dd>
@@ -141,12 +141,12 @@ export default function ResumePage() {
             <div className='mt-4 space-y-10'>
                 {projects.map(({ title, meta, bullets, detailLink }) => (
                     <section key={title}>
-                        <h3 className='text-lg font-semibold text-gray-800 dark:text-white'>{title}</h3>
-                        <p className='text-xs text-gray-500 dark:text-gray-400 mt-1'>{meta}</p>
+                        <h3 className='text-lg font-semibold text-ink dark:text-darkText'>{title}</h3>
+                        <p className='text-xs text-sub dark:text-darkSub mt-1'>{meta}</p>
                         <ul className='mt-3 space-y-2'>
                             {bullets.map((item, i) => (
-                                <li key={i} className='text-sm text-gray-600 dark:text-white/80 leading-7 flex items-start gap-2'>
-                                    <span className='text-gray-400 mt-0.5'>•</span>
+                                <li key={i} className='text-sm text-sub dark:text-darkSub leading-7 flex items-start gap-2'>
+                                    <span className='text-accent dark:text-darkFocus mt-0.5'>—</span>
                                     <span>{item}</span>
                                 </li>
                             ))}
@@ -154,7 +154,7 @@ export default function ResumePage() {
                         {detailLink && (
                             <Link
                                 href={detailLink}
-                                className='inline-flex items-center gap-1 text-sm mt-3 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white underline underline-offset-4 print:hidden'
+                                className='inline-flex items-center gap-1 text-sm font-semibold mt-3 text-accent hover:opacity-80 dark:text-darkFocus underline underline-offset-4 print:hidden'
                             >
                                 케이스 스터디 자세히 보기
                                 <ArrowRight className='h-3.5 w-3.5' aria-hidden />
@@ -173,9 +173,9 @@ export default function ResumePage() {
                             target='_blank'
                             rel='noopener noreferrer'
                             aria-label={`${label} 열기 (PDF)`}
-                            className='inline-flex items-center gap-2 text-sm text-gray-600 dark:text-white/80 hover:underline'
+                            className='inline-flex items-center gap-2 text-sm text-sub dark:text-darkSub hover:underline'
                         >
-                            <FileText className='h-4 w-4 text-gray-500 dark:text-gray-400' strokeWidth={1.5} aria-hidden />
+                            <FileText className='h-4 w-4 text-sub dark:text-darkSub' strokeWidth={1.5} aria-hidden />
                             {label}
                             <ArrowUpRight className='h-3.5 w-3.5' aria-hidden />
                         </a>
@@ -185,9 +185,9 @@ export default function ResumePage() {
 
             <SectionTitle>경력</SectionTitle>
             <section className='mt-4'>
-                <h3 className='text-lg font-semibold text-gray-800 dark:text-white'>휴먼TSS (삼성전자 사업장 시설보안)</h3>
-                <p className='text-xs text-gray-500 dark:text-gray-400 mt-1'>2023.11 ~ 2024.11 (1년) · 졸업 유예 기간 중 근무 시작</p>
-                <p className='mt-3 text-sm text-gray-600 dark:text-white/80 leading-7'>
+                <h3 className='text-lg font-semibold text-ink dark:text-darkText'>휴먼TSS (삼성전자 사업장 시설보안)</h3>
+                <p className='text-xs text-sub dark:text-darkSub mt-1'>2023.11 ~ 2024.11 (1년) · 졸업 유예 기간 중 근무 시작</p>
+                <p className='mt-3 text-sm text-sub dark:text-darkSub leading-7'>
                     출입증 발급·출입객 관리, 보안검색(금속탐지·문서감응·엑스레이), 반입·반출 통제, 사업장 순찰, 모의훈련(무단반출·침입·화재) 대응
                 </p>
                 <ul className='mt-3 space-y-2'>
@@ -196,8 +196,8 @@ export default function ResumePage() {
                         '단독 근무가 많은 초기 환경에서 표준업무절차를 자기 언어로 재구성한 절차서를 비번에 직접 제작해 빠르게 적응, 동기·선배보다 이른 적응으로 신뢰도 있는 평가 받음',
                         '다양한 매뉴얼과 지속적으로 올라오는 공지를 빠르게 숙지해 이후 선배들이 먼저 업무를 확인하는 위치가 됨',
                     ].map((item, i) => (
-                        <li key={i} className='text-sm text-gray-600 dark:text-white/80 leading-7 flex items-start gap-2'>
-                            <span className='text-gray-400 mt-0.5'>•</span>
+                        <li key={i} className='text-sm text-sub dark:text-darkSub leading-7 flex items-start gap-2'>
+                            <span className='text-accent dark:text-darkFocus mt-0.5'>—</span>
                             <span>{item}</span>
                         </li>
                     ))}
@@ -205,7 +205,7 @@ export default function ResumePage() {
             </section>
 
             <SectionTitle>보조 경험 — 네트워크 구성</SectionTitle>
-            <p className='mt-3 text-sm text-gray-600 dark:text-white/80 leading-7'>
+            <p className='mt-3 text-sm text-sub dark:text-darkSub leading-7'>
                 기가 지원 스위치 교체로 기가인터넷 구간을 확대하고, 이후 통신사 공유기가 방마다 분할하던 분절 구조를 거실 무선
                 공유기 중심의 단일 서브넷(하나의 로컬 네트워크)으로 통합해 홈네트워크를 단계적으로 재구성
             </p>
@@ -220,8 +220,8 @@ export default function ResumePage() {
                     ['근무 조건', '24시간(3교대) 교대근무 가능 · 해외여행 결격사유 없음'],
                 ].map(([term, desc]) => (
                     <div key={term} className='sm:grid sm:grid-cols-[180px_1fr] sm:gap-4'>
-                        <dt className='text-sm font-semibold text-gray-700 dark:text-white'>{term}</dt>
-                        <dd className='mt-1 sm:mt-0 text-sm text-gray-600 dark:text-white/80 leading-7'>{desc}</dd>
+                        <dt className='text-sm font-semibold text-ink dark:text-darkText'>{term}</dt>
+                        <dd className='mt-1 sm:mt-0 text-sm text-sub dark:text-darkSub leading-7'>{desc}</dd>
                     </div>
                 ))}
             </dl>
