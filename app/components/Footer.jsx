@@ -17,8 +17,8 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className='text-center sm:flex items-center justify-between border-t border-gray-400 mx-[10%] mt-12 py-6'>
-        <p> © {new Date().getFullYear()} Yunsung Kim. All rights reserved.</p>
+      <div className='text-center sm:flex items-center justify-between border-t border-line dark:border-darkBorder mx-[10%] mt-12 py-6'>
+        <p className='font-mono text-sm text-inkMuted dark:text-darkMuted'> © {new Date().getFullYear()} Yunsung Kim. All rights reserved.</p>
         <ul className='flex items-center gap-10 justify-center mt-4 sm:mt-0'>
             <li><a target='_blank' rel='noopener noreferrer' href='https://github.com/kys980819' aria-label='GitHub 열기(새 탭)'>GitHub</a></li>
             <li><a target='_blank' rel='noopener noreferrer' href='https://velog.io/@kys980819' aria-label='블로그 열기(새 탭)'>Blog</a></li>

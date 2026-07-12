@@ -43,15 +43,17 @@ const skillsData = [
 const Skills = () => {
   return (
     <div id='skills' className='w-full px-[12%] py-10 scroll-mt-20'>
-      <h2 className='text-center text-5xl'>Skills</h2>
+      <h2 className='text-center text-3xl font-bold'>Skills</h2>
 
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mt-12'>
         {skillsData.map((group, index) => (
-          <div key={index} className='border border-gray-400 rounded-xl p-6 dark:border-darkBorder'>
-            <h3 className='font-semibold text-gray-800 dark:text-white mb-3'>{group.category}</h3>
-            <div className='flex flex-wrap gap-2'>
+          <div key={index} className='rounded-lg border border-line bg-panel overflow-hidden dark:border-darkBorder dark:bg-darkSurface'>
+            <div className='border-b border-line px-5 py-3 dark:border-darkBorder'>
+              <h3 className='font-mono text-xs font-bold uppercase tracking-[0.12em] text-ink dark:text-darkText'>{group.category}</h3>
+            </div>
+            <div className='flex flex-wrap gap-2 px-5 py-4'>
               {group.skills.map((skill, i) => (
-                <span key={i} className='text-sm px-3 py-1 rounded-full bg-gray-100 text-gray-700 dark:bg-darkSurface dark:text-gray-300'>
+                <span key={i} className='text-sm px-2.5 py-1 rounded bg-pageBg text-ink/90 border border-line dark:bg-darkTheme dark:text-darkText/90 dark:border-darkBorder'>
                   {skill}
                 </span>
               ))}
