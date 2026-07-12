@@ -12,7 +12,7 @@ const sectionIcons = { Target, ServerCog, Filter, Bug, ShieldCheck, Wrench };
 function renderWithCode(text) {
     return text.split(/(`[^`]+`)/g).map((part, i) =>
         part.startsWith('`') && part.endsWith('`') ? (
-            <code key={i} className='font-mono text-[13px] bg-gray-100 dark:bg-darkSurface px-1.5 py-0.5 rounded'>
+            <code key={i} className='font-mono text-[13px] bg-pageBg border border-line dark:border-darkBorder dark:bg-darkSurface px-1.5 py-0.5 rounded'>
                 {part.slice(1, -1)}
             </code>
         ) : (
@@ -50,31 +50,36 @@ export default async function CaseStudyPage({ params }) {
     return (
         <>
         <Navbar />
-        <main className='px-[8%] md:px-[12%] pt-28 pb-20 max-w-4xl mx-auto min-h-screen dark:bg-darkTheme dark:text-white'>
+        <main className='px-[8%] md:px-[12%] pt-28 pb-20 max-w-4xl mx-auto min-h-screen dark:text-darkText'>
             <Link
                 href='/#projects'
-                className='inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white'
+                className='inline-flex items-center gap-1 text-sm text-inkMuted hover:text-ink dark:text-darkMuted dark:hover:text-darkText'
             >
                 ← 프로젝트 목록으로
             </Link>
 
-            <h1 className='font-Ovo text-3xl md:text-4xl mt-6 leading-snug'>{study.title}</h1>
+            <h1 className='text-3xl md:text-4xl font-bold mt-6 leading-snug'>{study.title}</h1>
 
-            <div className='mt-6 rounded-xl border border-gray-200 dark:border-darkBorder bg-gray-50 dark:bg-darkSurface/40 p-6'>
-                <p className='text-base md:text-lg text-gray-700 dark:text-white/90 leading-relaxed'>{study.summary}</p>
+            <div className='mt-6 rounded-lg border border-line dark:border-darkBorder bg-panel dark:bg-darkSurface overflow-hidden'>
+                <div className='flex items-center justify-between border-b border-line px-6 py-3 dark:border-darkBorder'>
+                    <span className='font-mono text-xs font-bold uppercase tracking-[0.15em] text-inkMuted dark:text-darkMuted'>Case Study</span>
+                    <span className='rounded bg-ok-soft px-2 py-0.5 font-mono text-[11px] font-bold tracking-wider text-ok dark:bg-emerald-900/45 dark:text-emerald-300'>VERIFIED</span>
+                </div>
+                <div className='p-6'>
+                <p className='text-base md:text-lg text-ink dark:text-darkText/90 leading-relaxed'>{study.summary}</p>
 
                 {study.period && (
-                    <p className='text-sm text-gray-500 dark:text-gray-400 mt-3'>기간: {study.period}</p>
+                    <p className='font-mono text-sm text-inkMuted dark:text-darkMuted mt-3'>기간: {study.period}</p>
                 )}
 
                 {study.techStack && study.techStack.length > 0 && (
                     <div className='mt-4'>
-                        <p className='text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2'>기술 스택</p>
+                        <p className='font-mono text-xs font-bold uppercase tracking-[0.12em] text-inkMuted dark:text-darkMuted mb-2'>기술 스택</p>
                         <div className='flex flex-wrap gap-1.5'>
                             {study.techStack.map((tech, i) => (
                                 <span
                                     key={i}
-                                    className='text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 dark:bg-darkSurface dark:text-gray-300'
+                                    className='text-xs px-2 py-0.5 rounded bg-pageBg text-ink/80 border border-line dark:bg-darkTheme dark:text-darkText/80 dark:border-darkBorder'
                                 >
                                     {tech}
                                 </span>
@@ -82,6 +87,7 @@ export default async function CaseStudyPage({ params }) {
                         </div>
                     </div>
                 )}
+                </div>
             </div>
 
             <nav aria-label='섹션 바로가기' className='flex flex-wrap gap-2 mt-4'>
@@ -89,7 +95,7 @@ export default async function CaseStudyPage({ params }) {
                     <a
                         key={i}
                         href={`#section-${i}`}
-                        className='text-xs px-3 py-1 rounded-full border border-gray-300 dark:border-darkBorder hover:bg-gray-50 dark:hover:bg-darkHover transition-colors'
+                        className='text-xs px-3 py-1 rounded-md border border-line bg-panel hover:bg-pageBg dark:bg-darkSurface dark:border-darkBorder dark:hover:bg-darkHover transition-colors'
                     >
                         {heading}
                     </a>
@@ -102,22 +108,22 @@ export default async function CaseStudyPage({ params }) {
                     const isCallout = variant === 'callout';
                     return (
                         <section key={i} id={`section-${i}`} className='scroll-mt-24'>
-                            <div className='border-b border-gray-200 dark:border-darkBorder pb-2'>
+                            <div className='border-b border-line dark:border-darkBorder pb-2'>
                                 <div className='flex items-center gap-2'>
                                     <span
-                                        className='flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-gray-300 dark:border-darkBorder text-xs font-semibold text-gray-500 dark:text-gray-400'
+                                        className='flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-line dark:border-darkBorder font-mono text-xs font-bold text-inkMuted dark:text-darkMuted'
                                         aria-hidden='true'
                                     >
-                                        {i + 1}
+                                        {String(i + 1).padStart(2, '0')}
                                     </span>
-                                    {Icon && <Icon className='h-4 w-4 shrink-0 text-gray-500 dark:text-gray-400' strokeWidth={1.5} aria-hidden />}
-                                    <h2 className='text-xl font-semibold text-gray-700 dark:text-white'>{heading}</h2>
+                                    {Icon && <Icon className='h-4 w-4 shrink-0 text-accent dark:text-accent-dark' strokeWidth={1.5} aria-hidden />}
+                                    <h2 className='text-xl font-bold text-ink dark:text-darkText'>{heading}</h2>
                                 </div>
                             </div>
                             <div
                                 className={
                                     isCallout
-                                        ? 'mt-3 space-y-2 p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/30'
+                                        ? 'mt-3 space-y-2 p-4 rounded-lg bg-info-soft/60 dark:bg-blue-900/20 border border-info/20 dark:border-blue-800/30'
                                         : 'mt-3 space-y-2'
                                 }
                             >
@@ -125,7 +131,7 @@ export default async function CaseStudyPage({ params }) {
                                     typeof block === 'object' && block.type === 'code' ? (
                                         <pre
                                             key={j}
-                                            className='my-3 p-4 rounded-lg overflow-x-auto text-xs leading-6 font-mono bg-gray-100 text-gray-800 dark:bg-darkSurface dark:text-gray-200 border border-gray-200 dark:border-darkBorder'
+                                            className='my-3 p-4 rounded-lg overflow-x-auto text-xs leading-6 font-mono bg-pageBg text-ink dark:bg-darkSurface dark:text-darkText border border-line dark:border-darkBorder'
                                         >
                                             <code>{block.text}</code>
                                         </pre>
@@ -134,8 +140,8 @@ export default async function CaseStudyPage({ params }) {
                                             key={j}
                                             className={
                                                 isCallout
-                                                    ? 'text-sm text-blue-600 dark:text-blue-200 leading-7'
-                                                    : 'text-gray-600 dark:text-white/80 leading-8'
+                                                    ? 'text-sm text-ink/80 dark:text-blue-200 leading-7'
+                                                    : 'text-ink/80 dark:text-darkText/80 leading-8'
                                             }
                                         >
                                             {renderWithCode(block)}
@@ -149,8 +155,8 @@ export default async function CaseStudyPage({ params }) {
             </div>
 
             {study.attachments && study.attachments.length > 0 && (
-                <div className='mt-12 pt-6 border-t border-gray-200 dark:border-darkBorder'>
-                    <p className='text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3'>증빙 문서</p>
+                <div className='mt-12 pt-6 border-t border-line dark:border-darkBorder'>
+                    <p className='font-mono text-xs font-bold uppercase tracking-[0.12em] text-inkMuted dark:text-darkMuted mb-3'>증빙 문서</p>
                     <div className='flex flex-col gap-2'>
                         {study.attachments.map(({ label, href }, i) => (
                             <a
@@ -159,9 +165,9 @@ export default async function CaseStudyPage({ params }) {
                                 target='_blank'
                                 rel='noopener noreferrer'
                                 aria-label={`${label} 열기 (PDF)`}
-                                className='inline-flex items-center gap-2 text-sm border border-gray-400 rounded-lg px-3 py-1.5 w-fit dark:border-darkBorder hover:bg-gray-50 dark:hover:bg-darkHover'
+                                className='inline-flex items-center gap-2 text-sm border border-line bg-panel rounded-md px-3 py-1.5 w-fit dark:border-darkBorder dark:bg-darkSurface hover:bg-pageBg dark:hover:bg-darkHover'
                             >
-                                <FileText className='h-4 w-4 text-gray-500 dark:text-gray-400' strokeWidth={1.5} aria-hidden />
+                                <FileText className='h-4 w-4 text-inkMuted dark:text-darkMuted' strokeWidth={1.5} aria-hidden />
                                 {label}
                                 <ArrowUpRight className='h-3.5 w-3.5' aria-hidden />
                             </a>

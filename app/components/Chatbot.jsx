@@ -87,7 +87,7 @@ export default function Chatbot({ mode = "floating" }) {
 						{mode === "floating" && (
 						<button
 							onClick={closeChat}
-							className="p-1 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 dark:hover:bg-white/10 dark:focus:ring-darkFocus"
+							className="p-1 rounded hover:bg-pageBg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-inkMuted dark:hover:bg-white/10 dark:focus:ring-darkFocus"
 							aria-label="챗봇 닫기"
 							title="닫기"
 						>
