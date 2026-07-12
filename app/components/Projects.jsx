@@ -1,5 +1,6 @@
 import { assets, serviceData } from '@/assets/assets'
 import { caseStudies } from '@/assets/caseStudies'
+import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -8,6 +9,7 @@ const Projects = () => {
   return (
     <div id='projects' className='w-full px-[12%] py-10 scroll-mt-20'>
         <h2 className='text-center text-3xl font-bold'> MY Projects </h2>
+        <span className='mx-auto mt-3 block h-1 w-10 rounded-full bg-accent dark:bg-accent-dark' aria-hidden='true'></span>
 
             <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mt-12 mb-10 max-w-5xl mx-auto'>
                 {serviceData.map(({slug, title, description, period, techStack, highlights, troubleshooting, link, attachments}, index)=>{
@@ -86,18 +88,18 @@ const Projects = () => {
                         {link && (
                             <a href={link} target="_blank" rel="noopener noreferrer"
                                 aria-label={`${title} 자세히 보기`}
-                                className='inline-flex items-center gap-2 text-sm mt-5 border border-line rounded-md px-3 py-1.5 w-fit hover:bg-pageBg dark:border-darkBorder dark:hover:bg-darkHover'>
+                                className='inline-flex items-center gap-2 text-sm mt-5 border border-accent/30 rounded-md px-3 py-1.5 w-fit font-medium text-accent hover:bg-info-soft/60 dark:border-accent-dark/40 dark:text-accent-dark dark:hover:bg-accent-dark/10'>
                                 {link.includes('velog') ? '블로그에서 보기' : '사이트 보기'}
-                                <Image src={assets.right_arrow} alt='화살표 아이콘' className='w-4'/>
+                                <ArrowUpRight className='h-4 w-4' aria-hidden />
                             </a>
                         )}
 
                         {slug && caseStudies[slug] && (
                             <Link href={`/projects/${slug}`}
                                 aria-label={`${title} 자세히 보기`}
-                                className='inline-flex items-center gap-2 text-sm mt-5 border border-line rounded-md px-3 py-1.5 w-fit hover:bg-pageBg dark:border-darkBorder dark:hover:bg-darkHover'>
+                                className='inline-flex items-center gap-2 text-sm mt-5 border border-accent/30 rounded-md px-3 py-1.5 w-fit font-medium text-accent hover:bg-info-soft/60 dark:border-accent-dark/40 dark:text-accent-dark dark:hover:bg-accent-dark/10'>
                                 자세히 보기
-                                <Image src={assets.right_arrow} alt='화살표 아이콘' className='w-4'/>
+                                <ArrowRight className='h-4 w-4' aria-hidden />
                             </Link>
                         )}
                         </div>

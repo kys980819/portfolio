@@ -17,6 +17,7 @@ const About = () => {
     <div id='about' className='w-full px-[12%] py-10 scroll-mt-20'>
       <h4 className='text-center mb-2 font-mono text-xs font-bold uppercase tracking-[0.2em] text-inkMuted dark:text-darkMuted'> Introduction </h4>
       <h2 className='text-center text-3xl font-bold'> About me </h2>
+      <span className='mx-auto mt-3 block h-1 w-10 rounded-full bg-accent dark:bg-accent-dark' aria-hidden='true'></span>
 
       <ul className='grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto mt-10'>
         {kpiTiles.map(({ label, value, unit }) => (

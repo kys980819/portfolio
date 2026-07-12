@@ -44,6 +44,7 @@ const Skills = () => {
   return (
     <div id='skills' className='w-full px-[12%] py-10 scroll-mt-20'>
       <h2 className='text-center text-3xl font-bold'>Skills</h2>
+      <span className='mx-auto mt-3 block h-1 w-10 rounded-full bg-accent dark:bg-accent-dark' aria-hidden='true'></span>
 
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mt-12'>
         {skillsData.map((group, index) => (
