@@ -95,8 +95,8 @@ export default function RootLayout({ children }) {
           `}
         </Script>
       </head>
-      <body className={`${outfit.variable} ${ovo.variable} 
-      antialiased leading-8 overflow-x-hidden dark:bg-darkTheme dark:text-white`}>
+      <body className={`${outfit.variable} ${ovo.variable}
+      antialiased leading-8 overflow-x-hidden bg-pageBg text-ink dark:bg-darkTheme dark:text-darkText print:bg-white`}>
         <ChatbotProvider>
           {children}
           <Chatbot />
