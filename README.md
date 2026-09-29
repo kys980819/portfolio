@@ -3,7 +3,7 @@
 정보보안 담당자를 목표로, 정보보안을 기반으로 개발·운영까지 아우르는
 DevSecOps를 지향하는 김윤성의 개인 포트폴리오 사이트입니다.
 
-🔗 라이브 사이트: https://kysportfolio.site
+🔗 라이브 사이트: https://kimys.site
 
 ## 기술 스택
 - **Frontend**: Next.js 15 (App Router), React 19, Tailwind CSS

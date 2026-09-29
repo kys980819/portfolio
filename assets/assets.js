@@ -102,7 +102,7 @@ export const serviceData = [
             'Claude Code 기반 보안 점검: /api/sendMessage 요청 속도 제한(rate limit) 적용, 의존성 취약점 정리, /api/health 정보 노출 축소',
         ],
         troubleshooting: 'Flask 백엔드 → Next.js API 라우트로 마이그레이션하여 프론트·백엔드를 단일 프로젝트로 통합. 배포 구조 단순화.',
-        link: 'https://kysportfolio.site'
+        link: 'https://kimys.site'
     },
     {
         icon: assets.code_icon,

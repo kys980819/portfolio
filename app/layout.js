@@ -16,7 +16,7 @@ const ovo = Ovo({
 });
 
 export const metadata = {
-  metadataBase: new URL('https://kysportfolio.site'),
+  metadataBase: new URL('https://kimys.site'),
   title: {
     default: "KYS Portfolio",
     template: "%s | KYS Portfolio",
@@ -41,7 +41,7 @@ export const metadata = {
   openGraph: {
     title: "KYS Portfolio",
     description: "정보보안 담당자를 목표로, DevSecOps를 지향하는 김윤성의 포트폴리오",
-    url: "https://kysportfolio.site",
+    url: "https://kimys.site",
     siteName: "KYS Portfolio",
     images: [
       {
