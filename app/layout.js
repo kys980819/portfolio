@@ -1,5 +1,6 @@
 import { Outfit, Ovo } from "next/font/google";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Chatbot from "./components/Chatbot";
 import { ChatbotProvider } from "./components/ChatbotProvider";
@@ -60,10 +61,26 @@ export const metadata = {
   },
 };
 
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "김윤성",
+  url: "https://kimys.site",
+  description: metadata.description,
+  sameAs: [
+    "https://github.com/kys980819",
+    "https://velog.io/@kys980819",
+  ],
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="ko" className="scroll-smooth">
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <Script id="theme-init" strategy="beforeInteractive">
           {`
           (function() {
@@ -78,12 +95,13 @@ export default function RootLayout({ children }) {
           `}
         </Script>
       </head>
-      <body className={`${outfit.variable} ${ovo.variable} 
-      antialiased leading-8 overflow-x-hidden dark:bg-darkTheme dark:text-white`}>
+      <body className={`${outfit.variable} ${ovo.variable}
+      antialiased leading-8 overflow-x-hidden bg-pageBg text-ink dark:bg-darkTheme dark:text-darkText print:bg-white`}>
         <ChatbotProvider>
           {children}
           <Chatbot />
         </ChatbotProvider>
+        <Analytics />
       </body>
     </html>
   );

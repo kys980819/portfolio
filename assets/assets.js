@@ -70,6 +70,7 @@ export const assets = {
 export const serviceData = [
     {
         icon: assets.code_icon,
+        slug: 'snort-ids-cean-agenttesla',
         title: 'Snort IDS 탐지 환경 구축 + 악성코드 분석 (CEaN.exe / 정보탈취형)',
         description: 'VMware 격리 환경에 Snort 기반 IDS를 직접 구축하고, 정보탈취형 악성코드를 분석해 IOC 기반 탐지 룰을 작성·검증한 메인 프로젝트',
         period: '2026.05.11 ~ 2026.06.05',

@@ -5,22 +5,22 @@ export const learningLogMeta = {
   period: '2025.09 ~ 현재',
 }
 
-// 카테고리별 스타일 (Tailwind 클래스)
+// 카테고리별 스타일 (Tailwind 클래스) — C안 상태 칩 팔레트 기준
 export const categoryStyles = {
   Security: {
-    badge: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/45 dark:text-emerald-200',
+    badge: 'bg-ok-soft text-ok dark:bg-emerald-900/45 dark:text-emerald-300',
     accent: 'hover:border-emerald-400 dark:hover:border-emerald-500/60',
   },
   Certification: {
-    badge: 'bg-amber-300 text-amber-900 dark:bg-amber-800/70 dark:text-amber-50',
+    badge: 'bg-warn-soft text-warn dark:bg-amber-900/45 dark:text-amber-300',
     accent: 'hover:border-amber-400 dark:hover:border-amber-500/60',
   },
   'Hands-on': {
-    badge: 'bg-blue-100 text-blue-800 dark:bg-blue-900/45 dark:text-blue-200',
+    badge: 'bg-info-soft text-info dark:bg-blue-900/45 dark:text-blue-300',
     accent: 'hover:border-blue-400 dark:hover:border-blue-500/60',
   },
   Foundation: {
-    badge: 'bg-slate-300 text-slate-800 dark:bg-slate-600/70 dark:text-slate-50',
+    badge: 'bg-slate-200 text-slate-700 dark:bg-slate-600/60 dark:text-slate-200',
     accent: 'hover:border-slate-400 dark:hover:border-slate-500/60',
   },
 }
