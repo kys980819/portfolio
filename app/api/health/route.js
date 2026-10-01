@@ -1,15 +1,15 @@
 import { NextResponse } from 'next/server';
-import OpenAI from 'openai';
+import { GoogleGenAI } from '@google/genai';
 import { MongoClient } from 'mongodb';
 
 export const runtime = 'nodejs';
 
 // 각 서비스 상태 확인 — 가장 가벼운 호출만 사용, try/catch로 개별 격리
 
-async function checkOpenAI(openaiClient) {
-  if (!openaiClient) return "error";
+async function checkGemini(geminiClient) {
+  if (!geminiClient) return "error";
   try {
-    await openaiClient.models.list();
+    await geminiClient.models.get({ model: process.env.GEMINI_MODEL?.trim() || 'gemini-3.8-flash' });
     return "ok";
   } catch {
     return "error";
@@ -42,11 +42,11 @@ async function checkTelegram() {
   }
 }
 
-async function checkVectorStore(openaiClient) {
-  const ids = (process.env.VECTOR_STORE_IDS || '').split(',').map(id => id.trim()).filter(Boolean);
-  if (!openaiClient || !ids.length) return "error";
+async function checkFileSearch(geminiClient) {
+  const names = (process.env.GEMINI_FILE_SEARCH_STORE_NAMES || '').split(',').map(name => name.trim()).filter(Boolean);
+  if (!geminiClient || !names.length) return "error";
   try {
-    await openaiClient.vectorStores.retrieve(ids[0]);
+    await Promise.all(names.map(name => geminiClient.fileSearchStores.get({ name })));
     return "ok";
   } catch {
     return "error";
@@ -63,18 +63,18 @@ export async function GET(request) {
     return NextResponse.json({ ok: true });
   }
 
-  const apiKey = process.env.OPENAI_API_KEY?.trim();
-  const openaiClient = apiKey ? new OpenAI({ apiKey, timeout: 10000 }) : null;
+  const apiKey = process.env.GEMINI_API_KEY?.trim();
+  const geminiClient = apiKey ? new GoogleGenAI({ apiKey, httpOptions: { timeout: 10000 } }) : null;
 
-  const [openai, mongo, telegram, vectorStore] = await Promise.all([
-    checkOpenAI(openaiClient),
+  const [gemini, mongo, telegram, fileSearch] = await Promise.all([
+    checkGemini(geminiClient),
     checkMongo(),
     checkTelegram(),
-    checkVectorStore(openaiClient)
+    checkFileSearch(geminiClient)
   ]);
 
   return NextResponse.json({
     ok: true,
-    services: { openai, mongo, telegram, vectorStore }
+    services: { gemini, mongo, telegram, fileSearch }
   });
 }
