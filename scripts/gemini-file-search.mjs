@@ -1,7 +1,7 @@
 import { GoogleGenAI } from '@google/genai';
 import { createHash } from 'node:crypto';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
-import { resolve, dirname, basename } from 'node:path';
+import { resolve, dirname, basename, extname } from 'node:path';
 
 // 명시한 원본만 등록. 키는 환경변수에서 가져오고 결과 파일에 저장하지 않음.
 const manifestPath = process.argv[2];
@@ -54,9 +54,16 @@ async function main() {
     let operation = entry.operation;
     if (!operation) {
       operation = await ai.fileSearchStores.uploadToFileSearchStore({
-        file: file.path,
+        // ASCII 전송 이름을 사용해 한글 파일명의 HTTP 헤더 오류를 방지
+        file: extname(file.path).toLowerCase() === '.md'
+          ? new File([await readFile(file.path)], `${file.sha256}.md`, { type: 'text/markdown' })
+          : file.path,
         fileSearchStoreName: state.storeName,
-        config: { displayName: basename(file.path), customMetadata: [{ key: 'sha256', stringValue: file.sha256 }] }
+        config: {
+          displayName: basename(file.path),
+          ...(extname(file.path).toLowerCase() === '.md' ? { mimeType: 'text/markdown' } : {}),
+          customMetadata: [{ key: 'sha256', stringValue: file.sha256 }]
+        }
       });
       entry.operation = operation;
       await save();
