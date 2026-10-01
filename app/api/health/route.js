@@ -9,7 +9,7 @@ export const runtime = 'nodejs';
 async function checkGemini(geminiClient) {
   if (!geminiClient) return "error";
   try {
-    await geminiClient.models.get({ model: process.env.GEMINI_MODEL?.trim() || 'gemini-3.8-flash' });
+    await geminiClient.models.get({ model: process.env.GEMINI_MODEL?.trim() || 'gemini-3.5-flash-lite' });
     return "ok";
   } catch {
     return "error";

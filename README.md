@@ -8,7 +8,7 @@ DevSecOps를 지향하는 김윤성의 개인 포트폴리오 사이트입니다
 ## 기술 스택
 - **Frontend**: Next.js 15 (App Router), React 19, Tailwind CSS
 - **Backend**: Next.js Route Handlers (Node.js runtime)
-- **AI 챗봇**: Gemini 3.8 Flash + Interactions API + File Search (RAG)
+- **AI 챗봇**: Gemini 3.5 Flash-Lite + Interactions API + File Search (RAG)
 - **Database**: MongoDB (대화 로그)
 - **알림**: Telegram Bot API
 - **배포**: Vercel
@@ -36,7 +36,8 @@ npm run dev
 `.env.local`에 다음 환경변수 필요 (값은 비공개):
 `GEMINI_API_KEY`, `GEMINI_FILE_SEARCH_STORE_NAMES`, `MONGO_URI`, `MONGO_DB`, `MONGO_COLLECTION`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`
 
-모델 기본값은 `gemini-3.8-flash`이며 `GEMINI_MODEL`로 설정할 수 있습니다.
+모델 기본값은 `gemini-3.5-flash-lite`이며 `GEMINI_MODEL`로 설정할 수 있습니다.
+3.8 Flash의 실제 요청이 503·시간 초과로 실패해 사용자 결정으로 Lite로 전환했습니다.
 `GEMINI_TIMEOUT`은 초 단위(기본 30초), `MAX_OUTPUT_TOKENS`는 출력 토큰 상한(기본 1000)입니다.
 기존 `CHAT_*` 제한과 `HEALTH_CHECK_SECRET` 설정은 유지합니다.
 

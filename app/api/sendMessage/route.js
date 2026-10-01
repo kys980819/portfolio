@@ -11,7 +11,7 @@ const mongoDbName = process.env.MONGO_DB;
 const mongoCollectionName = process.env.MONGO_COLLECTION;
 const fileSearchStoreNames = (process.env.GEMINI_FILE_SEARCH_STORE_NAMES || '')
   .split(',').map(name => name.trim()).filter(Boolean);
-const geminiModel = process.env.GEMINI_MODEL?.trim() || 'gemini-3.8-flash';
+const geminiModel = process.env.GEMINI_MODEL?.trim() || 'gemini-3.5-flash-lite';
 const maxOutputTokens = parseInt(process.env.MAX_OUTPUT_TOKENS || '1000');
 const geminiTimeout = parseInt(process.env.GEMINI_TIMEOUT || '30') * 1000; // ms로 변환
 
