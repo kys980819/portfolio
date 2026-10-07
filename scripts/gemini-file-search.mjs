@@ -53,15 +53,18 @@ async function main() {
     }
     let operation = entry.operation;
     if (!operation) {
+      const extension = extname(file.path).toLowerCase();
+      const mimeType = extension === '.md' ? 'text/markdown'
+        : extension === '.pdf' ? 'application/pdf' : undefined;
       operation = await ai.fileSearchStores.uploadToFileSearchStore({
-        // ASCII 전송 이름을 사용해 한글 파일명의 HTTP 헤더 오류를 방지
-        file: extname(file.path).toLowerCase() === '.md'
-          ? new File([await readFile(file.path)], `${file.sha256}.md`, { type: 'text/markdown' })
+        // 한글 파일명의 HTTP 헤더 오류를 피하고 원래 이름은 displayName에 보존
+        file: mimeType
+          ? new File([await readFile(file.path)], `${file.sha256}${extension}`, { type: mimeType })
           : file.path,
         fileSearchStoreName: state.storeName,
         config: {
           displayName: basename(file.path),
-          ...(extname(file.path).toLowerCase() === '.md' ? { mimeType: 'text/markdown' } : {}),
+          ...(mimeType ? { mimeType } : {}),
           customMetadata: [{ key: 'sha256', stringValue: file.sha256 }]
         }
       });
