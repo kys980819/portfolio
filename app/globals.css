@@ -1,17 +1,65 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.js";
 
-* {
-  font-family: Outfit, sans-serif;
+/* 사용 중인 기본 팔레트 색을 Tailwind 3 값으로 고정 (v4 기본 팔레트는 색감이 조금 다름) */
+@theme {
+  --color-amber-300: #fcd34d;
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+  --color-amber-900: #78350f;
+  --color-blue-200: #bfdbfe;
+  --color-blue-300: #93c5fd;
+  --color-blue-400: #60a5fa;
+  --color-blue-500: #3b82f6;
+  --color-blue-800: #1e40af;
+  --color-blue-900: #1e3a8a;
+  --color-emerald-300: #6ee7b7;
+  --color-emerald-400: #34d399;
+  --color-emerald-500: #10b981;
+  --color-emerald-900: #064e3b;
+  --color-gray-200: #e5e7eb;
+  --color-gray-400: #9ca3af;
+  --color-slate-200: #e2e8f0;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
 }
 
-html {
-  scroll-behavior: smooth;
+/* Tailwind 3 기본값 유지 (v4에서 바뀐 기본 스타일 되돌림) */
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-gray-400);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
 }
 
-body {
-  word-break: keep-all;
+/* v4에서는 레이어 밖 규칙이 유틸리티(font-mono 등)를 이기므로 base 레이어에 둔다 */
+@layer base {
+  * {
+    font-family: Outfit, sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    word-break: keep-all;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

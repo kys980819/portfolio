@@ -23,12 +23,12 @@ const Projects = () => {
                                 CASE {String(index + 1).padStart(2, '0')}
                             </span>
                             {hasProof && (
-                                <span className='rounded bg-ok-soft px-2 py-0.5 font-mono text-[11px] font-bold tracking-wider text-ok dark:bg-emerald-900/45 dark:text-emerald-300'>
+                                <span className='rounded-sm bg-ok-soft px-2 py-0.5 font-mono text-[11px] font-bold tracking-wider text-ok dark:bg-emerald-900/45 dark:text-emerald-300'>
                                     VERIFIED
                                 </span>
                             )}
                             {!hasProof && inProgress && (
-                                <span className='rounded bg-warn-soft px-2 py-0.5 font-mono text-[11px] font-bold tracking-wider text-warn dark:bg-amber-900/45 dark:text-amber-300'>
+                                <span className='rounded-sm bg-warn-soft px-2 py-0.5 font-mono text-[11px] font-bold tracking-wider text-warn dark:bg-amber-900/45 dark:text-amber-300'>
                                     IN PROGRESS
                                 </span>
                             )}
@@ -44,7 +44,7 @@ const Projects = () => {
                         {techStack && techStack.length > 0 && (
                             <div className='flex flex-wrap gap-1.5 mt-3'>
                                 {techStack.map((tech, i) => (
-                                    <span key={i} className='text-xs px-2 py-0.5 rounded bg-pageBg text-ink/80 border border-line dark:bg-darkTheme dark:text-darkText/80 dark:border-darkBorder'>
+                                    <span key={i} className='text-xs px-2 py-0.5 rounded-sm bg-pageBg text-ink/80 border border-line dark:bg-darkTheme dark:text-darkText/80 dark:border-darkBorder'>
                                         {tech}
                                     </span>
                                 ))}

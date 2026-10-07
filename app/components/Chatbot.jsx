@@ -51,7 +51,7 @@ export default function Chatbot({ mode = "floating" }) {
 					aria-controls="chatbot-panel-floating"
 					aria-label={isOpen ? "챗봇 닫기" : "챗봇 열기"}
 					title={isOpen ? "닫기" : "챗봇 열기"}
-					className="fixed right-4 bottom-4 z-50 rounded-full bg-accent text-white shadow-lg transition hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent w-14 h-14 flex items-center justify-center dark:bg-accent-dark dark:text-darkTheme dark:focus:ring-accent-dark"
+					className="fixed right-4 bottom-4 z-50 rounded-full bg-accent text-white shadow-lg transition hover:opacity-90 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-accent w-14 h-14 flex items-center justify-center dark:bg-accent-dark dark:text-darkTheme dark:focus:ring-accent-dark"
 				>
 					<span className="sr-only">Chatbot</span>
 					{/* 간단한 말풍선 아이콘 */}
@@ -87,7 +87,7 @@ export default function Chatbot({ mode = "floating" }) {
 						{mode === "floating" && (
 						<button
 							onClick={closeChat}
-							className="p-1 rounded hover:bg-pageBg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-inkMuted dark:hover:bg-white/10 dark:focus:ring-darkFocus"
+							className="p-1 rounded-sm hover:bg-pageBg focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-inkMuted dark:hover:bg-white/10 dark:focus:ring-darkFocus"
 							aria-label="챗봇 닫기"
 							title="닫기"
 						>
@@ -134,7 +134,7 @@ export default function Chatbot({ mode = "floating" }) {
 								<button
 									key={q}
 									onClick={() => sendMessage(q)}
-									className="rounded-md border border-line bg-panel px-3 py-1 text-xs text-ink shadow-sm hover:bg-pageBg dark:border-darkBorder dark:bg-darkTheme dark:text-darkText dark:hover:bg-white/10"
+									className="rounded-md border border-line bg-panel px-3 py-1 text-xs text-ink shadow-xs hover:bg-pageBg dark:border-darkBorder dark:bg-darkTheme dark:text-darkText dark:hover:bg-white/10"
 								>
 									{q}
 								</button>
@@ -145,9 +145,9 @@ export default function Chatbot({ mode = "floating" }) {
 					{/* 인풋 바로 위: 이전 대화 복원 안내 배너 (페이지 로드 시 복원된 경우에만, X로 이번 방문 동안 숨김 가능) */}
 					{hasSavedHistory && !isBannerDismissed && (
 						<div className="px-4 pb-2 text-center">
-							<div className="inline-flex items-center gap-2 rounded-md border border-line bg-panel dark:bg-darkTheme dark:border-darkBorder shadow px-3 py-1 text-sm">
+							<div className="inline-flex items-center gap-2 rounded-md border border-line bg-panel dark:bg-darkTheme dark:border-darkBorder shadow-sm px-3 py-1 text-sm">
 								<span className="text-ink dark:text-darkText">이전 대화가 로드되었습니다.</span>
-								<button onClick={resetConversation} className="rounded bg-pageBg dark:bg-darkHover text-ink dark:text-darkText px-3 py-0.5 text-xs">새로 시작</button>
+								<button onClick={resetConversation} className="rounded-sm bg-pageBg dark:bg-darkHover text-ink dark:text-darkText px-3 py-0.5 text-xs">새로 시작</button>
 								<button onClick={dismissBanner} className="rounded-full p-0.5 text-inkMuted hover:text-ink dark:text-darkMuted dark:hover:text-darkText" aria-label="안내 닫기" title="안내 닫기">
 									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path d="M6 6l12 12M6 18L18 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
@@ -167,7 +167,7 @@ export default function Chatbot({ mode = "floating" }) {
 								onChange={(e) => handleInputChange(e.target.value)}
 								maxLength={1000}
 								placeholder="메시지를 입력하세요..."
-								className="flex-1 rounded-md border border-line px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent dark:bg-transparent dark:text-darkText dark:placeholder-white/50 dark:border-darkBorder dark:focus:ring-darkFocus"
+								className="flex-1 rounded-md border border-line px-3 py-2 text-sm focus:outline-hidden focus:ring-2 focus:ring-accent dark:bg-transparent dark:text-darkText dark:placeholder-white/50 dark:border-darkBorder dark:focus:ring-darkFocus"
 								disabled={isLoading}
 							/>
 							<button

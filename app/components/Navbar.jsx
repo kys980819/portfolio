@@ -52,7 +52,7 @@ const Navbar = () => {
     <>
       <nav className={`w-full fixed top-0 px-5 lg:px-8 xl:px-[8%] py-3
       flex items-center justify-between z-50 bg-panel border-b border-line
-      dark:bg-darkSurface dark:border-darkBorder ${isScroll ? "shadow-sm" : ""}`}>
+      dark:bg-darkSurface dark:border-darkBorder ${isScroll ? "shadow-xs" : ""}`}>
         <a href='/#top' aria-label="홈으로 이동">
           <Image src={isDark ? assets.logo_dark : assets.logo} alt="KYS Portfolio 로고" className='w-28 cursor-pointer mr-14'/>
         </a>

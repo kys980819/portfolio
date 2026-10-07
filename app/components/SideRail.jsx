@@ -38,7 +38,7 @@ const SideRail = () => {
     <nav
       aria-label='섹션 바로가기 레일'
       className='hidden lg:flex fixed left-5 top-1/2 -translate-y-1/2 z-40 flex-col gap-1.5
-      rounded-lg border border-line bg-panel p-1.5 shadow-sm dark:border-darkBorder dark:bg-darkSurface'
+      rounded-lg border border-line bg-panel p-1.5 shadow-xs dark:border-darkBorder dark:bg-darkSurface'
     >
       {railItems.map(({ id, no, label }) => (
         <a

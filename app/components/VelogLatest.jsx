@@ -43,7 +43,7 @@ const VelogLatest = async () => {
     <div className='max-w-5xl mx-auto mt-2 rounded-lg border border-line bg-panel overflow-hidden dark:border-darkBorder dark:bg-darkSurface'>
       <div className='flex items-center justify-between border-b border-line px-5 py-3 dark:border-darkBorder'>
         <p className='font-mono text-xs font-bold uppercase tracking-[0.15em] text-inkMuted dark:text-darkMuted'>최신 글</p>
-        <span className='rounded bg-info-soft px-2 py-0.5 font-mono text-[11px] font-bold tracking-wider text-info dark:bg-blue-900/45 dark:text-blue-300'>
+        <span className='rounded-sm bg-info-soft px-2 py-0.5 font-mono text-[11px] font-bold tracking-wider text-info dark:bg-blue-900/45 dark:text-blue-300'>
           LIVE
         </span>
       </div>

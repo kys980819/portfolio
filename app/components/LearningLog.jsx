@@ -51,7 +51,7 @@ const LearningLog = () => {
         <div className='mt-2 flex flex-wrap justify-center gap-x-4 gap-y-1 font-mono text-[11px] text-inkMuted dark:text-darkMuted' aria-hidden='true'>
           {Object.entries(categoryCounts).map(([category, count]) => (
             <span key={category} className='inline-flex items-center gap-1.5'>
-              <span className={`inline-block h-2 w-2 rounded-sm ${categoryBarColors[category] || 'bg-slate-400'}`}></span>
+              <span className={`inline-block h-2 w-2 rounded-xs ${categoryBarColors[category] || 'bg-slate-400'}`}></span>
               {category} {count}
             </span>
           ))}
@@ -73,7 +73,7 @@ const LearningLog = () => {
             <div className='flex items-start justify-between mb-4'>
               <span
                 className={
-                  'inline-flex rounded px-2 py-0.5 font-mono text-[11px] font-bold uppercase tracking-wider ' +
+                  'inline-flex rounded-sm px-2 py-0.5 font-mono text-[11px] font-bold uppercase tracking-wider ' +
                   categoryStyles[series.category].badge
                 }
               >

@@ -54,7 +54,7 @@ const Skills = () => {
             </div>
             <div className='flex flex-wrap gap-2 px-5 py-4'>
               {group.skills.map((skill, i) => (
-                <span key={i} className='text-sm px-2.5 py-1 rounded bg-pageBg text-ink/90 border border-line dark:bg-darkTheme dark:text-darkText/90 dark:border-darkBorder'>
+                <span key={i} className='text-sm px-2.5 py-1 rounded-sm bg-pageBg text-ink/90 border border-line dark:bg-darkTheme dark:text-darkText/90 dark:border-darkBorder'>
                   {skill}
                 </span>
               ))}

@@ -116,13 +116,13 @@ const About = () => {
             <ul className='px-5 py-4 space-y-4'>
               <li className='flex flex-wrap items-center gap-2'>
                 <span className='font-medium text-ink dark:text-darkText'>리눅스마스터 2급</span>
-                <span className='inline-flex rounded bg-ok-soft px-2 py-0.5 font-mono text-xs font-bold text-ok dark:bg-emerald-900/45 dark:text-emerald-300'>
+                <span className='inline-flex rounded-sm bg-ok-soft px-2 py-0.5 font-mono text-xs font-bold text-ok dark:bg-emerald-900/45 dark:text-emerald-300'>
                   2025.12
                 </span>
               </li>
               <li className='flex flex-wrap items-center gap-2'>
                 <span className='font-medium text-ink dark:text-darkText'>정보처리기사 필기</span>
-                <span className='inline-flex rounded bg-info-soft px-2 py-0.5 font-mono text-xs font-bold text-info dark:bg-blue-900/45 dark:text-blue-300'>
+                <span className='inline-flex rounded-sm bg-info-soft px-2 py-0.5 font-mono text-xs font-bold text-info dark:bg-blue-900/45 dark:text-blue-300'>
                   2026.03
                 </span>
               </li>

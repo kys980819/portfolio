@@ -12,7 +12,7 @@ const sectionIcons = { Target, ServerCog, Filter, Bug, ShieldCheck, Wrench };
 function renderWithCode(text) {
     return text.split(/(`[^`]+`)/g).map((part, i) =>
         part.startsWith('`') && part.endsWith('`') ? (
-            <code key={i} className='font-mono text-[13px] bg-pageBg border border-line dark:border-darkBorder dark:bg-darkSurface px-1.5 py-0.5 rounded'>
+            <code key={i} className='font-mono text-[13px] bg-pageBg border border-line dark:border-darkBorder dark:bg-darkSurface px-1.5 py-0.5 rounded-sm'>
                 {part.slice(1, -1)}
             </code>
         ) : (
@@ -58,15 +58,15 @@ export default async function CaseStudyPage({ params }) {
                 ← 프로젝트 목록으로
             </Link>
 
-            <h1 className='text-3xl md:text-4xl font-bold mt-6 leading-snug'>{study.title}</h1>
+            <h1 className='text-3xl md:text-4xl font-bold mt-6 leading-snug md:leading-10'>{study.title}</h1>
 
             <div className='mt-6 rounded-lg border border-line dark:border-darkBorder bg-panel dark:bg-darkSurface overflow-hidden'>
                 <div className='flex items-center justify-between border-b border-line px-6 py-3 dark:border-darkBorder'>
                     <span className='font-mono text-xs font-bold uppercase tracking-[0.15em] text-inkMuted dark:text-darkMuted'>Case Study</span>
-                    <span className='rounded bg-ok-soft px-2 py-0.5 font-mono text-[11px] font-bold tracking-wider text-ok dark:bg-emerald-900/45 dark:text-emerald-300'>VERIFIED</span>
+                    <span className='rounded-sm bg-ok-soft px-2 py-0.5 font-mono text-[11px] font-bold tracking-wider text-ok dark:bg-emerald-900/45 dark:text-emerald-300'>VERIFIED</span>
                 </div>
                 <div className='p-6'>
-                <p className='text-base md:text-lg text-ink dark:text-darkText/90 leading-relaxed'>{study.summary}</p>
+                <p className='text-base md:text-lg text-ink dark:text-darkText/90 leading-relaxed md:leading-7'>{study.summary}</p>
 
                 {study.period && (
                     <p className='font-mono text-sm text-inkMuted dark:text-darkMuted mt-3'>기간: {study.period}</p>
@@ -79,7 +79,7 @@ export default async function CaseStudyPage({ params }) {
                             {study.techStack.map((tech, i) => (
                                 <span
                                     key={i}
-                                    className='text-xs px-2 py-0.5 rounded bg-pageBg text-ink/80 border border-line dark:bg-darkTheme dark:text-darkText/80 dark:border-darkBorder'
+                                    className='text-xs px-2 py-0.5 rounded-sm bg-pageBg text-ink/80 border border-line dark:bg-darkTheme dark:text-darkText/80 dark:border-darkBorder'
                                 >
                                     {tech}
                                 </span>
@@ -131,7 +131,7 @@ export default async function CaseStudyPage({ params }) {
                                     typeof block === 'object' && block.type === 'code' ? (
                                         <pre
                                             key={j}
-                                            className='my-3 p-4 rounded-lg overflow-x-auto text-xs leading-6 font-mono bg-pageBg text-ink dark:bg-darkSurface dark:text-darkText border border-line dark:border-darkBorder'
+                                            className='p-4 rounded-lg overflow-x-auto text-xs leading-6 font-mono bg-pageBg text-ink dark:bg-darkSurface dark:text-darkText border border-line dark:border-darkBorder'
                                         >
                                             <code>{block.text}</code>
                                         </pre>
