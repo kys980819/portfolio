@@ -1,14 +1,31 @@
 "use client";
 
 import { useRef, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkCjkFriendly from "remark-cjk-friendly";
 import { useChatbot } from "./ChatbotProvider";
 
 // 빈 대화창에서 첫 질문을 유도하는 추천 질문 칩
 const SUGGESTED_QUESTIONS = [
 	"김윤성님은 어떤 사람인가요?",
-	"어떤 프로젝트를 해봤나요?",
-	"트러블슈팅 경험이 궁금해요",
+	"Snort 탐지 문제는 어떻게 해결했나요?",
+	"보안관제(SOC) 관련 경험이 있나요?",
 ];
+
+// 챗봇 답변 Markdown 표시 — 링크는 사이트 내부 주소(/...)만 허용하고 나머지는 일반 글자로
+const markdownComponents = {
+	p: ({ node, ...props }) => <p className="my-1" {...props} />,
+	ul: ({ node, ...props }) => <ul className="my-1 list-disc pl-5 space-y-0.5" {...props} />,
+	ol: ({ node, ...props }) => <ol className="my-1 list-decimal pl-5 space-y-0.5" {...props} />,
+	code: ({ node, ...props }) => <code className="font-mono text-[0.9em] px-1 rounded-sm bg-black/5 dark:bg-white/10" {...props} />,
+	// "//", "/\"로 시작하면 브라우저가 외부 주소로 해석하므로 제외
+	a: ({ href = "", children }) =>
+		/^\/(?![/\\])/.test(href) ? (
+			<a href={href} className="underline underline-offset-2 text-accent dark:text-accent-dark">{children}</a>
+		) : (
+			<span>{children}</span>
+		),
+};
 
 export default function Chatbot({ mode = "floating" }) {
 	const {
@@ -102,16 +119,20 @@ export default function Chatbot({ mode = "floating" }) {
 					<ul ref={listRef} className="flex-1 overflow-y-auto px-4 py-3 space-y-2">
 						{messages.map((m, i) => (
 							<li key={i} className={m.role === "assistant" ? "text-left" : "text-right"}>
-								<span
+								<div
 									className={
-										"inline-block px-3 py-2 rounded-lg leading-relaxed " +
+										"inline-block px-3 py-2 rounded-lg leading-relaxed text-left " +
 										(m.role === "assistant"
 											? "bg-pageBg text-ink dark:bg-white/10 dark:text-darkText"
-											: "bg-accent text-white dark:bg-accent-dark dark:text-darkTheme")
+											: "bg-accent text-white whitespace-pre-wrap dark:bg-accent-dark dark:text-darkTheme")
 									}
 								>
-									{m.content}
-								</span>
+									{m.role === "assistant" ? (
+										<ReactMarkdown remarkPlugins={[remarkCjkFriendly]} components={markdownComponents}>{m.content}</ReactMarkdown>
+									) : (
+										m.content
+									)}
+								</div>
 							</li>)
 						)}
 						{isLoading && (
