@@ -93,14 +93,15 @@ export const serviceData = [
         title: '포트폴리오 사이트 (AI 챗봇 포함)',
         description: '이력서·자소서 기반으로 대화하는 AI 챗봇이 포함된 개인 포트폴리오 웹사이트',
         period: '지속 개선 중',
-        techStack: ['Next.js', 'React', 'MongoDB', 'OpenAI API', 'Vercel', 'AWS EC2'],
+        techStack: ['Next.js', 'React', 'MongoDB', 'Gemini API', 'Vercel', 'AWS EC2'],
         highlights: [
-            'OpenAI 기반 AI 챗봇 구현 (MongoDB로 대화 저장)',
+            'AI 챗봇 구현 (OpenAI → Gemini 전환, MongoDB로 대화 저장)',
             '텔레그램 알림 연동',
             'GitHub Actions CI/CD + 커스텀 도메인·HTTPS',
             'CVE-2025-55182(React Server Components 원격 코드 실행 취약점) 공개 시 영향 버전을 확인해 패치 버전(Next.js 15.5.7)으로 즉시 재배포',
             'Vercel 공급망 침해(서드파티 AI 도구 OAuth 토큰 탈취로 고객 환경변수 노출) 사고 발생 시 영향 가능성을 판단해 환경변수·API 키(OpenAI·MongoDB 등) 전수 교체',
             'Claude Code 기반 보안 점검: /api/sendMessage 요청 속도 제한(rate limit) 적용, 의존성 취약점 정리, /api/health 정보 노출 축소',
+            'npm audit로 Next.js 치명적(Critical) 취약점을 확인해 Next.js 16·Tailwind CSS 4로 업그레이드, 화면 동일성·챗봇 동작 검증 후 반영해 실서비스 패키지 취약점 0건',
         ],
         troubleshooting: 'Flask 백엔드 → Next.js API 라우트로 마이그레이션하여 프론트·백엔드를 단일 프로젝트로 통합. 배포 구조 단순화.',
         link: 'https://kimys.site'

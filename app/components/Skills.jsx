@@ -32,7 +32,7 @@ const skillsData = [
   },
   {
     category: '개발',
-    skills: ['JavaScript', 'React', 'Next.js', 'HTML/CSS', 'Node.js', 'Python/Flask', 'OpenAI API', 'MongoDB', 'Supabase']
+    skills: ['JavaScript', 'React', 'Next.js', 'HTML/CSS', 'Node.js', 'Python/Flask', 'OpenAI API', 'Gemini API', 'MongoDB', 'Supabase']
   },
   {
     category: 'DevOps · 협업 · 문서화',
